@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <SiteNav />
+    <main class="error-page">
+      <h1>Error 404</h1>
+    </main>
+    <SiteFooter />
+  </div>
+</template>
