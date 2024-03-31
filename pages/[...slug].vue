@@ -1,6 +1,7 @@
 <script setup>
 /* Load site settings */
 const settings = await useSettings()
+const config = settings.value.data.story.content
 
 /* Load page */
 const { locale } = useI18n()
@@ -8,7 +9,11 @@ const { slug } = useRoute().params
 const version = useEnvironment()
 const story = await useAsyncStoryblok(
   slug && slug.length > 0 ? slug.join('/') : 'home',
-  { version, language: locale.value }
+  {
+    version,
+    language: locale.value,
+    resolve_relations: 'Artist.venue'
+  }
 )
 const page = story.value.content
 
@@ -20,13 +25,13 @@ if (!story.value) {
 }
 
 /* SEO Metatags */
-const siteName = settings.site_name
+const siteName = config.site_name
 const title = slug && slug.length > 0 ? `${page.title || page.name} - ${siteName}` : siteName
 const ogTitle = page.seo_title || title
-const description = page.seo_description || page.summary || settings.seo_description
-const ogImage = page.seo_picture?.filename || page.picture?.filename || settings.seo_picture?.filename
+const description = page.seo_description || page.summary || config.seo_description
+const ogImage = page.seo_picture?.filename || page.picture?.filename || config.seo_picture?.filename
 const keywords = page.seo_keywords
-const twitterSite = settings.twitter_account
+const twitterSite = config.twitter_account
 useServerSeoMeta({
   title,
   ogTitle,
@@ -44,8 +49,10 @@ useHead({ title })
 </script>
 
 <template>
-  <StoryblokComponent
-    v-if="story"
-    :blok="story.content"
-  />
+  <div>
+    <StoryblokComponent
+      v-if="story"
+      :blok="story.content"
+    />
+  </div>
 </template>

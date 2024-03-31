@@ -1,16 +1,33 @@
 <script setup>
 /* Load nav items */
 const settings = await useSettings()
-const { slug } = useRoute().params
 const localePath = useLocalePath()
-/* function isActive (link) {
-  return link.story?.slug === slug[0]
-} */
+const { internalLink } = useLinks()
 </script>
 
 <template>
   <nav>
+    <NuxtLink :to="localePath('/')">Logo</NuxtLink>
+
+    <ul>
+      <li v-for="item in settings.data.story.content.nav" :key="item._uid">
+        <NuxtLink v-if="item.component === 'Submenu'" :to="internalLink(item.index?.story?.full_slug)">
+          {{ item.label }}
+        </NuxtLink>
+        <NuxtLink v-else :to="internalLink(item.link?.story?.full_slug)">
+          {{ item.label }}
+        </NuxtLink>
+
+        <ul v-if="item.items?.length > 0">
+          <li v-for="subitem in item.items" :key="subitem._uid">
+            <NuxtLink :to="internalLink(subitem.link?.story?.full_slug)">
+              {{ subitem.label }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
     <SiteLanguage />
-    <pre>{{ settings }}</pre>
   </nav>
 </template>
