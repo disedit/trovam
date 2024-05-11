@@ -1,0 +1,28 @@
+.font-headline {
+  font-family: var(--font-headline);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+
+  &.padded {
+    padding: var(--site-padding);
+  }
+
+  &.padded-x {
+    padding: 0 var(--site-padding);
+  }
+
+  &.padded-y {
+    padding: var(--site-padding) 0;
+  }
+}
+
+.focus-pink {
+  --focus-color: var(--pink);
+}
+
+.focus-yellow {
+  --focus-color: var(--yellow);
+}

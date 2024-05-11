@@ -1,0 +1,26 @@
+/* Colors */
+$red: #e0602e;
+$yellow: #fad414;
+$green: #099e76;
+$pink: #e3aaca;
+$blue: #3f85c1;
+$black: #1e1e1e;
+$white: #fff;
+$gray: #71717a;
+
+/* Typography */
+$font-base: Agrandir, sans-serif;
+$font-headline: Agrandir-WideLight, sans-serif;
+
+/* Breakpots */
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1250px,
+  xxl: 1540px,
+  sup: 2200px
+);
+
+/* Sizing */
+$container-max-width: 1200px;

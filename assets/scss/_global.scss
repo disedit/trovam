@@ -1,0 +1,58 @@
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--black);
+  color: var(--white);
+}
+
+a {
+  color: var(--blue);
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  font-family: inherit;
+  font-weight: 900;
+  background: transparent;
+  cursor: pointer;
+}
+
+.list-reset {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0;
+  }
+}
+
+*:focus-visible {
+  outline: var(--focus-weight, 2px) var(--focus-color, var(--blue)) solid;
+  outline-offset: 3px;
+}

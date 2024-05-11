@@ -1,7 +1,7 @@
 <script setup>
 /* Load site settings */
 const settings = await useSettings()
-const config = settings.value.data.story.content
+const global = settings.value.data.story.content
 
 /* Load page */
 const { locale } = useI18n()
@@ -25,13 +25,13 @@ if (!story.value) {
 }
 
 /* SEO Metatags */
-const siteName = config.site_name
+const siteName = global.site_name
 const title = slug && slug.length > 0 ? `${page.title || page.name} - ${siteName}` : siteName
 const ogTitle = page.seo_title || title
-const description = page.seo_description || page.summary || config.seo_description
-const ogImage = page.seo_picture?.filename || page.picture?.filename || config.seo_picture?.filename
+const description = page.seo_description || page.summary || global.seo_description
+const ogImage = page.seo_picture?.filename || page.picture?.filename || global.seo_picture?.filename
 const keywords = page.seo_keywords
-const twitterSite = config.twitter_account
+const twitterSite = global.twitter_account
 useServerSeoMeta({
   title,
   ogTitle,
