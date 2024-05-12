@@ -7,7 +7,9 @@ const { internalLink } = useLinks()
 
 <template>
   <nav>
-    <NuxtLink :to="localePath('/')">Logo</NuxtLink>
+    <NuxtLink :to="localePath('/')">
+      <SiteLogo />
+    </NuxtLink>
 
     <ul>
       <li v-for="item in settings.data.story.content.nav" :key="item._uid">
