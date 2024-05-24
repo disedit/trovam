@@ -11,6 +11,7 @@
   --text-muted: #{$gray};
   --container-max-width: #{$container-max-width};
   --navbar-safe-area: #{$navbar-safe-area};
+  --navbar-safest-area: #{$navbar-safe-area + 4rem};
   --spacer-1: .25rem;
   --spacer-2: .5rem;
   --spacer-3: .75rem;
@@ -30,7 +31,7 @@
   --spacer-28: 7rem;
   --spacer-32: 8rem;
   --spacer-40: 10rem;
-  --site-padding: var(--spacer-4);
+  --site-padding: var(--spacer-8);
   --text-sm: clamp(0.8rem, 0.08vi + 0.78rem, 0.84rem);
   --text-base: clamp(1rem, 0.23vi + 0.94rem, 1.13rem);
   --text-md: clamp(1.25rem, 0.45vi + 1.14rem, 1.5rem);

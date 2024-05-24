@@ -21,7 +21,7 @@ const { data: posts } = await useAsyncData(
 </script>
 
 <template>
-  <div v-editable="blok">
+  <div v-editable="blok" class="container padded navbar-safest-area">
     <h1>Posts Index</h1>
     <pre>{{ page }}</pre>
     <article v-for="post in posts.data.stories" :key="post.uuid">

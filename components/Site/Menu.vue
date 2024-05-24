@@ -7,6 +7,31 @@ defineProps({
 })
 
 const { internalLink } = useLinks()
+
+const hovering = ref(null)
+const gracePeriod = ref(false)
+
+function toggleHover (id) {
+  if (hovering.value === id) {
+    hovering.value = null
+  } else {
+    hovering.value = id
+  }
+}
+
+function hover(id) {
+  if (!gracePeriod.value) {
+    hovering.value = id
+  }
+}
+
+function unhover() {
+  hovering.value = null
+  gracePeriod.value = true
+  setTimeout(() => {
+    gracePeriod.value = false
+  }, 1000)
+}
 </script>
 
 <template>
@@ -14,16 +39,21 @@ const { internalLink } = useLinks()
     <li
       v-for="(item, i) in items"
       :key="item._uid"
-      :class="['menu-item', `color-${item.shape_color}`]"
+      :class="['menu-item', `color-${item.shape_color}`, { open: hovering === item._uid}]"
       :style="{ '--index': i }"
+      @mouseenter="hover(item._uid)"
+      @mouseleave="hovering = null"
     >
-      <NuxtLink
+      <a
         v-if="item.component === 'Submenu'"
-        :to="internalLink(item.index?.story?.full_slug)"
-        class="menu-link">
+        :href="internalLink(item.index?.story?.full_slug)"
+        :aria-expanded="hovering === item._uid ? 'true' : 'false'"
+        class="menu-link"
+        @click.prevent="toggleHover(item._uid)"
+      >
         <ShapesGate :shape="item.shape" />
         <span>{{ item.label }}</span>
-      </NuxtLink>
+      </a>
       <NuxtLink
         v-else
         :to="internalLink(item.link?.story?.full_slug)"
@@ -34,7 +64,11 @@ const { internalLink } = useLinks()
 
       <ul v-if="item.items?.length > 0" class="submenu">
         <li v-for="subitem in item.items" :key="subitem._uid" class="submenu-item">
-          <NuxtLink :to="internalLink(subitem.link?.story?.full_slug)" class="submenu-link">
+          <NuxtLink
+            :to="internalLink(subitem.link?.story?.full_slug)"
+            class="submenu-link"
+            @click="unhover"
+          >
             {{ subitem.label }}
           </NuxtLink>
         </li>
@@ -67,8 +101,7 @@ const { internalLink } = useLinks()
       font-style: italic;
     }
 
-    &:hover,
-    &:focus-within {
+    &.open {
       z-index: calc(11000 - var(--index));
 
       .menu-link {
@@ -124,6 +157,7 @@ const { internalLink } = useLinks()
   transform-origin: 0 0;
   will-change: visibility, opacity, transform;
   z-index: calc(11000 - var(--index));
+  min-width: 300px;
 
   &-link {
     display: block;

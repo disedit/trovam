@@ -33,7 +33,7 @@ const scrolled = computed(() => y.value > 100)
   left: 0;
   right: 0;
   z-index: 10000;
-  padding: var(--site-padding);
+  padding: var(--spacer-4) var(--site-padding);
   gap: var(--site-padding);
   --nav-height: 5.75vw;
   font-size: var(--nav-height);

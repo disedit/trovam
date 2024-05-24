@@ -30,7 +30,7 @@ const { data: artists } = await useAsyncData(
 </script>
 
 <template>
-  <div v-editable="blok">
+  <div v-editable="blok" class="container padded navbar-safest-area">
     <h1>Artists Index</h1>
     <ul>
       <li v-for="artist in artists.data.stories" :key="artist.uuid">
