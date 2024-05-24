@@ -53,6 +53,6 @@ button {
 }
 
 *:focus-visible {
-  outline: var(--focus-weight, 2px) var(--focus-color, var(--blue)) solid;
+  outline: var(--focus-weight, 2px) var(--focus-color, var(--yellow)) solid;
   outline-offset: 3px;
 }

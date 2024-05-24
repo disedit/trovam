@@ -28,7 +28,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/i18n',
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
-    '@nuxt/image'
+    '@vueuse/nuxt',
+    '@nuxt/image',
+    'nuxt-icon'
   ],
 
   vite: {
@@ -48,9 +50,9 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'ca',
     locales: [
-      { code: 'ca', iso: 'ca-ES', name: 'Valencià', file: 'ca.js' },
-      { code: 'es', iso: 'es-ES', name: 'Castellano', file: 'es.js' },
-      { code: 'en', iso: 'en', name: 'English', file: 'en.js' },
+      { code: 'ca', iso: 'ca-ES', name: 'Valencià', short: 'VAL', file: 'ca.js' },
+      { code: 'es', iso: 'es-ES', name: 'Castellano', short: 'CAS', file: 'es.js' },
+      { code: 'en', iso: 'en', name: 'English', short: 'ENG', file: 'en.js' },
     ],
     lazy: true,
     langDir: 'lang',

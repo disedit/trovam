@@ -1,7 +1,9 @@
+/* Fonts */
 .font-headline {
   font-family: var(--font-headline);
 }
 
+/* Container */
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -19,10 +21,20 @@
   }
 }
 
+/* Focus */
 .focus-pink {
   --focus-color: var(--pink);
 }
 
 .focus-yellow {
   --focus-color: var(--yellow);
+}
+
+/* Colors */
+$colors: ('red': $red, 'yellow': $yellow, 'green': $green, 'pink': $pink, 'blue': $blue);
+
+@each $name, $color in $colors {
+  .color-#{$name} {
+    --color: #{$color};
+  }
 }

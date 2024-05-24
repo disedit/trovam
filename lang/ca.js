@@ -1,3 +1,5 @@
 export default {
-  hello: 'world'
+  assist: {
+    main_menu: 'Menú principal'
+  }
 }
