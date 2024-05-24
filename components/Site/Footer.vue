@@ -4,12 +4,28 @@ const settings = await useSettings()
 </script>
 
 <template>
-  <footer class="footer">
-    <a href="sd">Test</a>
-    <div class="container padded">
-      <div class="footer-org"></div>
-      <div class="footer-sponsors">
-        <img src="@/assets/images/sponsors.png" />
+  <footer class="footer" aria-describedby="FooterTitle">
+    <h2 id="FooterTitle" class="visually-hidden">Footer</h2>
+    <div class="container padded grid md:grid-cols-2 gap-6">
+      <div class="footer-sponsors md:col-span-2 mb-10">
+        <StoryblokComponent
+          v-for="blok in settings.data.story.content.footer_logos"
+          :blok="blok"
+          class="sponsor"
+        />
+      </div>
+      <div class="footer-socials">
+        Valencian Music Association (VAM!)
+        <SiteSocials :socials="settings.data.story.content.social_networks" />
+      </div>
+      <div class="footer-links flex flex-wrap gap-4 md:items-end md:justify-end">
+        <a
+          v-for="link in settings.data.story.content.footer_links"
+          :key="link._uid"
+          :href="link.link.cached_url"
+        >
+          {{ link.label }}
+        </a>
       </div>
     </div>
   </footer>
@@ -17,17 +33,28 @@ const settings = await useSettings()
 
 <style lang="scss" scoped>
 .footer {
-  height: 100vh;
+  &-sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer-6);
 
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--site-padding);
+    .sponsor {
+      flex-shrink: 0;
+    }
   }
 
-  &-sponsors {
-    img {
-      width: 100%;
+  a {
+    color: var(--white);
+
+    &:hover {
+      color: var(--yellow);
+    }
+  }
+
+  .socials :deep(a) {
+    &:hover {
+      color: var(--yellow);
+      opacity: 1;
     }
   }
 }

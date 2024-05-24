@@ -1,5 +1,5 @@
 <script setup>
-import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
+import * as focusTrap from 'focus-trap'
 
 defineProps({
   items: {
@@ -19,17 +19,18 @@ const switchLocalePath = useSwitchLocalePath()
 /* Menu toggler */
 const menuOpen = ref(false)
 const menu = ref()
-const { activate: focusTrap, deactivate: releaseTrap } = useFocusTrap(menu, { immediate: true })
+let trap
 
 const showMenu = () => {
   menuOpen.value = true
   document.documentElement.classList.add('overflow-hidden')
-  focusTrap()
+  trap = focusTrap.createFocusTrap(menu.value)
+  trap.activate()
 }
 const hideMenu = () => {
   menuOpen.value = false
   document.documentElement.classList.remove('overflow-hidden')
-  releaseTrap()
+  trap && trap.deactivate()
 }
 
 function toggleMenu () {
@@ -96,11 +97,11 @@ function onLeaveCancelled() {
     <button
       class="menu-burger"
       @click="toggleMenu"
-      :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
+      :aria-label="menuOpen ? $t('assist.close_menu') : $t('assist.open_menu')"
       aria-controls="mainMobileNav"
       :aria-expanded="menuOpen ? 'true' : 'false'"
     >
-      <ShapesMenu class="icon" />
+      <ShapesMenu :close="menuOpen" class="icon" />
     </button>
 
     <Transition
