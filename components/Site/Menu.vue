@@ -1,13 +1,18 @@
 <script setup>
-/* Load nav items */
-const settings = await useSettings()
+defineProps({
+  items: {
+    type: Array,
+    required: true
+  }
+})
+
 const { internalLink } = useLinks()
 </script>
 
 <template>
   <ul class="menu" :aria-label="$t('assist.main_menu')">
     <li
-      v-for="(item, i) in settings.data.story.content.nav"
+      v-for="(item, i) in items"
       :key="item._uid"
       :class="['menu-item', `color-${item.shape_color}`]"
       :style="{ '--index': i }"
@@ -40,7 +45,6 @@ const { internalLink } = useLinks()
 
 <style lang="scss" scoped>
 .menu {
-  display: flex;
   flex-wrap: wrap;
   list-style: none;
   margin: 0;

@@ -3,6 +3,11 @@
   font-family: var(--font-headline);
 }
 
+.compensate {
+  position: relative;
+  top: .1em;
+}
+
 /* Container */
 .container {
   max-width: var(--container-max-width);

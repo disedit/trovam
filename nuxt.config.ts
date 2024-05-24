@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
     '@vueuse/nuxt',
     '@nuxt/image',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@nuxtjs/tailwindcss'
   ],
 
   vite: {

@@ -1,4 +1,6 @@
 <script setup>
+/* Load nav items */
+const settings = await useSettings()
 const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
@@ -9,9 +11,17 @@ const scrolled = computed(() => y.value > 100)
     <NuxtLink :to="localePath('/')" class="nav-logo">
       <SiteLogo />
     </NuxtLink>
-    <SiteMenu class="nav-menu" :scrolled="scrolled" />
-    <SiteLanguage class="nav-langs" />
-    <SiteMobileMenu class="nav-mobile" />
+    <SiteMenu
+      class="nav-menu hidden lg:flex"
+      :items="settings.data.story.content.nav"
+      :scrolled="scrolled"
+    />
+    <SiteLanguage class="nav-langs hidden lg:flex" />
+    <SiteMobileMenu
+      class="nav-mobile lg:hidden ms-auto"
+      :items="settings.data.story.content.nav"
+      :socials="settings.data.story.content.social_networks"
+    />
   </nav>
 </template>
 
@@ -30,6 +40,8 @@ const scrolled = computed(() => y.value > 100)
   transition: .25s ease;
 
   &-logo {
+    position: relative;
+    z-index: 10000;
     color: var(--white);
 
     svg {
@@ -49,24 +61,12 @@ const scrolled = computed(() => y.value > 100)
     background: var(--black);
     --nav-height: 2.5rem;
   }
-
-  &-mobile {
-    display: none;
-  }
 }
 
 @include media('<lg') {
   .nav {
     --nav-height: 2rem;
-
-    &-mobile {
-      display: block;
-    }
-
-    &-menu,
-    &-langs {
-      display: none;
-    }
+    height: 4rem;
 
     &.scrolled {
       --nav-height: 2rem;

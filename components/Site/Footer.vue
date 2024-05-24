@@ -5,6 +5,7 @@ const settings = await useSettings()
 
 <template>
   <footer class="footer">
+    <a href="sd">Test</a>
     <div class="container padded">
       <div class="footer-org"></div>
       <div class="footer-sponsors">
