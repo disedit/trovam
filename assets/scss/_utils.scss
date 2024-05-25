@@ -11,6 +11,7 @@
 .compensate {
   position: relative;
   top: .1em;
+  margin-block-end: -.1em;
 }
 
 /* Container */
@@ -43,6 +44,18 @@
   padding-block-start: var(--navbar-safest-area) !important;
 }
 
+.gap-padding {
+  gap: var(--site-padding);
+}
+
+.p-site {
+  padding: var(--site-padding);
+}
+
+.top-navbar {
+  top: var(--navbar-safe-area);
+}
+
 /* Focus */
 .focus-pink {
   --focus-color: var(--pink);
@@ -59,15 +72,35 @@ $colors: ('red': $red, 'yellow': $yellow, 'green': $green, 'pink': $pink, 'blue'
   .color-#{$name} {
     --color: #{$color};
   }
+
+  .text-#{$name} {
+    color: $color;
+  }
 }
 
 @each $name, $color in $colors {
-  .bg-#{$name} {
+  .bg-color-#{$name} {
     --bg-color: #{$color};
     --text-color: var(--black);
   }
 }
 
-.bg-black {
+.bg-color-black {
   --text-color: var(--white);
+}
+
+/* Font sizes */
+$text-sizes: (
+  'sm': var(--text-sm),
+  'base': var(--text-base),
+  'md': var(--text-md),
+  'lg': var(--text-lg),
+  'xl': var(--text-xl),
+  '2xl': var(--text-2xl),
+);
+
+@each $size, $var in $text-sizes {
+  .text-#{$size} {
+    font-size: #{$var};
+  }
 }

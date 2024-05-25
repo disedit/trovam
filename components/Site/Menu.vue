@@ -131,6 +131,7 @@ function unhover() {
     text-transform: uppercase;
     font-size: 1.1em;
     padding: .1em;
+    transition: outline .25s ease, outline-offset .25s ease;
 
     svg {
       color: var(--color);
@@ -192,6 +193,7 @@ function unhover() {
 
     .submenu {
       top: 1.6em;
+      min-width: 200px;
     }
   }
 }

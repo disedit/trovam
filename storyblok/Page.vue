@@ -3,7 +3,7 @@ const props = defineProps({ blok: Object })
 
 const img = useImage()
 const backgroundStyle = computed(() => {
-  if (!props.blok.background.filename) return false
+  if (!props.blok.background?.filename) return false
   const imgUrl = img(props.blok.background.filename, { width: 1500 })
   return { backgroundImage: `url('${imgUrl}')` }
 })
@@ -15,7 +15,7 @@ const backgroundStyle = computed(() => {
     class="page"
     :style="backgroundStyle"
   >
-    <div class="relative z-10">
+    <div :class="['relative z-10', { 'container padded': blok.container }]">
       <StoryblokComponent
         v-for="blok in blok.body"
         :key="blok._uid"
@@ -30,12 +30,12 @@ const backgroundStyle = computed(() => {
   position: relative;
   background-size: cover;
   background-attachment: fixed;
-  padding-block-end: var(--spacer-20);
 }
 
 .background-overlay {
   background: rgba($black, .5);
   position: absolute;
   inset: 0;
+  z-index: 1;
 }
 </style>

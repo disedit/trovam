@@ -3,27 +3,23 @@ defineProps({ blok: Object })
 </script>
 
 <template>
-  <div
+  <article
     v-editable="blok"
-    :class="[
-      'container',
-      `bg-color-${blok.background}`,
-      {
-        padded: blok.padded,
-        'container-sm': blok.small_container
-      }
-    ]"
+    :class="['card p-site', `bg-color-${blok.background}`, {'gap-padding': blok.gap}]"
   >
     <StoryblokComponent
       v-for="blok in blok.blocks"
+      :key="blok._uid"
       :blok="blok"
     />
-  </div>
+  </article>
 </template>
 
 <style lang="scss" scoped>
-.container {
+.card {
   background-color: var(--bg-color);
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
 }
 </style>

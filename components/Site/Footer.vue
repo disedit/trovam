@@ -36,11 +36,8 @@ const settings = await useSettings()
   &-sponsors {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacer-6);
-
-    .sponsor {
-      flex-shrink: 0;
-    }
+    row-gap: var(--spacer-6);
+    column-gap: var(--spacer-14);
   }
 
   a {

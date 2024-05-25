@@ -26,12 +26,12 @@ export default defineNuxtConfig({
   css: ['~/assets/scss/main.scss'],
 
   modules: [
+    '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
     '@vueuse/nuxt',
     '@nuxt/image',
-    'nuxt-icon',
-    '@nuxtjs/tailwindcss'
+    'nuxt-icon'
   ],
 
   vite: {
@@ -64,6 +64,14 @@ export default defineNuxtConfig({
     provider: 'storyblok',
     storyblok: {
       baseURL: 'https://a.storyblok.com'
+    }
+  },
+
+  tailwindcss: {
+    config: {
+      content: [
+        'storyblok/**/**.vue'
+      ]
     }
   }
 })

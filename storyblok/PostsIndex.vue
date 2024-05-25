@@ -21,13 +21,21 @@ const { data: posts } = await useAsyncData(
 </script>
 
 <template>
-  <div v-editable="blok" class="container padded navbar-safest-area">
-    <h1>Posts Index</h1>
-    <pre>{{ page }}</pre>
-    <article v-for="post in posts.data.stories" :key="post.uuid">
-      <NuxtLink :to="`/${post.full_slug}`">
-        {{ post.content.title }}
-      </NuxtLink>
-    </article>
+  <div v-editable="blok">
+    <StoryblokComponent
+      v-for="blok in blok.header"
+      :blok="blok"
+    />
+    <div class="container padded mb-10">
+      <article v-for="post in posts.data.stories" :key="post.uuid">
+        <NuxtLink :to="`/${post.full_slug}`">
+          {{ post.content.title }}
+        </NuxtLink>
+      </article>
+    </div>
+    <StoryblokComponent
+      v-for="blok in blok.footer"
+      :blok="blok"
+    />
   </div>
 </template>

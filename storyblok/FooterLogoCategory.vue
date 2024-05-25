@@ -28,7 +28,8 @@ defineProps({ blok: Object })
     gap: var(--spacer-2);
 
     img {
-      height: 3rem;
+      height: 100%;
+      max-height: 3rem;
       max-width: 100%;
       object-fit: contain;
     }

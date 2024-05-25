@@ -3,7 +3,7 @@ const props = defineProps({ blok: Object })
 
 const img = useImage()
 const backgroundStyle = computed(() => {
-  if (!props.blok.background.filename) return false
+  if (!props.blok.background?.filename) return false
   const imgUrl = img(props.blok.background.filename, { width: 1500 })
   return { backgroundImage: `url('${imgUrl}')` }
 })
@@ -15,12 +15,12 @@ const backgroundStyle = computed(() => {
     class="page-header"
   >
     <div :class="[
-      'container padded navbar-safest-area', 
+      'container padded navbar-safest-area',
       `color-${blok.color}`,
       { 'container-sm': blok.small_container }
     ]">
       <h1 class="headline">
-        <span :class="['headline-inner p-4', { pill: blok.pill }]">
+        <span :class="['headline-inner', { 'pill p-4': blok.pill }]">
           <ShapesGate v-if="blok.shape" :shape="blok.shape" class="icon" />
           <span class="headline-text compensate">{{ blok.title }}</span>
         </span>
@@ -47,6 +47,8 @@ const backgroundStyle = computed(() => {
     font-size: var(--text-4xl);
     top: .4em;
     z-index: 5;
+    margin-block-end: -.2em;
+    line-height: 1;
 
     .headline-inner {
       display: inline-flex;
@@ -75,6 +77,14 @@ const backgroundStyle = computed(() => {
     opacity: .5;
     z-index: 1;
     background-size: cover;
+  }
+}
+
+@include media('<md') {
+  .page-header {
+    h1 {
+      font-size: var(--text-3xl);
+    }
   }
 }
 </style>

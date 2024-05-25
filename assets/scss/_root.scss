@@ -42,3 +42,9 @@
   --text-4xl: clamp(3.81rem, 4.54vi + 2.68rem, 6.31rem);
   --text-5xl: clamp(4.77rem, 6.63vi + 3.11rem, 8.41rem);
 }
+
+@include media('<md') {
+  :root {
+    --site-padding: var(--spacer-4);
+  }
+}

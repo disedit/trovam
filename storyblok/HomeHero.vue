@@ -14,7 +14,9 @@ const backgroundStyle = computed(() => {
     class="home-hero"
     :style="backgroundStyle"
   >
-    <div class="home-hero-text" v-html="blok.text" />
+    <div class="container padded">
+      <div class="home-hero-text" v-html="blok.text" />
+    </div>
   </section>
 </template>
 
