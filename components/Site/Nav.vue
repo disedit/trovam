@@ -71,17 +71,23 @@ const config = settings.value.data.story.content
     }
 
     &.gradient-nav::after {
-      content: '';
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to bottom, rgba(darken($black, 5%), 1), rgba($black, 0));
-      pointer-events: none;
-      z-index: 8000;
-      height: 15rem;
+      opacity: 1;
     }
+  }
+
+  &.gradient-nav::after {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(darken($black, 5%), 1), rgba($black, 0));
+    pointer-events: none;
+    z-index: 8000;
+    height: 15rem;
+    opacity: 0;
+    transition: 1s ease;
   }
 }
 

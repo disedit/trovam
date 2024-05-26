@@ -12,14 +12,18 @@ const icons = {
   youtube: 'fa6-brands:youtube',
   twitter: 'fa6-brands:twitter',
   tiktok: 'fa6-brands:tiktok',
-  linkedin: 'fa6-brands:linkedin'
+  linkedin: 'fa6-brands:linkedin',
+  spotify: 'fa6-brands:spotify',
+  soundcloud: 'fa6-brands:soundcloud',
+  bandcamp: 'fa6-brands:bandcamp',
+  website: 'iconoir:www'
 }
 </script>
 
 <template>
   <ul class="socials list-reset">
-    <li v-for="profile in socials" :key="profile._uid">
-      <a :href="profile.url?.cached_url" target="_blank" :aria-label="profile.label">
+    <li v-for="(profile, i) in socials" :key="profile._uid || i">
+      <a :href="profile.link || profile.url?.cached_url" target="_blank" :aria-label="profile.label" :title="profile.label">
         <Icon :name="icons[profile.icon]" />
       </a>
     </li>
@@ -31,7 +35,7 @@ const icons = {
   gap: var(--spacer-3);
 
   a {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     color: inherit;
     transition: .25s ease;
 
