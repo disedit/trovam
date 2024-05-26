@@ -29,14 +29,9 @@ const { data: posts } = await useAsyncData(
     />
     <div class="container padded mb-10">
       <LegosArticle
-        v-for="post in posts.data.stories" :key="post.uuid"
-        :article="{
-          title: post.content.title,
-          slug: post.full_slug,
-          picture: post.content.picture,
-          date: post.published_at,
-          summary: post.content.summary
-        }"
+        v-for="post in posts.data.stories"
+        :key="post.uuid"
+        :article="post"
       />
     </div>
     <StoryblokComponent
@@ -53,6 +48,14 @@ const { data: posts } = await useAsyncData(
     gap: var(--site-padding);
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     margin-block-end: var(--spacer-10);
+  }
+}
+
+@include media('<md') {
+  .posts-index {
+    .container {
+      grid-template-columns: 1fr;
+    }
   }
 }
 </style>

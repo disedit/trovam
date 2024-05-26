@@ -51,4 +51,14 @@ const props = defineProps({ blok: Object })
     height: 100%;
   }
 }
+
+@include media('<md') {
+  .home-recap {
+    min-height: 75svh;
+
+    iframe {
+      aspect-ratio: 1;
+    }
+  }
+}
 </style>

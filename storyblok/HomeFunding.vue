@@ -8,7 +8,7 @@ const props = defineProps({ blok: Object })
       <h2 :id="`title-${blok._uid}`" class="visually-hidden">
         {{ blok.title }}
       </h2>
-      <div class="grid lg:grid-cols-3 gap-padding">
+      <div class="grid gap-8">
         <div
           v-for="block in blok.blocks"
           :key="blok._uid"
@@ -36,6 +36,12 @@ const props = defineProps({ blok: Object })
 
     p {
       line-height: 1;
+    }
+  }
+
+  @include media('>md') {
+    .grid {
+      grid-template-columns: 2fr 1fr 1fr;
     }
   }
 }

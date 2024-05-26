@@ -36,6 +36,7 @@ const { longDate } = useDate()
       </div>
     </div>
   </article>
+  <LegosMoreArticles :exclude="meta.id" />
 </template>
 
 <style lang="scss" scoped>
@@ -100,6 +101,18 @@ const { longDate } = useDate()
   &-picture {
     :deep(img) {
       width: 100%;
+    }
+  }
+}
+
+@include media('<md') {
+  .article {
+    &-meta {
+      margin-block-start: 0;
+    }
+
+    &-summary {
+      font-size: var(--text-md);
     }
   }
 }

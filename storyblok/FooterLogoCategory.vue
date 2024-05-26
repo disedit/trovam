@@ -18,11 +18,11 @@ defineProps({ blok: Object })
 
 <style lang="scss" scoped>
 .footer-logos {
-  max-width: 45%;
-
   h3 {
     font-weight: bold;
     text-transform: uppercase;
+    line-height: 1;
+    margin-block-end: var(--spacer-2);
   }
 
   &-assets {
@@ -36,6 +36,12 @@ defineProps({ blok: Object })
       max-width: 100%;
       object-fit: contain;
     }
+  }
+}
+
+@include media('>md') {
+  .footer-logos {
+    max-width: 45%;
   }
 }
 </style>

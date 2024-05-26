@@ -1,41 +1,64 @@
 <script setup>
 const props = defineProps({
   article: { type: Object, required: true },
-  level: { type: Number, default: 2 }
+  level: { type: Number, default: 2 },
+  clickable: { type: Boolean, default: true },
+  noSummary: { type: Boolean, default: false }
 })
 
+const router = useRouter()
 const hTag = computed(() => `h${props.level}`)
 const { shortDate } = useDate()
 
 function random(min, max) {
   return Math.random() * (max - min) + min
 }
+
+function navigate(e, to) {
+  e.preventDefault()
+  if (props.clickable) {
+    router.push(to)
+  }
+}
+
+const post = {
+  title: props.article.content.title,
+  slug: props.article.full_slug,
+  picture: props.article.content.picture,
+  date: props.article.published_at,
+  summary: props.article.content.summary
+}
 </script>
 
 <template>
-  <NuxtLink
-    :to="`/${article.slug}`"
+  <a
+    :href="`/${post.slug}`"
     class="article"
     :style="{
       '--rotate': `${random(-3,3)}deg`
     }"
+    draggable="false"
+    @click="navigate($event, `/${post.slug}`)"
   >
-    <div v-if="article.picture" class="article-picture">
+    <div v-if="post.picture" class="article-picture">
       <NuxtImg
-        :src="article.picture?.filename"
-        :alt="article.picture?.alt"
+        :src="post.picture?.filename"
+        :alt="post.picture?.alt"
+        draggable="false"
       />
     </div>
-    <time :datetime="article.date">
-      {{ shortDate(article.date) }}
+    <time :datetime="post.date">
+      {{ shortDate(post.date) }}
     </time>
-    <Component :is="hTag" class="article-title">
-      {{ article.title }}
+    <Component :is="hTag" class="article-title" draggable="false">
+      {{ post.title }}
     </Component>
-    <p class="article-summary">
-      {{ article.summary }}
-    </p>
-  </NuxtLink>
+    <div v-if="!noSummary" class="hidden md:block">
+      <p class="article-summary">
+        {{ post.summary }}
+      </p>
+    </div>
+  </a>
 </template>
 
 <style lang="scss" scoped>
@@ -49,16 +72,6 @@ function random(min, max) {
   flex-direction: column;
   gap: var(--card-padding);
   --focus-weight: 4px;
-
-  &:hover {
-    transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
-    box-shadow: 0 0 30px rgba($black, .5);
-
-    .article-title {
-      text-decoration: underline;
-      text-underline-offset: .1em;
-    }
-  }
 
   &-title {
     font-weight: bold;
@@ -81,6 +94,31 @@ function random(min, max) {
       height: 100%;
       width: 100%;
       max-height: 200px;
+    }
+  }
+}
+
+@include media('<md') {
+  .article {
+    &-title {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .article {
+    &:hover {
+      transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
+      box-shadow: 0 0 30px rgba($black, .5);
+
+      .article-title {
+        text-decoration: underline;
+        text-underline-offset: .1em;
+      }
     }
   }
 }

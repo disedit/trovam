@@ -36,7 +36,7 @@ const settings = await useSettings()
   &-sponsors {
     display: flex;
     flex-wrap: wrap;
-    row-gap: var(--spacer-6);
+    row-gap: var(--spacer-8);
     column-gap: var(--spacer-14);
   }
 

@@ -40,26 +40,24 @@ const { data: posts } = await useAsyncData(
     </div>
     <div class="relative">
       <ShapesCurlyArrow class="arrow z-10" />
-      <SiteSlider class="home-news-slider">
-        <div class="dummy-card">
-          
-        </div>
+      <SiteSlider class="home-news-slider" v-slot="{ clickable }">
+        <div class="dummy-card" />
         <LegosArticle
           v-for="post in posts.data.stories"
           :key="post.uuid"
-          :article="{
-            title: post.content.title,
-            slug: post.full_slug,
-            picture: post.content.picture,
-            date: post.published_at,
-            summary: post.content.summary
-          }"
+          :clickable="clickable"
+          :article="post"
           class="home-news-card"
         />
-        <NuxtLink :to="blok.link.cached_url">
+        <NuxtLink
+          :to="blok.link.cached_url"
+          class="home-news-more"
+          draggable="false"
+        >
+          <ShapesShape7 />
           {{ $t('news.all') }}
         </NuxtLink>
-    </SiteSlider>
+      </SiteSlider>
     </div>
   </section>
 </template>
@@ -68,20 +66,24 @@ const { data: posts } = await useAsyncData(
 .home-news {
   background-size: cover;
   background-attachment: fixed;
+  --card-width: 33vw;
 
   &-title {
     font-size: var(--text-2xl);
-    margin-top: 30vh;
+    margin-top: 20vh;
+    line-height: 1.1;
   }
 
   &-card {
-    width: 26vw;
+    width: var(--card-width);
     max-width: 500px;
     flex-shrink: 0;
   }
 
   &-slider {
     position: relative;
+    padding-block: 4rem;
+    margin-block-start: -2rem;
   }
 
   .dummy-card {
@@ -91,10 +93,61 @@ const { data: posts } = await useAsyncData(
 
   .arrow {
     position: absolute;
-    top: 0;
+    top: 1rem;
     left: var(--site-padding);
     height: 13em;
     color: var(--yellow);
+    pointer-events: none;
+  }
+
+  &-more {
+    width: var(--card-width);
+    max-width: 500px;
+    border: 3px var(--white) solid;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--white);
+    font-size: var(--text-lg);
+    gap: var(--spacer-5);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    svg {
+      height: 4em;
+      color: var(--blue);
+    }
+  }
+}
+
+@include media('<lg') {
+  .home-news {
+    --card-width: 50vw;
+  }
+}
+
+@include media('<md') {
+  .home-news {
+    --card-width: 65vw;
+
+    &-title {
+      margin-top: 10vh;
+      text-align: center;
+    }
+
+    .dummy-card {
+      width: 4rem;
+    }
+
+    .arrow {
+      height: 5rem;
+      z-index: 0;
+      top: 4rem;
+    }
   }
 }
 </style>

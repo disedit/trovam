@@ -9,6 +9,7 @@ export default {
     address: 'Adreça'
   },
   news: {
-    title: 'Notícies'
+    title: 'Notícies',
+    all: 'Més notícies'
   }
 }

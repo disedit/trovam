@@ -10,7 +10,7 @@ const { data: artists } = await useAsyncData(
     version,
     language: locale.value,
     excluding_fields: 'website,description,facebook,twitter,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
-    resolve_relations: 'Artist.venue',
+    resolve_relations: 'Artist.stage',
     starts_with: props.path || `${slug[0]}/artistes/`,
     sort_by: 'content.concert_date:asc',
     is_startpage: false
@@ -40,7 +40,7 @@ const { longDate } = useDate()
         <li v-for="concert in concerts" :key="concert.uuid">
           {{ concert.content.name }}
           at {{ concert.content.concert_date }}
-          <pre>{{ concert.content.venue.name }}</pre>
+          <pre>{{ concert.content.stage.name }}</pre>
         </li>
       </ul>
     </section>
