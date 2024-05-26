@@ -65,13 +65,5 @@ export default defineNuxtConfig({
     storyblok: {
       baseURL: 'https://a.storyblok.com'
     }
-  },
-
-  tailwindcss: {
-    config: {
-      content: [
-        'storyblok/**/**.vue'
-      ]
-    }
   }
 })

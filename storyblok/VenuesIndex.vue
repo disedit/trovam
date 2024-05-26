@@ -10,9 +10,15 @@ const { data: venues } = await useAsyncData(
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
     language: locale.value,
-    by_uuids_ordered: props.blok.venues.join(',')
+    by_uuids_ordered: props.blok.venues.join(','),
+    resolve_relations: 'Venue.stages',
+    excluding_fields: 'map',
   })
 )
+
+function random(min, max) {
+  return Math.random() * (max - min) + min
+}
 </script>
 
 <template>
@@ -21,53 +27,62 @@ const { data: venues } = await useAsyncData(
     class="venues-index"
     aria-label="Espais"
   >
-    <div class="container padded">
+    <div class="container container-sm mx-auto padded grid md:grid-cols-2 gap-padding">
       <article
-        v-for="venue in venues"
-        :key="venue.id"
-        :class="['venue']"
+        v-for="venue in venues.data.stories"
+        :key="venue.uuid"
+        :class="['venue', { 'highlight md:col-span-2': venue.content.highlight }]"
+        :style="{
+          '--rotate': `${random(-3,3)}deg`
+        }"
       >
-        <pre>{{venue}}</pre>
+        <NuxtLink :to="`/${venue.full_slug}`">
+          <div v-if="venue.content.picture?.filename" class="venue-picture">
+            <NuxtImg
+              :src="venue.content.picture.filename"
+              :alt="`Foto de ${venue.content.name}`"
+            />
+          </div>
+          <h2>{{ venue.content.name }}</h2>
+          <LegosStageList class="mt-auto" :stages="venue.content.stages" />
+        </NuxtLink>
       </article>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.block-menu {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  background: var(--black);
-  border-top: 3px solid var(--black);
-  border-bottom: 3px solid var(--black);
+.venue {
+  display: flex;
 
-  &-item {
+  a {
     display: flex;
-    background: var(--color);
+    flex-direction: column;
     color: var(--black);
-    padding: var(--spacer-1) var(--site-padding);
-    font-size: var(--text-2xl);
-    gap: .25em;
-    align-items: center;
-
-    svg {
-      height: 1em;
-    }
+    gap: var(--spacer-4);
+    padding: var(--spacer-4);
+    background: var(--white);
+    flex-grow: 1;
+    transition: .25s ease;
 
     &:hover {
-      background: var(--white);
-
-      svg {
-        color: var(--color);
-      }
+      transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
+      box-shadow: 0 0 30px rgba($black, .5);
     }
   }
-}
 
-@include media('<md') {
-  .block-menu {
-    grid-template-columns: 1fr;
+  h2 {
+    font-weight: 900;
+    font-size: var(--text-lg);
+    line-height: 1;
+  }
+
+  &-picture {
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
   }
 }
 </style>

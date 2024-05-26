@@ -9,6 +9,9 @@ export const useDate = () => {
   return {
     longDate (date) {
       return format(date, 'EEEE, d MMMM y', { locale: locales[locale.value] })
+    },
+    shortDate (date) {
+      return format(date, 'dd/MM/yy', { locale: locales[locale.value] })
     }
   }
 }

@@ -18,6 +18,8 @@ defineProps({ blok: Object })
 
 <style lang="scss" scoped>
 .footer-logos {
+  max-width: 45%;
+
   h3 {
     font-weight: bold;
     text-transform: uppercase;
@@ -26,6 +28,7 @@ defineProps({ blok: Object })
   &-assets {
     display: flex;
     gap: var(--spacer-2);
+    flex-wrap: wrap;
 
     img {
       height: 100%;

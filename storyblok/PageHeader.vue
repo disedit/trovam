@@ -7,6 +7,10 @@ const backgroundStyle = computed(() => {
   const imgUrl = img(props.blok.background.filename, { width: 1500 })
   return { backgroundImage: `url('${imgUrl}')` }
 })
+
+const tag = computed(() => {
+  return props.blok.link ? resolveComponent('NuxtLink') : 'span'
+})
 </script>
 
 <template>
@@ -17,13 +21,20 @@ const backgroundStyle = computed(() => {
     <div :class="[
       'container padded navbar-safest-area',
       `color-${blok.color}`,
-      { 'container-sm': blok.small_container }
+      {
+        'container-sm': blok.small_container,
+        'has-background': !!blok.background?.filename
+      }
     ]">
       <h1 class="headline">
-        <span :class="['headline-inner', { 'pill p-4': blok.pill }]">
+        <Component
+          :is="tag"
+          :class="['headline-inner', { 'pill p-4': blok.pill }]"
+          :to="blok.link"
+        >
           <ShapesGate v-if="blok.shape" :shape="blok.shape" class="icon" />
           <span class="headline-text compensate">{{ blok.title }}</span>
-        </span>
+        </Component>
       </h1>
     </div>
     <div
@@ -49,6 +60,19 @@ const backgroundStyle = computed(() => {
     z-index: 5;
     margin-block-end: -.2em;
     line-height: 1;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        background: var(--color);
+        color: var(--black);
+
+        svg {
+          color: var(--black);
+        }
+      }
+    }
 
     .headline-inner {
       display: inline-flex;
@@ -77,6 +101,12 @@ const backgroundStyle = computed(() => {
     opacity: .5;
     z-index: 1;
     background-size: cover;
+  }
+
+  .has-background {
+    h1 {
+      margin-block-end: 0;
+    }
   }
 }
 

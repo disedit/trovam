@@ -68,16 +68,18 @@ const menu = computed(() => {
   background: var(--black);
   border-top: 3px solid var(--black);
   border-bottom: 3px solid var(--black);
+  overflow: clip;
 
   &-item {
     display: flex;
     background: var(--color);
     color: var(--black);
-    padding: var(--spacer-1) var(--site-padding);
+    padding: var(--spacer-3) var(--site-padding);
     font-size: var(--text-2xl);
     gap: .25em;
     align-items: center;
     transition: outline .25s ease, outline-offset .25s ease;
+    line-height: 1;
 
     svg {
       height: 1em;

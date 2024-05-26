@@ -3,5 +3,12 @@ export default {
     main_menu: 'Menú principal',
     open_menu: 'Obrir menú',
     close_menu: 'Tancar menú'
+  },
+  venue: {
+    stages: 'Escenaris',
+    address: 'Adreça'
+  },
+  news: {
+    title: 'Notícies'
   }
 }

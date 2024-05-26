@@ -12,7 +12,7 @@ const story = await useAsyncStoryblok(
   {
     version,
     language: locale.value,
-    resolve_relations: 'Artist.venue'
+    resolve_relations: 'Artist.stage,Stage.venue'
   }
 )
 const page = story.value.content
@@ -52,5 +52,6 @@ useHead({ title })
   <StoryblokComponent
     v-if="story"
     :blok="story.content"
+    :meta="story"
   />
 </template>

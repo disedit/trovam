@@ -4,23 +4,24 @@ const settings = await useSettings()
 const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
+const config = settings.value.data.story.content
 </script>
 
 <template>
-  <nav :class="['nav', { scrolled }]">
+  <nav :class="['nav', { scrolled, 'gradient-nav': config.gradient_nav }]">
     <NuxtLink :to="localePath('/')" class="nav-logo">
       <SiteLogo />
     </NuxtLink>
     <SiteMenu
       class="nav-menu hidden lg:flex"
-      :items="settings.data.story.content.nav"
+      :items="config.nav"
       :scrolled="scrolled"
     />
     <SiteLanguage class="nav-langs hidden lg:flex" />
     <SiteMobileMenu
       class="nav-mobile lg:hidden ms-auto"
-      :items="settings.data.story.content.nav"
-      :socials="settings.data.story.content.social_networks"
+      :items="config.nav"
+      :socials="config.social_networks"
     />
   </nav>
 </template>
@@ -55,11 +56,32 @@ const scrolled = computed(() => y.value > 100)
     align-self: flex-start;
     margin-inline-start: auto;
     font-size: var(--text-base);
+    z-index: 9000;
+  }
+
+  &-menu {
+    z-index: 9000;
   }
 
   &.scrolled {
-    background: var(--black);
     --nav-height: 2.5rem;
+
+    &:not(.gradient-nav) {
+      background: var(--black);
+    }
+
+    &.gradient-nav::after {
+      content: '';
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, rgba(darken($black, 5%), 1), rgba($black, 0));
+      pointer-events: none;
+      z-index: 8000;
+      height: 15rem;
+    }
   }
 }
 
