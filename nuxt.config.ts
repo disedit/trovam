@@ -5,13 +5,15 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'theme-color', content: '#ffffff' },
+        { name: 'theme-color', content: '#1e1e1e' },
+        { name: 'msapplication-TileColor', content: '#1e1e1e' },
       ],
       link: [
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'mask-icon', color: '#652B80', href: '/safari-pinned-tab.svg' },
+        { rel: 'manifest', color: '#652B80', href: '/site.webmanifest' },
       ]
     }
   },
