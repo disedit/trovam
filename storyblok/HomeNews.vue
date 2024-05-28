@@ -48,6 +48,7 @@ const { data: posts } = await useAsyncData(
           :clickable="clickable"
           :article="post"
           class="home-news-card"
+          no-picture
         />
         <NuxtLink
           :to="blok.link.cached_url"
@@ -67,6 +68,11 @@ const { data: posts } = await useAsyncData(
   background-size: cover;
   background-attachment: fixed;
   --card-width: 33vw;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   &-title {
     font-size: var(--text-2xl);
@@ -87,17 +93,18 @@ const { data: posts } = await useAsyncData(
   }
 
   .dummy-card {
-    width: 80px;
+    width: 9rem;
     flex-shrink: 0;
   }
 
   .arrow {
     position: absolute;
-    top: 1rem;
-    left: var(--site-padding);
-    height: 13em;
+    top: .5rem;
+    left: calc(((100vw - var(--container-max-width)) / 2) + var(--site-padding));
+    width: 8rem;
     color: var(--yellow);
     pointer-events: none;
+    z-index: 0;
   }
 
   &-more {
@@ -119,7 +126,7 @@ const { data: posts } = await useAsyncData(
 
     svg {
       height: 4em;
-      color: var(--blue);
+      color: var(--yellow);
     }
   }
 }

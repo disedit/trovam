@@ -20,6 +20,11 @@ const props = defineProps({ blok: Object })
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
       />
+      <div class="flex justify-end">
+        <NuxtLink :to="useLocalePath('')" class="button color-blue">
+          {{ $t('recap.editions') }}
+        </NuxtLink>
+      </div>
     </div>
   </section>
 </template>
@@ -41,7 +46,7 @@ const props = defineProps({ blok: Object })
   }
 
   svg {
-    color: var(--green);
+    color: var(--blue);
     height: 1em;
   }
 
@@ -49,6 +54,7 @@ const props = defineProps({ blok: Object })
     aspect-ratio: 16/6.5;
     width: 100%;
     height: 100%;
+    border: 3px var(--white) solid;
   }
 }
 

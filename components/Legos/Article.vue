@@ -3,7 +3,8 @@ const props = defineProps({
   article: { type: Object, required: true },
   level: { type: Number, default: 2 },
   clickable: { type: Boolean, default: true },
-  noSummary: { type: Boolean, default: false }
+  noSummary: { type: Boolean, default: false },
+  noPicture: { type: Boolean, default: false },
 })
 
 const router = useRouter()
@@ -40,7 +41,7 @@ const post = {
     draggable="false"
     @click="navigate($event, `/${post.slug}`)"
   >
-    <div v-if="post.picture" class="article-picture">
+    <div v-if="post.picture && !noPicture" class="article-picture">
       <NuxtImg
         :src="post.picture?.filename"
         :alt="post.picture?.alt"
@@ -53,7 +54,7 @@ const post = {
     <Component :is="hTag" class="article-title" draggable="false">
       {{ post.title }}
     </Component>
-    <div v-if="!noSummary" class="hidden md:block">
+    <div v-if="!noSummary" class="hidden md:block mt-auto">
       <p class="article-summary">
         {{ post.summary }}
       </p>
