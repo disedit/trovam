@@ -1,6 +1,7 @@
 :root {
   --font-base: #{$font-base};
   --font-headline: #{$font-headline};
+  --font-heavy: #{$font-heavy};
   --red: #{$red};
   --yellow: #{$yellow};
   --green: #{$green};
@@ -41,6 +42,7 @@
   --text-3xl: clamp(3.05rem, 3.06vi + 2.29rem, 4.73rem);
   --text-4xl: clamp(3.81rem, 4.54vi + 2.68rem, 6.31rem);
   --text-5xl: clamp(4.77rem, 6.63vi + 3.11rem, 8.41rem);
+  --card-shadow: 0 0 30px #{rgba($black, .5)};
 }
 
 @include media('<md') {

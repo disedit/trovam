@@ -5,17 +5,22 @@ const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
 const config = settings.value.data.story.content
+const { params } = useRoute()
+const onArtistsSingle = computed(() => params.slug.includes('artistes'))
+console.log(params, params.slug.includes('artistes'))
+watch(params, () => {
+  console.log('params changed')
+})
 </script>
 
 <template>
-  <nav :class="['nav', { scrolled, 'gradient-nav': config.gradient_nav }]">
+  <nav :class="['nav', { scrolled, compact: scrolled || onArtistsSingle, 'gradient-nav': config.gradient_nav }]">
     <NuxtLink :to="localePath('/')" class="nav-logo">
       <SiteLogo />
     </NuxtLink>
     <SiteMenu
       class="nav-menu hidden lg:flex"
       :items="config.nav"
-      :scrolled="scrolled"
     />
     <SiteLanguage class="nav-langs hidden lg:flex" />
     <SiteMobileMenu
@@ -63,9 +68,11 @@ const config = settings.value.data.story.content
     z-index: 9000;
   }
 
-  &.scrolled {
+  &.compact {
     --nav-height: 2.5rem;
+  }
 
+  &.scrolled {
     &:not(.gradient-nav) {
       background: var(--black);
     }
@@ -96,7 +103,7 @@ const config = settings.value.data.story.content
     --nav-height: 2rem;
     height: 4rem;
 
-    &.scrolled {
+    &.compact {
       --nav-height: 2rem;
     }
   }

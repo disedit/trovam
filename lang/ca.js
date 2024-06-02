@@ -12,5 +12,8 @@ export default {
   news: {
     title: 'Notícies',
     all: 'Més notícies'
+  },
+  artists: {
+    title: 'Artistes 2024'
   }
 }

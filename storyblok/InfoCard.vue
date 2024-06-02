@@ -1,15 +1,12 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { random } = useUtils()
 const tag = computed(() => props.blok.link?.cached_url
   ? props.blok.link.linktype === 'story'
     ? resolveComponent('NuxtLink')
       : 'a'
       : 'article'
 )
-
-function random(min, max) {
-  return Math.random() * (max - min) + min
-}
 </script>
 
 <template>
@@ -44,7 +41,7 @@ function random(min, max) {
 
   &.hover-effect:hover {
     transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
-    box-shadow: 0 0 30px rgba($black, .5);
+    box-shadow: var(--card-shadow);
   }
 
   h2 {

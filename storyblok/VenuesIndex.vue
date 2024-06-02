@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { random } = useUtils()
 
 /* Load relations */
 const { locale } = useI18n()
@@ -15,10 +16,6 @@ const { data: venues } = await useAsyncData(
     excluding_fields: 'map',
   })
 )
-
-function random(min, max) {
-  return Math.random() * (max - min) + min
-}
 </script>
 
 <template>
@@ -67,7 +64,7 @@ function random(min, max) {
 
     &:hover {
       transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
-      box-shadow: 0 0 30px rgba($black, .5);
+      box-shadow: var(--card-shadow);
     }
   }
 

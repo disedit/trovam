@@ -1,7 +1,9 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { RoughEase } from "gsap/EasePack"
 
 gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(RoughEase) 
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(gsap)

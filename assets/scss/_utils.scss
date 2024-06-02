@@ -8,6 +8,10 @@
   text-transform: uppercase;
 }
 
+.font-heavy {
+  font-family: var(--font-heavy);
+}
+
 .compensate {
   position: relative;
   top: .1em;
@@ -17,18 +21,18 @@
 /* Container */
 .container {
   max-width: var(--container-max-width);
-  margin: 0 auto;
+  margin-inline: auto;
 
   &.padded {
     padding: var(--site-padding);
   }
 
   &.padded-x {
-    padding: 0 var(--site-padding);
+    padding-inline: var(--site-padding);
   }
 
   &.padded-y {
-    padding: var(--site-padding) 0;
+    padding-block: var(--site-padding);
   }
 }
 
@@ -54,6 +58,22 @@
 
 .top-navbar {
   top: var(--navbar-safe-area);
+}
+
+/* Polaroid */
+.polaroid {
+  --card-padding: var(--spacer-4);
+  background: var(--white);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
+  color: var(--black);
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-padding);
+
+  &.with-bottom {
+    padding-block-end: var(--spacer-8);
+  }
 }
 
 /* Focus */

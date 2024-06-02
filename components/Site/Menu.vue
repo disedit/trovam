@@ -183,7 +183,7 @@ function unhover() {
   }
 }
 
-.scrolled {
+.compact {
   .menu {
     max-width: 100%;
 
@@ -192,14 +192,14 @@ function unhover() {
     }
 
     .submenu {
-      top: 1.6em;
+      top: 1.5em;
       min-width: 200px;
     }
   }
 }
 
 @include media('<xl') {  
-  .scrolled {
+  .compact {
     .menu {
       &-item {
         font-size: 1.2rem;

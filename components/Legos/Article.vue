@@ -10,10 +10,7 @@ const props = defineProps({
 const router = useRouter()
 const hTag = computed(() => `h${props.level}`)
 const { shortDate } = useDate()
-
-function random(min, max) {
-  return Math.random() * (max - min) + min
-}
+const { random } = useUtils()
 
 function navigate(e, to) {
   e.preventDefault()
@@ -114,7 +111,7 @@ const post = {
   .article {
     &:hover {
       transform: scale(1.05) translateY(-2%) rotate(var(--rotate, -2deg));
-      box-shadow: 0 0 30px rgba($black, .5);
+      box-shadow: var(--card-shadow);
 
       .article-title {
         text-decoration: underline;
