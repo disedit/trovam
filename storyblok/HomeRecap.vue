@@ -21,7 +21,7 @@ const props = defineProps({ blok: Object })
         allowfullscreen
       />
       <div class="flex justify-end">
-        <NuxtLink :to="useLocalePath('')" class="button color-blue">
+        <NuxtLink :to="blok.link.cached_url" class="button color-blue">
           {{ $t('recap.editions') }}
         </NuxtLink>
       </div>

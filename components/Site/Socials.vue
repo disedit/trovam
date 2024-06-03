@@ -35,7 +35,7 @@ const icons = {
   gap: var(--spacer-3);
 
   a {
-    font-size: 1.5em;
+    font-size: 1em;
     color: inherit;
     transition: .25s ease;
 

@@ -5,12 +5,8 @@ const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
 const config = settings.value.data.story.content
-const { params } = useRoute()
-const onArtistsSingle = computed(() => params.slug.includes('artistes'))
-console.log(params, params.slug.includes('artistes'))
-watch(params, () => {
-  console.log('params changed')
-})
+const route = useRoute()
+const onArtistsSingle = computed(() => route.params.slug.includes('artistes'))
 </script>
 
 <template>

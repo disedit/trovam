@@ -15,5 +15,8 @@ export default {
   },
   artists: {
     title: 'Artistes 2024'
+  },
+  recap: {
+    editions: 'Edicions anteriors'
   }
 }

@@ -30,6 +30,7 @@ const { data: artists } = await useAsyncData(
 
 /* Selected artist */
 const hovering = ref(null)
+const allowHover = ref(false)
 
 /* Background */
 const img = useImage()
@@ -93,6 +94,54 @@ function onLeave (el, done) {
     onComplete: done
   })
 }
+
+function leaveCard () {
+  $gsap.to('artist-card', {
+    opacity: 0,
+    y: '-20%',
+    rotate: `${random(-5, 5)}deg`,
+    duration: .5,
+    ease: "steps(3)",
+  })
+}
+
+onMounted(() => {
+  const mm = $gsap.matchMedia()
+  mm.add("(max-width: 768px)", () => {
+    const artistCards = document.querySelectorAll('.artists .artist')
+    artistCards.forEach(card => {
+      $gsap.to(card, {
+        opacity: 1,
+        y: (i, el) => getComputedStyle(el).getPropertyValue('--to-y'),
+        x: (i, el) => getComputedStyle(el).getPropertyValue('--to-x'),
+        rotate: (i, el) => getComputedStyle(el).getPropertyValue('--to-rotate'),
+        duration: .25,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 75%'
+        }
+      })
+    })
+  })
+
+  mm.add("(min-width: 768px)", () => {
+    $gsap.fromTo('.artists .artist', {
+      opacity: 0,
+      y: (i, el) => getComputedStyle(el).getPropertyValue('--from-y'),
+      x: (i, el) => getComputedStyle(el).getPropertyValue('--from-x'),
+      rotate: (i, el) => getComputedStyle(el).getPropertyValue('--from-rotate'),
+    }, {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      rotate: 0,
+      ease: "steps(3)",
+      stagger: .1,
+      duration: .5,
+      onComplete: () => allowHover.value = true
+    })
+  })
+})
 </script>
 
 <template>
@@ -117,23 +166,41 @@ function onLeave (el, done) {
         <ShapesShape1 />
         <span class="compensate">Live / {{ blok.title }}</span>
       </h1>
-      <section :class="['artists-list', { hovering: !!hovering }]">
+      <section :class="['artists-list', { hovering: !!hovering && allowHover }]">
         <template v-for="(artist, i) in artists.data.stories" :key="artist.uuid">
           <NuxtLink
             :to="`/${artist.full_slug}`"
-            :class="['artist relative font-heavy', { hovering: hovering?.uuid === artist.uuid }]"
+            :class="[
+              'artist relative font-heavy',
+              { hovering: hovering?.uuid === artist.uuid && allowHover },
+            ]"
+            :style="{
+              '--from-x': `${random(-30, 30)}%`,
+              '--from-y': `${random(-30, 30)}%`,
+              '--from-rotate': `${random(-15, 15)}deg`,
+              '--to-x': `${random(-10, 10)}%`,
+              '--to-y': `${random(-2, 2)}%`,
+              '--to-rotate': `${random(-7, 7)}deg`,
+            }"
             @mouseenter="hovering = artist"
             @mouseleave="hovering = null"
+            @click="leaveCard"
           >
+            <UtilsNoisyPhoto
+              v-if="artist.content.picture?.filename"
+              :src="artist.content.picture.filename"
+              :alt="`Foto de ${artist.content.name}`"
+              class="artist-picture md:!hidden"
+            />
             <h2 class="compensate">{{ artist.content.name }}</h2>
           </NuxtLink>
-          <div :class="['shape', `color-${rebus[i]?.color}`]">
+          <div :class="['shape hidden md:block', `color-${rebus[i]?.color}`]">
             <ShapesArtists :shape="rebus[i]?.shape" preserveAspectRatio="none" />
           </div>
         </template>
       </section>
     </div>
-    <div class="artist-corkboard">
+    <div class="hidden md:block">
       <template v-for="artist in artists.data.stories" :key="`card-${artist.uuid}`">
         <Transition
           @before-enter="beforeEnter"
@@ -141,7 +208,7 @@ function onLeave (el, done) {
           @leave="onLeave"
         >
           <article
-            v-if="hovering?.uuid === artist.uuid"
+            v-if="hovering?.uuid === artist.uuid && allowHover"
             class="artist-card polaroid"
             :style="{
               '--top': `calc(${random(60,90)}vh - var(--card-height))`,
@@ -149,11 +216,16 @@ function onLeave (el, done) {
               '--rotate': `${random(-5, 5)}deg`
             }"
           >
-            <NuxtImg
-              v-if="artist.content.picture?.filename"
-              :src="artist.content.picture.filename"
-              :alt="`Foto de ${artist.content.name}`" />
+            <div class="artist-card-picture">
+              <UtilsNoisyPhoto
+                v-if="artist.content.picture?.filename"
+                :src="artist.content.picture.filename"
+                :alt="`Foto de ${artist.content.name}`"
+              />
+            </div>
+            <div class="artist-card-name">
               {{ artist.content.name }}
+            </div>
           </article>
         </Transition>
       </template>
@@ -188,36 +260,44 @@ function onLeave (el, done) {
     justify-content: center;
     font-size: var(--text-2xl);
     gap: .5em;
-    margin: 2rem 0 5rem;
+    margin: 2rem 0 calc(5rem + 20vh);
   }
 }
 
 .artist {
   color: var(--white);
-  transition: opacity .25s ease;
   line-height: 1;
+  text-align: center;
+  opacity: 0;
+
+  .compensate {
+    transition: opacity .25s ease;
+  }
 
   &-card {
     --card-width: 22vw;
-    --card-height: 28vw;
+    --card-height: 27vw;
     position: fixed;
     top: var(--top);
     left: var(--left);
-    z-index: 100;
+    z-index: 20000;
     pointer-events: none;
     rotate: var(--rotate, -3deg);
     width: var(--card-width);
-    height: var(--card-height);
+    min-height: var(--card-height);
     color: var(--black);
     font-size: var(--text-lg);
     font-family: var(--font-base);
     font-weight: bold;
     line-height: 1;
 
-    img {
-      width: 100%;
-      height: 75%;
-      object-fit: cover;
+    &-picture {
+      background: var(--black);
+      filter: saturate(1.15);
+
+      :deep(img) {
+        aspect-ratio: 1;
+      }
     }
   }
 }
@@ -231,12 +311,6 @@ function onLeave (el, done) {
   }
 }
 
-.hovering {
-  .artist:not(.hovering), .shape {
-    opacity: .1;
-  }
-}
-
 .background {
   position: sticky;
   inset: 0;
@@ -247,6 +321,15 @@ function onLeave (el, done) {
 .background-holder {
   position: relative;
   height: 100vh;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    filter: contrast(170%) brightness(.14);
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 100;
+  }
 }
 
 .generic-background,
@@ -261,5 +344,46 @@ function onLeave (el, done) {
 .artist-background {
   z-index: 2;
   filter: grayscale(1) contrast(1) brightness(.5);
+}
+
+@media (hover: none) {
+  .artists-card {
+    display: none;
+  }
+}
+
+@include media('>=md') {
+  .hovering {
+  .artist:not(.hovering) .compensate, .shape {
+      opacity: .1;
+    }
+  }
+}
+
+@include media('<md') {
+  .artists {
+    &-title {
+      margin-top: 0;
+    }
+  }
+
+  .artist {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    color: var(--black);
+    flex-grow: 1;
+    padding: var(--site-padding);
+    gap: var(--site-padding);
+    transform: translate(var(--from-x, var(--from-y))) rotate(var(--from-rotate));
+    opacity: 0;
+    box-shadow: var(--card-shadow);
+
+    &-picture {
+      :deep(img) {
+        aspect-ratio: 1;
+      }
+    }
+  }
 }
 </style>

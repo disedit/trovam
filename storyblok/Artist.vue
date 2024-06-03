@@ -42,13 +42,13 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
       <header class="artist-header">
         <NuxtLink :to="localePath('/2024/artistes')" class="artist-back" @mouseenter="showArrow = true" @mouseleave="showArrow = false">
           <Transition name="fade-left" mode="out-in">
-            <Icon name="material-symbols:arrow-back" v-if="showArrow" />
+            <Icon name="material-symbols:arrow-back" v-if="showArrow" class="arrow" />
             <ShapesShape1 v-else />
           </Transition>
           Live / {{ $t('artists.title') }}
         </NuxtLink>
         <ShapesArtists :shape="artistShape" class="artist-shape" />
-        <h1 class="artist-name font-heavy">
+        <h1 :class="['artist-name font-heavy', { short: blok.name.length < 9, tiny: blok.name.length < 5, medium: blok.name.length < 15 }]">
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
@@ -123,7 +123,15 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
     align-self: end;
 
     .compensate {
-      top: .2em;
+      top: .15em;
+    }
+
+    &.short {
+      font-size: 1.5em;
+    }
+
+    &.tiny {
+      font-size: 1.75em;
     }
   }
 
@@ -148,6 +156,11 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
       left: 0;
       height: 1em;
       color: var(--red);
+    }
+
+    .arrow {
+      height: 1.25em;
+      width: 1.25em;
     }
   }
 
@@ -210,5 +223,13 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
   z-index: 1;
   z-index: 2;
   filter: grayscale(1) contrast(1) brightness(.5);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    filter: contrast(170%) brightness(.14);
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
 }
 </style>
