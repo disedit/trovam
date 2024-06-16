@@ -84,6 +84,7 @@ const tag = computed(() => {
       height: 1em;
       width: 1em;
       color: var(--color);
+      flex-shrink: 0;
     }
 
     .pill {

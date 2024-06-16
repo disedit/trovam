@@ -1,6 +1,7 @@
 <script setup>
 /* Load nav items */
 const settings = await useSettings()
+const { internalLink } = useLinks()
 </script>
 
 <template>
@@ -19,13 +20,13 @@ const settings = await useSettings()
         <SiteSocials :socials="settings.data.story.content.social_networks" />
       </div>
       <div class="footer-links flex flex-wrap gap-4 md:items-end md:justify-end">
-        <a
+        <NuxtLink
           v-for="link in settings.data.story.content.footer_links"
           :key="link._uid"
-          :href="link.link.cached_url"
+          :to="internalLink(link.link.cached_url)"
         >
           {{ link.label }}
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </footer>
@@ -49,6 +50,8 @@ const settings = await useSettings()
   }
 
   .socials :deep(a) {
+    font-size: 1.75rem;
+
     &:hover {
       color: var(--yellow);
       opacity: 1;

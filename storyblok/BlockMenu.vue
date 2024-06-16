@@ -28,6 +28,7 @@ const menu = computed(() => {
       label: item.label,
       shape: item.shape,
       color: item.shape_color,
+      flair: item.flair,
       link: internalLink(item.link.cached_url)
     }))
   }
@@ -37,6 +38,7 @@ const menu = computed(() => {
     label: item.content.title,
     shape: props.blok.items_shape,
     color: props.blok.items_color,
+    flair: false,
     link: internalLink(item.full_slug)
   }))
 })
@@ -56,6 +58,7 @@ const menu = computed(() => {
     >
       <ShapesGate :shape="item.shape" />
       <span class="compensate">{{ item.label }}</span>
+      <span class="flair" v-if="item.flair">{{ item.flair }}</span>
     </NuxtLink>
   </nav>
 </template>
@@ -71,6 +74,7 @@ const menu = computed(() => {
   overflow: clip;
 
   &-item {
+    position: relative;
     display: flex;
     background: var(--color);
     color: var(--black);
@@ -83,6 +87,19 @@ const menu = computed(() => {
 
     svg {
       height: 1em;
+    }
+
+    .flair {
+      background: var(--black);
+      color: var(--white);
+      text-transform: capitalize;
+      padding: .25em .25em 0 .25em;
+      position: absolute;
+      font-size: .45em;
+      font-weight: 900;
+      font-family: var(--font-base);
+      top: 0;
+      right: 0;
     }
 
     &:hover,

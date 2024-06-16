@@ -52,6 +52,33 @@ button {
   }
 }
 
+.accent-links {
+  a {
+    color: var(--color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.underlined-links {
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--color);
+    text-underline-offset: .12em;
+    text-decoration-thickness: .1em;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      text-underline-offset: .12em;
+      text-decoration-thickness: .1em;
+    }
+  }
+}
+
 *:focus-visible {
   outline: var(--focus-weight, 2px) var(--focus-color, var(--yellow)) solid;
   outline-offset: 3px;

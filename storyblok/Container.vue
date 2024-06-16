@@ -10,6 +10,7 @@ defineProps({ blok: Object })
       `bg-color-${blok.background}`,
       {
         padded: blok.padded,
+        gap: blok.gap,
         'container-sm': blok.small_container
       }
     ]"
@@ -25,5 +26,11 @@ defineProps({ blok: Object })
 .container {
   background-color: var(--bg-color);
   color: var(--text-color);
+
+  &.gap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--site-padding);
+  }
 }
 </style>
