@@ -6,7 +6,7 @@ const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
 const config = settings.value.data.story.content
 const route = useRoute()
-const onArtistsSingle = computed(() => route.params.slug.includes('artistes'))
+const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
 </script>
 
 <template>
