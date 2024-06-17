@@ -12,6 +12,9 @@ export const useDate = () => {
     },
     shortDate (date) {
       return format(date, 'dd/MM/yy', { locale: locales[locale.value] })
+    },
+    time (date) {
+      return format(date, 'HH:mm', { locale: locales[locale.value] })
     }
   }
 }

@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({ blok: Object })
 const { t } = useI18n()
+const { shortDate, time } = useDate()
 const localePath = useLocalePath()
 
 const socials = computed(() => {
@@ -25,10 +26,18 @@ const backgroundStyle = computed(() => {
 })
 
 const showArrow = ref(false)
+const showTicketsArrow = ref(false)
 const { randomInt } = useUtils()
 const colors = ['yellow', 'green', 'pink', 'blue']
-const artistColor = computed(() => colors[randomInt(0, colors.length - 1)])
+const artistColor = computed(() => colors[randomInt(0, colors.length)])
 const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
+const cardColor = computed(() => getSecondaryColor())
+
+const getSecondaryColor = () => {
+  const randomColor = colors[randomInt(0, colors.length)]
+  if (randomColor === artistColor.value) return getSecondaryColor()
+  return randomColor
+}
 </script>
 
 <template>
@@ -47,26 +56,42 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
           </Transition>
           Live / {{ $t('artists.title') }}
         </NuxtLink>
-        <ShapesArtists :shape="artistShape" class="artist-shape" />
+        <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
         <h1 :class="['artist-name font-heavy', { short: blok.name.length < 9, tiny: blok.name.length < 5, medium: blok.name.length < 15 }]">
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
-      <section class="artist-info">
-        <SiteSocials :socials="socials" />
-        Concert
+      <section :class="['artist-info polaroid', `color-${cardColor}`]">
+        <div v-if="blok.concert_date" class="artist-concert sticky top-navbar-plus">
+          <div class="artist-concert-date" v-if="blok.concert_date">
+            <span>{{ shortDate(blok.concert_date) }}</span>
+            <span>{{ time(blok.concert_date) }}</span>
+          </div>
+
+          <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />
+          
+          <a v-if="blok.cta_url" :href="blok.cta_url" target="_blank" class="artist-concert-tickets" @mouseenter="showTicketsArrow = true" @mouseleave="showTicketsArrow = false">
+            <span class="compensate">{{ blok.cta_label || $t('artists.tickets') }}</span>
+            
+            <Transition name="fade-right" mode="out-in">
+              <Icon name="material-symbols:arrow-forward" v-if="showTicketsArrow" class="arrow" key="arrow" />
+              <Icon name="f7:tickets" v-else key="tickets" />
+            </Transition>
+          </a>
+        </div>
+        <SiteSocials v-if="!blok.concert_date" :socials="socials" class="artist-socials" />
       </section>
       <section class="artist-description polaroid">
-        <div class="sticky top-navbar self-start">
+        <div class="md:sticky top-navbar-plus self-start">
           <NuxtImg
             v-if="blok.picture?.filename"
             :src="blok.picture.filename"
             :alt="`Foto de ${blok.name}`"
           />
+          <SiteSocials v-if="blok.concert_date" :socials="socials" class="artist-socials" />
         </div>
-        <div class="sticky top-navbar self-start">
+        <div class="artist-text sticky top-navbar-plus self-start">
           <UtilsRichText :content="blok.description" />
-          ds
         </div>
       </section>
       <section v-if="blok.youtube_id || blok.vimeo_id" class="artist-video polaroid">
@@ -169,7 +194,7 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
     flex-direction: row;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: var(--text-lg);
+    font-size: var(--text-md);
 
     img {
       width: 100%;
@@ -178,13 +203,87 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
 
   &-info {
     grid-area: info;
+    background-color: var(--color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-padding);
+    justify-content: space-between;
+
+    .artist-socials {
+      --hover-color: var(--white);
+      margin-top: 0;
+    }
+  }
+
+  &-socials {
+    font-size: 2.5rem;
+    flex-wrap: wrap;
+    line-height: 1;
+    margin-left: -.25em;
+    margin-top: var(--card-padding);
+
+    :deep(a) {
+      padding: .25em;
+      border-radius: 100%;
+
+      &:hover {
+        opacity: 1;
+        background: var(--hover-color, var(--color));
+      }
+    }
+  }
+
+  &-concert {
+    display: flex;
+    flex-direction: column;
+    gap: var(--card-padding);
+    font-size: var(--text-md);
+
+    &-date {
+      font-size: var(--text-xl);
+      font-weight: bold;
+      display: flex;
+      gap: var(--card-padding);
+      justify-content: space-between;
+    }
+
+    &-stage {
+      display: block;
+      border: 3px var(--black) solid;
+      padding: .5em .5em .4em .5em;
+      border-radius: 10rem;
+      color: var(--black);
+      text-align: center;
+      transition: .25s ease;
+
+      &:hover {
+        background: var(--white);
+      }
+    }
+
+    &-tickets {
+      display: flex;
+      border: 3px var(--black) solid;
+      padding: .5em 1.25em;
+      border-radius: 10rem;
+      color: var(--white);
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacer-2);
+      background-color: var(--black);
+      font-weight: bold;
+      transition: .25s ease;
+
+      &:hover {
+        background: var(--white);
+        color: var(--black);
+        border-color: var(--white);
+      }
+    }
   }
 
   &-video {
     grid-area: video;
-    max-width: 1100px;
-    margin-inline-start: auto;
-    width: 100%;
 
     iframe {
       aspect-ratio: 16 / 9;
@@ -193,9 +292,10 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
     }
   }
 }
+
 .container {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 400px;
   gap: var(--site-padding);
   grid-template-areas:
     "header header"
@@ -230,6 +330,59 @@ const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
     inset: 0;
     filter: contrast(170%) brightness(.14);
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+@include media('>lg') {
+  .artist {
+    &-description,
+    &-info,
+    &-video {
+      --card-padding: var(--spacer-6);
+    }
+
+    &-text {
+      border-left: 2px var(--black) solid;
+      padding-left: var(--card-padding);
+    }
+  }
+}
+
+@include media('<lg') {
+  .artist {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "info"
+        "description"
+        "video";
+    }
+
+    &-header {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "back"
+        "name";
+    }
+
+    &-name {
+      text-align: left;
+      font-size: .75em;
+    }
+  }
+}
+
+@include media('<md') {
+  .artist {
+
+    &-description {
+      grid-template-columns: 1fr;
+    }
+
+    &-socials {
+      font-size: 1.75rem;
+    }
   }
 }
 </style>

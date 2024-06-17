@@ -60,6 +60,10 @@
   top: var(--navbar-safe-area);
 }
 
+.top-navbar-plus {
+  top: calc(var(--navbar-safe-area) + 2rem);
+}
+
 /* Polaroid */
 .polaroid {
   --card-padding: var(--spacer-4);
