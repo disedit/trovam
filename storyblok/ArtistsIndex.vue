@@ -45,6 +45,15 @@ function artistBackground(filename) {
   return { backgroundImage: `url('${imgUrl}')` }
 }
 
+/* Prefetch backgrounds */
+useHead({
+  link: artists.value?.data?.stories?.map(artist => {
+    const background = artist.content.background.filename || artist.content.picture.filename
+    const imgUrl = img(background, { width: 1500 })
+    return { rel: 'prefetch', as: 'image', href: imgUrl }
+  })
+})
+
 /* Artist list effects */
 const { random } = useUtils()
 const artistsTotal = computed(() => artists.value?.data?.stories?.length)
@@ -155,7 +164,7 @@ onMounted(() => {
               :key="`background-${artist.uuid}`"
               v-if="hovering?.uuid === artist.uuid && artist.content?.picture?.filename"
               class="artist-background"
-              :style="artistBackground(artist.content.picture.filename)"
+              :style="artistBackground(artist.content.background.filename || artist.content.picture.filename)"
             />
           </Transition>
         </template>
@@ -189,7 +198,7 @@ onMounted(() => {
             <UtilsNoisyPhoto
               v-if="artist.content.picture?.filename"
               :src="artist.content.picture.filename"
-              :alt="`Foto de ${artist.content.name}`"
+              :alt="artist.content.picture.alt || `Foto de ${artist.content.name}`"
               class="artist-picture md:!hidden"
             />
             <h2 class="compensate">{{ artist.content.name }}</h2>

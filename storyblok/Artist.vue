@@ -21,7 +21,7 @@ const socials = computed(() => {
 const img = useImage()
 const backgroundStyle = computed(() => {
   if (!props.blok.picture?.filename) return false
-  const imgUrl = img(props.blok.picture.filename, { width: 1500 })
+  const imgUrl = img(props.blok.background.filename || props.blok.picture.filename, { width: 1500 })
   return { backgroundImage: `url('${imgUrl}')` }
 })
 
@@ -212,6 +212,7 @@ const getSecondaryColor = () => {
     .artist-socials {
       --hover-color: var(--white);
       margin-top: 0;
+      justify-content: space-between;
     }
   }
 
@@ -342,8 +343,7 @@ const getSecondaryColor = () => {
     }
 
     &-text {
-      border-left: 2px var(--black) solid;
-      padding-left: var(--card-padding);
+      line-height: 1.65;
     }
   }
 }
