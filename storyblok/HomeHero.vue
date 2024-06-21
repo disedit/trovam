@@ -14,7 +14,7 @@ const scrolled = computed(() => y.value > 100)
 <template>
   <section
     v-editable="blok"
-    :class="['home-hero', { scrolled }]"
+    :class="['home-hero background-filter', { scrolled }]"
     :style="backgroundStyle"
   >
     <div class="container">
@@ -26,6 +26,7 @@ const scrolled = computed(() => y.value > 100)
 
 <style lang="scss" scoped>
 .home-hero {
+  position: relative;
   background: var(--black);
   height: 100vh;
   height: 100svh;
@@ -47,6 +48,8 @@ const scrolled = computed(() => y.value > 100)
 
   .container {
     margin-block: auto;
+    position: relative;
+    z-index: 2;
   }
 
   .arrows {
@@ -62,6 +65,17 @@ const scrolled = computed(() => y.value > 100)
       opacity: 0;
       transform: translateY(-20%);
     }
+  }
+}
+
+.background-filter::before {
+  background-attachment: fixed;
+}
+
+@include media('<md') {
+  .home-hero,
+  .background-filter::before {
+    background-attachment: scroll;
   }
 }
 

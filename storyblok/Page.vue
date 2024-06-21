@@ -13,9 +13,13 @@ const backgroundStyle = computed(() => {
   <div
     v-editable="blok"
     class="page"
-    :style="backgroundStyle"
   >
-    <div :class="['relative z-10', { 'container padded': blok.container }]">
+    <div v-if="backgroundStyle" class="background z-1">
+      <div class="background-holder">
+        <div class="page-background" :style="backgroundStyle" />
+      </div>
+    </div>
+    <div :class="['relative z-10', { '-mt-[100vh]': !!backgroundStyle, 'container padded': blok.container }]">
       <StoryblokComponent
         v-for="blok in blok.body"
         :key="blok._uid"

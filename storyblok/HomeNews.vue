@@ -29,7 +29,7 @@ const { data: posts } = await useAsyncData(
 <template>
   <section
     v-editable="blok"
-    class="home-news"
+    class="home-news background-filter"
     :style="backgroundStyle"
     :aria-labelledby="`title-${blok._uid}`"
   >
@@ -65,6 +65,7 @@ const { data: posts } = await useAsyncData(
 
 <style lang="scss" scoped>
 .home-news {
+  position: relative;
   background-size: cover;
   background-attachment: fixed;
   --card-width: 33vw;
@@ -131,6 +132,10 @@ const { data: posts } = await useAsyncData(
   }
 }
 
+.background-filter::before {
+  background-attachment: fixed;
+}
+
 @include media('<lg') {
   .home-news {
     --card-width: 50vw;
@@ -140,14 +145,15 @@ const { data: posts } = await useAsyncData(
 @include media('<md') {
   .home-news {
     --card-width: 65vw;
+    background-attachment: scroll;
 
     &-title {
       margin-top: 10vh;
-      text-align: center;
+      text-align: left;
     }
 
     .dummy-card {
-      width: 4rem;
+      width: 0;
     }
 
     .arrow {
@@ -155,6 +161,10 @@ const { data: posts } = await useAsyncData(
       z-index: 0;
       top: 4rem;
     }
+  }
+
+  .background-filter::before {
+    background-attachment: scroll;
   }
 }
 </style>

@@ -44,7 +44,7 @@ const getSecondaryColor = () => {
   <article v-editable="blok" :class="['artist', `color-${artistColor}`]">
     <div class="background z-1">
       <div class="background-holder">
-        <div class="artist-background" :style="backgroundStyle" />
+        <div class="page-background grayscale" :style="backgroundStyle" />
       </div>
     </div>
     <div class="container padded relative navbar-safest-area z-10 -mt-[100vh]">
@@ -302,36 +302,6 @@ const getSecondaryColor = () => {
     "header header"
     "description info"
     "video video";
-}
-
-.background {
-  position: sticky;
-  inset: 0;
-  pointer-events: none;
-  opacity: .5;
-}
-
-.background-holder {
-  position: relative;
-  height: 100vh;
-}
-
-.artist-background {
-  position: absolute;
-  inset: 0;
-  background-position: top;
-  background-size: cover;
-  z-index: 1;
-  z-index: 2;
-  filter: grayscale(1) contrast(1) brightness(.5);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    filter: contrast(170%) brightness(.14);
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
 }
 
 @include media('>lg') {

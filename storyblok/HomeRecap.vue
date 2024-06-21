@@ -7,7 +7,8 @@ const props = defineProps({ blok: Object })
     <div class="container padded">
       <h2 :id="`title-${blok._uid}`" class="headline mb-4">
         <span class="compensate">{{ blok.title }}</span>
-        <ShapesRings />
+        <ShapesRings class="hidden md:block" />
+        <ShapesArtists2 class="md:hidden" />
         <span class="compensate">{{ blok.year }}</span>
       </h2>
       <iframe
@@ -21,9 +22,16 @@ const props = defineProps({ blok: Object })
         allowfullscreen
       />
       <div class="flex justify-end">
-        <NuxtLink :to="blok.link.cached_url" class="button color-blue">
+        <ElementsButton block :to="blok.link.cached_url">
+          <template #icon-prepend>
+            <ShapesArtists2 class="hidden md:block" />
+            <ShapesShape5 class="md:hidden" />
+          </template>
           {{ $t('recap.editions') }}
-        </NuxtLink>
+          <template #icon-append>
+            <Icon name="material-symbols:arrow-forward" />
+          </template>
+        </ElementsButton>
       </div>
     </div>
   </section>

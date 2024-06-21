@@ -11,7 +11,7 @@ const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
 
 <template>
   <nav :class="['nav', { scrolled, compact: scrolled || onArtistsSingle, 'gradient-nav': config.gradient_nav }]">
-    <NuxtLink :to="localePath('/')" class="nav-logo">
+    <NuxtLink :to="localePath('/')" class="nav-logo" :aria-label="$t('assist.logo')">
       <SiteLogo />
     </NuxtLink>
     <SiteMenu

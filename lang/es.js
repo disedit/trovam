@@ -1,5 +1,6 @@
 export default {
   assist: {
+    logo: 'Trovam (ir a la página principal)',
     main_menu: 'Menú principal',
     open_menu: 'Abrir menú',
     close_menu: 'Cerrar menú',

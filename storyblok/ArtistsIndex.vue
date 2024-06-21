@@ -157,13 +157,13 @@ onMounted(() => {
   <div v-editable="blok" class="artists">
     <div class="background z-1">
       <div class="background-holder">
-        <div class="generic-background" :style="backgroundStyle" />
-        <template v-for="(artist, i) in artists.data.stories" :key="artist.uuid">
+        <div class="page-background" :style="backgroundStyle" />
+        <template v-for="artist in artists.data.stories" :key="artist.uuid">
           <Transition name="fade">
             <div 
               :key="`background-${artist.uuid}`"
               v-if="hovering?.uuid === artist.uuid && artist.content?.picture?.filename"
-              class="artist-background"
+              class="page-background grayscale"
               :style="artistBackground(artist.content.background.filename || artist.content.picture.filename)"
             />
           </Transition>
@@ -318,41 +318,6 @@ onMounted(() => {
   svg {
     height: .85em;
   }
-}
-
-.background {
-  position: sticky;
-  inset: 0;
-  pointer-events: none;
-  opacity: .5;
-}
-
-.background-holder {
-  position: relative;
-  height: 100vh;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    filter: contrast(170%) brightness(.14);
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    z-index: 100;
-  }
-}
-
-.generic-background,
-.artist-background {
-  position: absolute;
-  inset: 0;
-  background-position: top;
-  background-size: cover;
-  z-index: 1;
-}
-
-.artist-background {
-  z-index: 2;
-  filter: grayscale(1) contrast(1) brightness(.5);
 }
 
 @media (hover: none) {
