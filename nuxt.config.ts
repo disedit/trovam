@@ -14,6 +14,9 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
         { rel: 'mask-icon', color: '#652B80', href: '/safari-pinned-tab.svg' },
         { rel: 'manifest', color: '#652B80', href: '/site.webmanifest' },
+      ],
+      script: [
+        { id: 'cookieyes', src: 'https://cdn-cookieyes.com/client_data/803042d9c7c874be402c6381/script.js' },
       ]
     }
   },
