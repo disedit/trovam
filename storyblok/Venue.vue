@@ -52,6 +52,7 @@ const backgroundStyle = computed(() => {
           <NuxtImg
             :src="blok.picture.filename"
             :alt="`Foto de ${blok.name}`"
+            sizes="100vw md:800px"
           />
           <h2>{{ blok.name }}</h2>
         </div>

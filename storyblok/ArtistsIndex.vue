@@ -200,6 +200,7 @@ onMounted(() => {
               :src="artist.content.picture.filename"
               :alt="artist.content.picture.alt || `Foto de ${artist.content.name}`"
               class="artist-picture md:!hidden"
+              sizes="100vw md:800px"
             />
             <h2 class="compensate">{{ artist.content.name }}</h2>
           </NuxtLink>
@@ -230,6 +231,7 @@ onMounted(() => {
                 v-if="artist.content.picture?.filename"
                 :src="artist.content.picture.filename"
                 :alt="`Foto de ${artist.content.name}`"
+                sizes="100vw md:800px"
               />
             </div>
             <div class="artist-card-name">

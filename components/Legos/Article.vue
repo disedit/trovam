@@ -43,6 +43,7 @@ const post = {
         :src="post.picture?.filename"
         :alt="post.picture?.alt"
         draggable="false"
+        sizes="100vw md:800px"
       />
     </div>
     <time :datetime="post.date">

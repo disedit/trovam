@@ -1,8 +1,10 @@
-
+<script setup>
+const loaded = ref(false)
+</script>
 
 <template>
-  <div class="noisy-photo">
-    <NuxtImg v-bind="{ ...$attrs, class: undefined }" />
+  <div :class="['noisy-photo', { loaded }]">
+    <NuxtImg v-bind="{ ...$attrs, class: undefined }" @load="loaded = true" />
   </div>
 </template>
 
@@ -17,6 +19,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: .5s ease;
+  }
+
+  &.loaded img {
+    opacity: 1;
   }
 
   &::before {

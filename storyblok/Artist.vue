@@ -57,7 +57,7 @@ const getSecondaryColor = () => {
           Live / {{ $t('artists.title') }}
         </NuxtLink>
         <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
-        <h1 :class="['artist-name font-heavy', { short: blok.name.length < 9, tiny: blok.name.length < 5, medium: blok.name.length < 15 }]">
+        <h1 :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
@@ -87,6 +87,7 @@ const getSecondaryColor = () => {
             v-if="blok.picture?.filename"
             :src="blok.picture.filename"
             :alt="`Foto de ${blok.name}`"
+            sizes="100vw md:800px"
           />
           <SiteSocials v-if="blok.concert_date" :socials="socials" class="artist-socials" />
         </div>
@@ -99,7 +100,7 @@ const getSecondaryColor = () => {
           v-if="blok.youtube_id"
           width="560"
           height="315"
-          :src="`https://www.youtube.com/embed/${blok.youtube_id}`"
+          :src="`https://www.youtube-nocookie.com/embed/${blok.youtube_id}`"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -128,7 +129,7 @@ const getSecondaryColor = () => {
     grid-template-areas:
       "back name"
       "shape name";
-    font-size: var(--text-5xl);
+    font-size: var(--text-4xl);
     margin-top: calc(4rem + 10vh);
     grid-area: header;
     gap: var(--site-padding);
@@ -151,12 +152,16 @@ const getSecondaryColor = () => {
       top: .15em;
     }
 
+    &.medium {
+      font-size: 1.25em;
+    }
+
     &.short {
-      font-size: 1.5em;
+      font-size: 1.75em;
     }
 
     &.tiny {
-      font-size: 1.75em;
+      font-size: 2em;
     }
   }
 
@@ -334,11 +339,23 @@ const getSecondaryColor = () => {
       grid-template-areas:
         "back"
         "name";
+      font-size: var(--text-2xl);
     }
 
     &-name {
       text-align: left;
-      font-size: .75em;
+
+      &.medium {
+        font-size: 1.25em;
+      }
+
+      &.short {
+        font-size: 1.4em;
+      }
+
+      &.tiny {
+        font-size: 2em;
+      }
     }
   }
 }

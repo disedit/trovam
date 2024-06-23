@@ -33,7 +33,7 @@ const { data: posts } = await useAsyncData(
     :style="backgroundStyle"
     :aria-labelledby="`title-${blok._uid}`"
   >
-    <div class="container padded">
+    <div class="container padded relative z-10">
       <NuxtLink :to="blok.link.cached_url" class="text-white hover:text-yellow">
         <h2 :id="`title-${blok._uid}`" class="home-news-title headline" v-html="blok.text" />
       </NuxtLink>
@@ -101,7 +101,7 @@ const { data: posts } = await useAsyncData(
   .arrow {
     position: absolute;
     top: .5rem;
-    left: calc(((100vw - var(--container-max-width)) / 2) + var(--site-padding));
+    left: calc(((100vw - min(100vw, var(--container-max-width))) / 2) + var(--site-padding));
     width: 8rem;
     color: var(--yellow);
     pointer-events: none;

@@ -38,6 +38,7 @@ const { data: venues } = await useAsyncData(
             <NuxtImg
               :src="venue.content.picture.filename"
               :alt="`Foto de ${venue.content.name}`"
+              sizes="100vw md:800px"
             />
           </div>
           <h2>{{ venue.content.name }}</h2>
