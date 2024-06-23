@@ -127,7 +127,7 @@ onMounted(() => {
         duration: .25,
         scrollTrigger: {
           trigger: card,
-          start: 'top 75%'
+          start: 'top 90%'
         }
       })
     })
@@ -348,12 +348,13 @@ onMounted(() => {
     flex-direction: column;
     background: var(--white);
     color: var(--black);
-    flex-grow: 1;
+    width: 90%;
     padding: var(--site-padding);
     gap: var(--site-padding);
     transform: translate(var(--from-x, var(--from-y))) rotate(var(--from-rotate));
     opacity: 0;
     box-shadow: var(--card-shadow);
+    font-size: var(--text-xl);
 
     &-picture {
       :deep(img) {
