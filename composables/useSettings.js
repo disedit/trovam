@@ -14,5 +14,12 @@ export const useSettings = async () => {
     { watch: [locale] }
   )
 
-  return settings
+  const siteSettings = ref(null)
+  siteSettings.value = settings.value
+
+  watch(settings, (newSettings) => {
+    siteSettings.value = newSettings
+  })
+
+  return siteSettings
 }

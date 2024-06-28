@@ -4,25 +4,24 @@ const settings = await useSettings()
 const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
-const config = settings.value.data.story.content
 const route = useRoute()
 const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
 </script>
 
 <template>
-  <nav :class="['nav', { scrolled, compact: scrolled || onArtistsSingle, 'gradient-nav': config.gradient_nav }]">
+  <nav :class="['nav', { scrolled, compact: scrolled || onArtistsSingle, 'gradient-nav': settings.data.story.content.gradient_nav }]">
     <NuxtLink :to="localePath('/')" class="nav-logo" :aria-label="$t('assist.logo')">
       <SiteLogo />
     </NuxtLink>
     <SiteMenu
       class="nav-menu hidden lg:flex"
-      :items="config.nav"
+      :items="settings.data.story.content.nav"
     />
     <SiteLanguage class="nav-langs hidden lg:flex" />
     <SiteMobileMenu
       class="nav-mobile lg:hidden ms-auto"
-      :items="config.nav"
-      :socials="config.social_networks"
+      :items="settings.data.story.content.nav"
+      :socials="settings.data.story.content.social_networks"
     />
   </nav>
 </template>
