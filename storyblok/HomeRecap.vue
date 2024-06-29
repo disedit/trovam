@@ -11,28 +11,29 @@ const props = defineProps({ blok: Object })
         <ShapesArtists2 class="md:hidden" />
         <span class="compensate">{{ blok.year }}</span>
       </h2>
-      <iframe
-        width="560"
-        height="315"
-        :src="`https://www.youtube-nocookie.com/embed/${blok.youtube_id}`"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      />
-      <div class="flex justify-end">
-        <ElementsButton block :to="blok.link.cached_url">
-          <template #icon-prepend>
-            <ShapesArtists2 class="hidden md:block" />
-            <ShapesShape5 class="md:hidden" />
-          </template>
-          {{ $t('recap.editions') }}
-          <template #icon-append>
-            <Icon name="material-symbols:arrow-forward" />
-          </template>
-        </ElementsButton>
-      </div>
+      <UtilsAnimateIn rotate="-2deg" :duration="1" start="top 75%">
+        <div class="polaroid">
+          <iframe
+            width="560"
+            height="315"
+            :src="`https://www.youtube-nocookie.com/embed/${blok.youtube_id}`"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
+          <div class="flex justify-end">
+            <ElementsButton rounded color="pink" size="sm" variant="negative" :to="blok.link.cached_url">
+              <template #icon-prepend>
+                <ShapesArtists2 class="hidden md:block" />
+                <ShapesShape5 class="md:hidden" />
+              </template>
+              {{ $t('recap.editions') }}
+            </ElementsButton>
+          </div>
+        </div>
+      </UtilsAnimateIn>
     </div>
   </section>
 </template>
@@ -55,6 +56,12 @@ const props = defineProps({ blok: Object })
   svg {
     color: var(--blue);
     height: 1em;
+  }
+
+  .polaroid {
+    max-width: 1100px;
+    margin-inline: auto;
+    rotate: -1deg;
   }
 
   iframe {

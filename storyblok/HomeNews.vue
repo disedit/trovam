@@ -24,6 +24,29 @@ const { data: posts } = await useAsyncData(
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
   })
 )
+
+/* Animations */
+const { $gsap, $ScrollTrigger } = useNuxtApp()
+onMounted(() => {
+  $gsap.set(".home-news-card", { y: 50, opacity: 0, rotate: '-2deg' })
+
+  $ScrollTrigger.batch(".home-news-card", {
+    start: "top 75%",
+    onEnter: elements => $gsap.to(elements, { y: 0, opacity: 1, rotate: 0, stagger: 0.25, ease: 'power4.out' }),
+    onLeaveBack: elements => $gsap.set(elements, { y: 50, opacity: 0, rotate: '-2deg', overwrite: true })
+  })
+
+  $gsap.from('.home-news-title', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    ease: 'power4.out',
+    scrollTrigger: {
+      trigger: '.home-news',
+      start: 'top 90%'
+    }
+  })
+})
 </script>
 
 <template>
@@ -42,14 +65,17 @@ const { data: posts } = await useAsyncData(
       <ShapesCurlyArrow class="arrow z-10" />
       <SiteSlider class="home-news-slider hide-scrollbar" v-slot="{ clickable }">
         <div class="dummy-card" />
-        <LegosArticle
+        <div
+          class="home-news-card"
           v-for="post in posts.data.stories"
           :key="post.uuid"
-          :clickable="clickable"
-          :article="post"
-          class="home-news-card"
-          no-picture
-        />
+        >
+          <LegosArticle
+            :clickable="clickable"
+            :article="post"
+            no-picture
+          />
+        </div>
         <NuxtLink
           :to="blok.link.cached_url"
           class="home-news-more"
@@ -83,6 +109,7 @@ const { data: posts } = await useAsyncData(
   }
 
   &-card {
+    display: flex;
     width: var(--card-width);
     max-width: 500px;
     flex-shrink: 0;

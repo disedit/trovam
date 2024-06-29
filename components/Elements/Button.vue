@@ -1,12 +1,15 @@
 <script setup>
 defineProps({
   block: { type: Boolean, default: false },
-  color: { type: String, default: 'red' }
+  color: { type: String, default: 'red' },
+  rounded: { type: Boolean, default: false },
+  size: { type: String, default: 'md' },
+  variant: { type: String, default: 'default' },
 })
 </script>
 
 <template>
-  <NuxtLink v-bind="$attrs" :class="['button', `color-${color}`, { block }]">
+  <NuxtLink v-bind="$attrs" :class="['button', `color-${color}`, `size-${size}`, `variant-${variant}`, { block, rounded }]">
     <span class="icon">
       <slot name="icon-prepend" />
     </span>
@@ -26,7 +29,7 @@ defineProps({
   font-weight: bold;
   display: inline-flex;
   gap: .5em;
-  font-size: var(--text-md);
+  font-size: var(--button-text-size, var(--text-md));
   align-items: center;
   padding: .5em .75em;
 
@@ -49,6 +52,19 @@ defineProps({
   &.block {
     display: flex;
     width: 100%;
+  }
+
+  &.rounded {
+    border-radius: 3em;
+  }
+
+  &.size-sm {
+    --button-text-size: var(--text-base);
+  }
+
+  &.variant-negative:hover {
+    background: var(--black);
+    color: var(--white);
   }
 }
 </style>

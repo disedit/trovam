@@ -36,7 +36,7 @@ const isHome = computed(() => {
             <span class="hidden md:block">
               {{ $t('newsletter.button') }}
             </span>
-            <Icon name="material-symbols:arrow-forward" class="icon md:hidden" />
+            <Icon name="material-symbols:arrow-forward" class="icon md:!hidden" />
           </button>
         </div>
         <div class="pt-4 xl:text-right leading-none text-sm color-yellow accent-links">
