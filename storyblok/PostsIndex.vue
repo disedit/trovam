@@ -34,10 +34,12 @@ const { data: posts } = await useAsyncData(
         :article="post"
       />
     </div>
-    <StoryblokComponent
-      v-for="blok in blok.footer"
-      :blok="blok"
-    />
+    <div class="relative z-10">
+      <StoryblokComponent
+        v-for="blok in blok.footer"
+        :blok="blok"
+      />
+    </div>
   </div>
 </template>
 

@@ -36,6 +36,10 @@ const backgroundStyle = computed(() => {
   background-attachment: fixed;
 }
 
+.container {
+  padding-block-end: 150px;
+}
+
 .background-overlay {
   background: rgba($black, .5);
   position: absolute;

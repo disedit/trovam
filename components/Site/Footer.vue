@@ -35,9 +35,23 @@ const { internalLink } = useLinks()
 
 <style lang="scss" scoped>
 .footer {
+  position: relative;
   background: url(~/assets/images/bg-2.jpg);
   background-size: cover;
   background-color: #000;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    translate: 0 -150px;
+    background: linear-gradient(to bottom, rgba($black, 0), rgba($black, 1));
+    pointer-events: none;
+  }
 
   &-sponsors {
     display: flex;

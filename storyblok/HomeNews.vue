@@ -95,6 +95,7 @@ onMounted(() => {
   position: relative;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   --card-width: 33vw;
   min-height: 100svh;
   min-height: 100vh;
