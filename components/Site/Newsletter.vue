@@ -33,7 +33,10 @@ const isHome = computed(() => {
           <input type="hidden" name="ok_redirect" id="id_redirect" :value="$t('newsletter.redirect')">
 
           <button type="submit" class="newsletter-button">
-            {{ $t('newsletter.button') }}
+            <span class="hidden md:block">
+              {{ $t('newsletter.button') }}
+            </span>
+            <Icon name="material-symbols:arrow-forward" class="icon md:hidden" />
           </button>
         </div>
         <div class="pt-4 xl:text-right leading-none text-sm color-yellow accent-links">
@@ -149,6 +152,14 @@ const isHome = computed(() => {
     &-input,
     &-button {
       font-size: var(--text-lg);
+    }
+
+    &-input {
+      width: 100%;
+    }
+
+    .icon {
+      translate: 0 -.1em;
     }
   }
 }
