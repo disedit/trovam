@@ -84,7 +84,7 @@ const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to bottom, rgba(darken($black, 5%), 1), rgba($black, 0));
+    background: linear-gradient(to bottom, rgba($black, 1), rgba($black, 0));
     pointer-events: none;
     z-index: 8000;
     height: 15rem;

@@ -5,8 +5,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'theme-color', content: '#1e1e1e' },
-        { name: 'msapplication-TileColor', content: '#1e1e1e' },
+        { name: 'theme-color', content: '#181818' },
+        { name: 'msapplication-TileColor', content: '#181818' },
       ],
       link: [
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
