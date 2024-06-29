@@ -101,6 +101,10 @@ const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
     &.compact {
       --nav-height: 2rem;
     }
+
+    &.gradient-nav::after {
+      opacity: 1;
+    }
   }
 }
 </style>
