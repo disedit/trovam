@@ -24,7 +24,7 @@ defineProps({
   background: var(--color);
   color: var(--black);
   font-weight: bold;
-  display: flex;
+  display: inline-flex;
   gap: .5em;
   font-size: var(--text-md);
   align-items: center;
@@ -47,6 +47,7 @@ defineProps({
   }
 
   &.block {
+    display: flex;
     width: 100%;
   }
 }

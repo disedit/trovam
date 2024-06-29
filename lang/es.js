@@ -20,5 +20,19 @@ export default {
   },
   recap: {
     editions: 'Ediciones anteriores'
+  },
+  newsletter: {
+    header_home: 'Recíbelas en tu correo',
+    header_footer: 'Las últimas novedades en tu correo',
+    email: 'E-mail',
+    placeholder: 'Déjanos tu e-mail',
+    button: 'Suscribirse',
+    redirect: 'https://firatrovam.com/newsletter',
+    legal_before: 'Al enviar el formulario aceptas la',
+    policy: 'Política de Privacidad',
+    legal_after: 'y recibir correos de Valencian Music Association (VAM)',
+    success: '¡Gracias!',
+    confirm: 'Te hemos enviado un correo para verificar tu dirección de email. Revisa tu bandeja de entrada para finalizar la suscripción.',
+    back: 'Página principal'
   }
 }

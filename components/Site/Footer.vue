@@ -6,6 +6,7 @@ const { internalLink } = useLinks()
 
 <template>
   <footer class="footer" aria-describedby="FooterTitle">
+    <SiteNewsletter />
     <h2 id="FooterTitle" class="visually-hidden">Footer</h2>
     <div class="container padded grid md:grid-cols-2 gap-6">
       <div class="footer-sponsors md:col-span-2 mb-10">
@@ -34,6 +35,10 @@ const { internalLink } = useLinks()
 
 <style lang="scss" scoped>
 .footer {
+  background: url(~/assets/images/bg-2.jpg);
+  background-size: cover;
+  background-color: #000;
+
   &-sponsors {
     display: flex;
     flex-wrap: wrap;

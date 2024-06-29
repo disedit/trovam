@@ -38,9 +38,9 @@ const { data: posts } = await useAsyncData(
         <h2 :id="`title-${blok._uid}`" class="home-news-title headline" v-html="blok.text" />
       </NuxtLink>
     </div>
-    <div class="relative">
+    <div class="relative z-10">
       <ShapesCurlyArrow class="arrow z-10" />
-      <SiteSlider class="home-news-slider" v-slot="{ clickable }">
+      <SiteSlider class="home-news-slider hide-scrollbar" v-slot="{ clickable }">
         <div class="dummy-card" />
         <LegosArticle
           v-for="post in posts.data.stories"
@@ -59,6 +59,7 @@ const { data: posts } = await useAsyncData(
           {{ $t('news.all') }}
         </NuxtLink>
       </SiteSlider>
+      <SiteNewsletter home />
     </div>
   </section>
 </template>
@@ -134,6 +135,15 @@ const { data: posts } = await useAsyncData(
 
 .background-filter::before {
   background-attachment: fixed;
+}
+
+.background-filter::after {
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba($black, 0), rgba($black, 1));
+  z-index: 0;
 }
 
 @include media('<lg') {
