@@ -6,10 +6,11 @@ const localePath = useLocalePath()
 
 const socials = computed(() => {
   const profiles = []
-  const { website, spotify, instagram, twitter, facebook, youtube, soundcloud, bandcamp } = props.blok
+  const { website, spotify, instagram, tiktok, twitter, facebook, youtube, soundcloud, bandcamp } = props.blok
   if (website) profiles.push({ label: t('assist.website'), link: website, icon: 'website' })
   if (spotify) profiles.push({ label: 'Spotify', link: spotify, icon: 'spotify' })
   if (instagram) profiles.push({ label: 'Instagram', link: twitter, icon: 'instagram' })
+  if (tiktok) profiles.push({ label: 'TikTok', link: tiktok, icon: 'tiktok' })
   if (facebook) profiles.push({ label: 'Facebook', link: facebook, icon: 'facebook' })
   if (youtube) profiles.push({ label: 'Youtube', link: youtube, icon: 'youtube' })
   if (soundcloud) profiles.push({ label: 'Soundcloud', link: soundcloud, icon: 'soundcloud' })

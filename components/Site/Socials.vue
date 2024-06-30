@@ -16,7 +16,8 @@ const icons = {
   spotify: 'fa6-brands:spotify',
   soundcloud: 'fa6-brands:soundcloud',
   bandcamp: 'fa6-brands:bandcamp',
-  website: 'iconoir:www'
+  tiktok: 'fa6-brands:tiktok',
+  website: 'iconoir:www',
 }
 </script>
 
