@@ -4,6 +4,6 @@ defineProps({ blok: Object })
 
 <template>
   <div v-editable="blok" class="youtube-embed">
-    <UtilsYoutube :video-id="blok.youtube_id" />
+    <UtilsYoutube :video-id="blok.youtube_id" :aspect="blok.aspect" />
   </div>
 </template>

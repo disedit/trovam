@@ -38,13 +38,15 @@ const isLoaded = ref(false)
 
 <style lang="scss" scoped>
 .video {
+  --video-aspect: var(--aspect);
+
   &-player-embed {
     width: 100% !important;
-    aspect-ratio: var(--aspect) !important;
+    aspect-ratio: var(--video-aspect) !important;
   }
 
   &-thumbnail {
-    aspect-ratio: var(--aspect);
+    aspect-ratio: var(--video-aspect);
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -83,6 +85,12 @@ const isLoaded = ref(false)
     font-size: var(--text-sm);
     color: var(--white);
     padding: var(--site-padding);
+  }
+}
+
+@include media('<md') {
+  .video {
+    --video-aspect: 1;
   }
 }
 </style>
