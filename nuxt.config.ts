@@ -16,7 +16,6 @@ export default defineNuxtConfig({
         { rel: 'manifest', color: '#652B80', href: '/site.webmanifest' },
       ],
       script: [
-        { id: 'cookieyes', type: 'text/javascript', src: 'https://cdn-cookieyes.com/client_data/803042d9c7c874be402c6381/script.js' },
         { src: 'https://cloud.umami.is/script.js', defer: true, 'data-website-id': '182211e5-3bf2-457e-9d2b-a1b7287fa2e4' },
       ]
     }
@@ -37,7 +36,8 @@ export default defineNuxtConfig({
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
     '@vueuse/nuxt',
     '@nuxt/image',
-    'nuxt-icon'
+    'nuxt-icon',
+    "@nuxt/scripts"
   ],
 
   vite: {

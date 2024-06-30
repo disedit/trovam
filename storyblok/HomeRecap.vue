@@ -13,16 +13,7 @@ const props = defineProps({ blok: Object })
       </h2>
       <UtilsAnimateIn rotate="-2deg" :duration="1" start="top 75%">
         <div class="polaroid">
-          <iframe
-            width="560"
-            height="315"
-            :src="`https://www.youtube-nocookie.com/embed/${blok.youtube_id}`"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          />
+          <UtilsYoutube :video-id="blok.youtube_id" aspect="16 / 6.5" />
           <div class="flex justify-end">
             <ElementsButton rounded color="pink" size="sm" variant="negative" :to="blok.link.cached_url">
               <template #icon-prepend>
@@ -63,22 +54,11 @@ const props = defineProps({ blok: Object })
     margin-inline: auto;
     rotate: -1deg;
   }
-
-  iframe {
-    aspect-ratio: 16/6.5;
-    width: 100%;
-    height: 100%;
-    border: 3px var(--white) solid;
-  }
 }
 
 @include media('<md') {
   .home-recap {
     min-height: 75svh;
-
-    iframe {
-      aspect-ratio: 1;
-    }
   }
 }
 </style>

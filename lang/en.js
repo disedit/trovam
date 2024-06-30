@@ -34,5 +34,10 @@ export default {
     success: 'Thanks!',
     confirm: 'We\'ve sent you an email to verify your address. Please, check your inbox to confirm your subscription.',
     back: 'Back to the homepage'
+  },
+  video: {
+    policy: 'By loading the vídeo, you accept',
+    youtube_policy: 'Google\'s privacy policy',
+    vimeo_policy: 'Vimeo\'s privacy policy'
   }
 }

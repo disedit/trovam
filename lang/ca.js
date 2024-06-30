@@ -34,5 +34,10 @@ export default {
     success: 'Gràcies!',
     confirm: 'T\'hem enviat un correu per verificar la teua adreça. Revisa el teu correu per finalitzar la subscripció.',
     back: 'Pàgina principal'
+  },
+  video: {
+    policy: 'Al carregar el vídeo, acceptes la',
+    youtube_policy: 'política de privacitat de Google',
+    vimeo_policy: 'política de privacitat de Vimeo'
   }
 }

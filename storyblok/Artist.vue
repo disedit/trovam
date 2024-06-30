@@ -97,26 +97,8 @@ const getSecondaryColor = () => {
         </div>
       </section>
       <section v-if="blok.youtube_id || blok.vimeo_id" class="artist-video polaroid">
-        <iframe
-          v-if="blok.youtube_id"
-          width="560"
-          height="315"
-          :src="`https://www.youtube-nocookie.com/embed/${blok.youtube_id}`"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        />
-        <iframe
-          v-else-if="blok.vimeo_id"
-          :src="`https://player.vimeo.com/video/${blok.vimeo_id}`"
-          width="640"
-          height="360"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-        />
+        <UtilsYoutube v-if="blok.youtube_id" :video-id="blok.youtube_id" />
+        <UtilsVimeo v-else :video-id="blok.vimeo_id" />
       </section>
     </div>
   </article>
@@ -291,12 +273,6 @@ const getSecondaryColor = () => {
 
   &-video {
     grid-area: video;
-
-    iframe {
-      aspect-ratio: 16 / 9;
-      width: 100%;
-      height: 100%;
-    }
   }
 }
 
