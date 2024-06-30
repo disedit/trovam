@@ -38,7 +38,9 @@ const isLoaded = ref(false)
 
 <style lang="scss" scoped>
 .video {
-  --video-aspect: var(--aspect);
+  &-player {
+    --video-aspect: var(--aspect);
+  }
 
   &-player-embed {
     width: 100% !important;
@@ -89,7 +91,7 @@ const isLoaded = ref(false)
 }
 
 @include media('<md') {
-  .video {
+  .video-player {
     --video-aspect: 1;
   }
 }
