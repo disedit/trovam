@@ -211,6 +211,7 @@ onMounted(() => {
     align-items: center;
     gap: .25em;
     margin-bottom: var(--spacer-4);
+    opacity: 0;
 
     svg {
       height: 1em;
@@ -242,6 +243,7 @@ onMounted(() => {
     .artist {
       font-size: 1.05em;
       color: var(--white);
+      opacity: 0;
 
       span {
         transition: .25s ease;
@@ -266,9 +268,12 @@ onMounted(() => {
 
   &-dates {
     max-width: 15ch;
+    opacity: 0;
   }
 
   &-location {
+    opacity: 0;
+
     span {
       display: block;
       color: var(--blue);
@@ -320,6 +325,7 @@ onMounted(() => {
 @include media('<md') {
   .home-artists {
     background-position: left;
+    background-attachment: scroll;
 
     &-list {
       display: block;
