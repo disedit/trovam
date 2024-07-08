@@ -35,6 +35,7 @@ const props = defineProps({ blok: Object })
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: clip;
 
   h2 {
     display: flex;

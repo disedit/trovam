@@ -48,7 +48,8 @@ function artistBackground(filename) {
 /* Prefetch backgrounds */
 useHead({
   link: artists.value?.data?.stories?.map(artist => {
-    const background = artist.content.background.filename || artist.content.picture.filename
+    const background = artist.content?.background?.filename || artist.content?.picture?.filename
+    if (!background) return
     const imgUrl = img(background, { width: 1500 })
     return { rel: 'prefetch', as: 'image', href: imgUrl }
   })
@@ -330,7 +331,7 @@ onMounted(() => {
 
 @include media('>=md') {
   .hovering {
-  .artist:not(.hovering) .compensate, .shape {
+    .artist:not(.hovering) .compensate, .shape {
       opacity: .1;
     }
   }

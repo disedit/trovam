@@ -48,5 +48,6 @@
 @include media('<md') {
   :root {
     --site-padding: var(--spacer-4);
+    --navbar-safest-area: 4rem;
   }
 }
