@@ -340,7 +340,7 @@ onMounted(() => {
 @include media('<md') {
   .artists {
     &-title {
-      margin-top: 0;
+      margin-top: var(--spacer-8);
     }
   }
 
