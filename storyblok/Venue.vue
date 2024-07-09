@@ -36,6 +36,11 @@ const backgroundStyle = computed(() => {
 
 <template>
   <div v-editable="blok" class="venue">
+    <div class="background z-1">
+      <div class="background-holder">
+        <div class="page-background grayscale" :style="backgroundStyle" />
+      </div>
+    </div>
     <PageHeader
       :blok="{
         small_container: true,
@@ -44,7 +49,7 @@ const backgroundStyle = computed(() => {
         title: parent.content.body[0].title,
         link: `/${parent.full_slug}`
       }"
-      class="relative z-10"
+      class="relative z-10 -mt-[100vh]"
     />
     <div class="container container-sm padded relative z-10">
       <article class="venue-card">
@@ -68,7 +73,6 @@ const backgroundStyle = computed(() => {
         <div v-if="blok.map" class="venue-map" v-html="blok.map" />
       </article>
     </div>
-    <div :style="backgroundStyle" class="page-background" />
   </div>
 </template>
 
@@ -127,14 +131,9 @@ const backgroundStyle = computed(() => {
       width: 100%;
     }
   }
-}
 
-.page-background {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-attachment: fixed;
-  filter: grayscale(1) contrast(4) brightness(1);
-  opacity: .1;
+  .page-background {
+    opacity: .35;
+  }
 }
 </style>
