@@ -322,6 +322,16 @@ onMounted(() => {
   }
 }
 
+@include media('>xxl') {
+  .home-artists-list {
+    line-height: 1.1;
+
+    .artist {
+      font-size: 1.4em;
+    }
+  }
+}
+
 @include media('<md') {
   .home-artists {
     background-position: left;
