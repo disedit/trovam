@@ -11,6 +11,10 @@ const router = useRouter()
 const hTag = computed(() => `h${props.level}`)
 const { shortDate } = useDate()
 const { random } = useUtils()
+const { data: rotate } = await useAsyncData(
+  'rotate' + props.article.uuid,
+  () => random(-3,3)
+)
 
 function navigate(e, to) {
   e.preventDefault()
@@ -33,11 +37,10 @@ const post = {
     :href="`/${post.slug}`"
     class="article"
     :style="{
-      '--rotate': `${random(-3,3)}deg`
+      '--rotate': `${rotate}deg`
     }"
     draggable="false"
-    @click="navigate($event, `/${post.slug}`)"
-  >
+    @click="navigate($event, `/${post.slug}`)">
     <div v-if="post.picture && !noPicture" class="article-picture">
       <NuxtImg
         :src="post.picture?.filename"

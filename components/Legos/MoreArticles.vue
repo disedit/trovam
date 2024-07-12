@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  exclude: { type: String, default: null },
+  exclude: { type: [String, Number], default: null },
   noSummary: { type: Boolean, default: true }
 })
 const { locale } = useI18n()
@@ -22,7 +22,7 @@ const { data: posts } = await useAsyncData(
 </script>
 
 <template>
-  <section aria-labelledby="MoreNews">
+  <section aria-labelledby="MoreNews" class="relative z-10">
     <div class="container padded-x">
       <h3 class="news-title headline flex items-center gap-4" id="MoreNews">
         <ShapesShape4 class="text-pink h-10" />
