@@ -10,12 +10,11 @@ const backgroundStyle = computed(() => {
 
 /* Fetch posts */
 const { locale } = useI18n()
-const version = useEnvironment()
 const storyblokApi = useStoryblokApi()
 const { data: posts } = await useAsyncData(
   'posts_home',
   async () => await storyblokApi.get(`cdn/stories`, {
-    version,
+    version: 'published',
     language: locale.value,
     excluding_fields: 'body',
     starts_with: `noticies/`,
