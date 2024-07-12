@@ -41,10 +41,10 @@ const post = {
     }"
     draggable="false"
     @click="navigate($event, `/${post.slug}`)">
-    <div v-if="post.picture && !noPicture" class="article-picture">
+    <div v-if="post.picture?.filename && !noPicture" class="article-picture">
       <NuxtImg
-        :src="post.picture?.filename"
-        :alt="post.picture?.alt"
+        :src="post.picture.filename"
+        :alt="post.picture.alt"
         draggable="false"
         sizes="100vw md:800px"
       />
