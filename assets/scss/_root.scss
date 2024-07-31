@@ -12,7 +12,7 @@
   --text-muted: #{$gray};
   --container-max-width: #{$container-max-width};
   --navbar-safe-area: #{$navbar-safe-area};
-  --navbar-safest-area: #{$navbar-safe-area + 4rem};
+  --navbar-safest-area: 8vw;
   --spacer-1: .25rem;
   --spacer-2: .5rem;
   --spacer-3: .75rem;
@@ -48,6 +48,6 @@
 @include media('<md') {
   :root {
     --site-padding: var(--spacer-4);
-    --navbar-safest-area: 4rem;
+    --navbar-safest-area: 7rem;
   }
 }

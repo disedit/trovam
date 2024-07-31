@@ -171,7 +171,7 @@ onMounted(() => {
         </template>
       </div>
     </div>
-    <div class="container padded relative navbar-safest-area z-10 -mt-[100vh]">
+    <div class="container padded relative navbar-safe-area z-10 -mt-[100vh]">
       <h1 class="artists-title">
         <ShapesShape1 />
         <span class="compensate">Live / {{ blok.title }}</span>
