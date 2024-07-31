@@ -1,6 +1,5 @@
 <script setup>
-/* Load nav items */
-const settings = await useSettings()
+const settings = useState('settings')
 const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)

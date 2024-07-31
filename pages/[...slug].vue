@@ -1,6 +1,6 @@
 <script setup>
 /* Load site settings */
-const settings = await useSettings()
+const settings = useState('settings')
 const global = settings.value.data.story.content
 
 /* Load page */

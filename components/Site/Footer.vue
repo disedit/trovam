@@ -1,6 +1,5 @@
 <script setup>
-/* Load nav items */
-const settings = await useSettings()
+const settings = useState('settings')
 const { internalLink } = useLinks()
 </script>
 

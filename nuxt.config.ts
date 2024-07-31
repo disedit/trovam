@@ -36,8 +36,7 @@ export default defineNuxtConfig({
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
     '@vueuse/nuxt',
     '@nuxt/image',
-    'nuxt-icon',
-    "@nuxt/scripts"
+    'nuxt-icon'
   ],
 
   vite: {
@@ -71,5 +70,7 @@ export default defineNuxtConfig({
     storyblok: {
       baseURL: 'https://a.storyblok.com'
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-31'
 })
