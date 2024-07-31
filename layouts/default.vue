@@ -1,6 +1,5 @@
 <script setup>
 const siteSettings = await useSettings()
-const settings = useState('settings', () => siteSettings)
 
 const head = useLocaleHead({
   addDirAttribute: true,

@@ -1,4 +1,5 @@
 export const useSettings = async () => {
+  const siteSettings = useState('settings', () => null)
   const { locale } = useI18n()
   const version = useEnvironment()
   const storyblokApi = useStoryblokApi()
@@ -14,7 +15,6 @@ export const useSettings = async () => {
     { watch: [locale] }
   )
 
-  const siteSettings = ref(null)
   siteSettings.value = settings.value
 
   watch(settings, (newSettings) => {
