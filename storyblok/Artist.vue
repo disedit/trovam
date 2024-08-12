@@ -63,26 +63,28 @@ const getSecondaryColor = () => {
         </h1>
       </header>
       <section :class="['artist-info polaroid', `color-${cardColor}`]">
-        <div v-if="blok.concert_date" class="artist-concert sticky top-navbar-plus">
-          <div class="artist-concert-date" v-if="blok.concert_date">
-            <span>{{ shortDate(blok.concert_date) }}</span>
-            <span>{{ time(blok.concert_date) }}</span>
-          </div>
+        <div v-if="blok.concert_date" class="artist-concert">
+          <div class="sticky top-navbar-plus">
+            <div class="artist-concert-date" v-if="blok.concert_date">
+              <span>{{ shortDate(blok.concert_date) }}</span>
+              <span>{{ time(blok.concert_date) }}</span>
+            </div>
 
-          <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />
-          
-          <a v-if="blok.cta_url" :href="blok.cta_url" target="_blank" class="artist-concert-tickets" @mouseenter="showTicketsArrow = true" @mouseleave="showTicketsArrow = false">
-            <span class="compensate">{{ blok.cta_label || $t('artists.tickets') }}</span>
+            <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />
             
-            <Transition name="fade-right" mode="out-in">
-              <Icon name="material-symbols:arrow-forward" v-if="showTicketsArrow" class="arrow" key="arrow" />
-              <Icon name="f7:tickets" v-else key="tickets" />
-            </Transition>
-          </a>
+            <a v-if="blok.cta_url" :href="blok.cta_url" target="_blank" class="artist-concert-tickets" @mouseenter="showTicketsArrow = true" @mouseleave="showTicketsArrow = false">
+              <span class="compensate">{{ blok.cta_label || $t('artists.tickets') }}</span>
+              
+              <Transition name="fade-right" mode="out-in">
+                <Icon name="material-symbols:arrow-forward" v-if="showTicketsArrow" class="arrow" key="arrow" />
+                <Icon name="f7:tickets" v-else key="tickets" />
+              </Transition>
+            </a>
 
-          <UtilsRichText v-if="blok.concert_info" :content="blok.concert_info" class="artist-concert-info" />
+            <UtilsRichText v-if="blok.concert_info" :content="blok.concert_info" class="artist-concert-info" />
+          </div>
         </div>
-        <SiteSocials v-if="!blok.concert_date" :socials="socials" class="artist-socials" />
+        <SiteSocials :socials="socials" class="artist-socials" />
       </section>
       <section class="artist-description polaroid">
         <div class="md:sticky top-navbar-plus self-start">
@@ -92,7 +94,6 @@ const getSecondaryColor = () => {
             :alt="`Foto de ${blok.name}`"
             sizes="100vw md:800px"
           />
-          <SiteSocials v-if="blok.concert_date" :socials="socials" class="artist-socials" />
         </div>
         <div class="artist-text sticky top-navbar-plus self-start">
           <UtilsRichText :content="blok.description" />
@@ -225,10 +226,14 @@ const getSecondaryColor = () => {
   }
 
   &-concert {
-    display: flex;
-    flex-direction: column;
-    gap: var(--card-padding);
-    font-size: var(--text-md);
+    flex-grow: 1;
+
+    .sticky {
+      display: flex;
+      flex-direction: column;
+      gap: var(--card-padding);
+      font-size: var(--text-md);
+    }
 
     &-date {
       font-size: var(--text-xl);
