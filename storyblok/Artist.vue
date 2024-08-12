@@ -79,6 +79,8 @@ const getSecondaryColor = () => {
               <Icon name="f7:tickets" v-else key="tickets" />
             </Transition>
           </a>
+
+          <UtilsRichText v-if="blok.concert_info" :content="blok.concert_info" class="artist-concert-info" />
         </div>
         <SiteSocials v-if="!blok.concert_date" :socials="socials" class="artist-socials" />
       </section>
@@ -267,6 +269,13 @@ const getSecondaryColor = () => {
         background: var(--white);
         color: var(--black);
         border-color: var(--white);
+      }
+    }
+
+    &-info {
+      &:deep(h3) {
+        border-bottom: 1.5px var(--black) solid;
+        margin-bottom: .5em;
       }
     }
   }
