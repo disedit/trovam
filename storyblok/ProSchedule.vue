@@ -16,7 +16,7 @@ const storyblokApi = useStoryblokApi()
 const { locale } = useI18n()
 const version = useEnvironment()
 const { data: stages } = await useAsyncData(
-  'stages',
+  'stages_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
     language: locale.value,
