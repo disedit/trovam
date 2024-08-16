@@ -28,7 +28,6 @@ const { data: stages } = await useAsyncData(
 )
 const stagesByUuid = Object.fromEntries(stages.value.data.stories.map(stage => [stage.uuid, stage]))
 
-
 // Concerts
 const { data: concertData } = await useAsyncData(
   'concerts',
@@ -45,6 +44,7 @@ const { data: concertData } = await useAsyncData(
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
   })
 )
+
 const concerts = concertData.value.data.stories.map(artist => ({
   id: artist.id,
   date: artist.content.concert_date,
@@ -62,14 +62,18 @@ const concerts = concertData.value.data.stories.map(artist => ({
 // Schedules
 const { data: scheduleData } = await useAsyncData(
   'schedules',
-  async () => await storyblokApi.get(`cdn/stories`, {
-    version,
-    language: locale.value,
-    by_uuids_ordered: props.blok.schedules.join(','),
-    excluding_fields: 'header,seo_title,seo_description,seo_picture'
-  })
+  async () => {
+    if (!props.blok.schedules.length) return []
+    return await storyblokApi.get(`cdn/stories`, {
+      version,
+      language: locale.value,
+      by_uuids_ordered: props.blok.schedules.join(','),
+      excluding_fields: 'header,seo_title,seo_description,seo_picture'
+    })
+  }
 )
-const schedules = scheduleData.value.data.stories
+
+const schedules = scheduleData.value.hasOwnProperty('data') ? scheduleData.value.data.stories : []
 const scheduleEvents = []
 
 // Filters
@@ -100,7 +104,7 @@ schedules.forEach(schedule => {
 
 // Merge all events
 const allEvents = concerts.concat(scheduleEvents)
-const sortedEvents = allEvents.sort((a, b) => new Date(b.date) - new Date(a.date))
+const sortedEvents = allEvents.sort((a, b) => new Date(a.date) - new Date(b.date))
 
 // Hide dates if repeated
 const firstInstanceOfDate = (date, index) => {

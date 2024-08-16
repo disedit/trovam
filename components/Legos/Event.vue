@@ -31,12 +31,24 @@ const hasDescription = props.event.description.content[0]?.content
           {{ event.title }}
         </span>
       </h3>
-      <LegosStage
-        v-if="event.stage"
-        :stage="stage.content"
-        stage-only
-        class="event-location compensate"
-      />
+      <div class="event-meta">
+        <LegosStage
+          v-if="event.stage"
+          :stage="stage.content"
+          stage-only
+          class="event-location compensate"
+        />
+        <UtilsButton
+          v-if="event.cta_url"
+          :to="event.cta_url"
+          icon="f7:tickets"
+          target="_blank"
+          rel="noopener"
+          class="event-button"
+        >
+          {{ event.cta_label || $t('artists.tickets') }}
+        </UtilsButton>
+      </div>
       <UtilsRichText
         v-if="hasDescription"
         :content="event.description"
@@ -94,12 +106,18 @@ const hasDescription = props.event.description.content[0]?.content
     margin-top: -.5rem;
   }
 
+  &-meta {
+    display: flex;
+    gap: var(--spacer-4);
+    align-items: center;
+    align-self: center;
+  }
+
   &-location {
     color: var(--black);
     text-align: right;
     font-family: var(--font-heavy);
     text-transform: uppercase;
-    align-self: center;
     padding-top: .25em;
     margin-top: -.25em;
 
