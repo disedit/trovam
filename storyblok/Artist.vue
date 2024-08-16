@@ -62,7 +62,7 @@ const getSecondaryColor = () => {
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
-      <section :class="['artist-info polaroid', `color-${cardColor}`]">
+      <section :class="['artist-info polaroid focus-black', `color-${cardColor}`]">
         <div v-if="blok.concert_date" class="artist-concert">
           <div class="sticky top-navbar-plus">
             <div class="artist-concert-date" v-if="blok.concert_date">
@@ -279,7 +279,7 @@ const getSecondaryColor = () => {
 
     &-info {
       &:deep(h3) {
-        border-bottom: 1.5px var(--black) solid;
+        border-bottom: 2px var(--black) solid;
         margin-bottom: .5em;
       }
     }

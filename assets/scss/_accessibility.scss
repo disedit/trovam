@@ -13,3 +13,16 @@
     position: absolute !important;
   }
 }
+
+/* Focus */
+.focus-pink {
+  --focus-color: var(--pink);
+}
+
+.focus-yellow {
+  --focus-color: var(--yellow);
+}
+
+.focus-black {
+  --focus-color: var(--black);
+}
