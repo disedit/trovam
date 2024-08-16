@@ -127,4 +127,57 @@ const hasDescription = props.event.description.content[0]?.content
     }
   }
 }
+
+@include media('<md') {
+  .event {
+    --card-padding: var(--spacer-3);
+    grid-template-columns: 4.25rem 1fr;
+
+    &-title {
+      top: -0.1em;
+    }
+
+    &-time {
+      font-size: var(--text-base);
+    }
+
+    &-info {
+      grid-template-columns: 1fr;
+    }
+
+    &-description {
+      grid-column: 1;
+      margin-top: 0;
+      border-top-width: 1px;
+      font-size: var(--text-sm);
+    }
+
+    &-meta {
+      flex-direction: column;
+    }
+
+    &-location {
+      align-self: flex-start;
+      font-family: var(--font-base);
+      border-top: 1px var(--black) solid;
+      width: 100%;
+      text-align: left;
+      margin-top: -.5em;
+      padding-top: .75em;
+
+      &:deep(span) {
+        border-bottom: 1px dotted var(--black);
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    &-button {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
 </style>

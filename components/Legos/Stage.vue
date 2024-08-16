@@ -15,7 +15,9 @@ const venue = computed(() => props.stage.venue[0].content)
 
 <template>
   <NuxtLink :to="`/${stage.venue[0].full_slug}`" class="stage">
-    {{ stage.short_name || stage.name }}
+    <span>
+      {{ stage.short_name || stage.name }}
+    </span>
     <span v-if="stage.name !== venue.name && !stageOnly" class="stage-venue">
       {{ venue.name }}
     </span>

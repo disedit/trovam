@@ -144,12 +144,20 @@ const firstInstanceOfDate = (date, index) => {
   display: flex;
   flex-direction: column;
   gap: var(--site-padding);
-  padding-bottom: 20rem;
+  padding-bottom: calc(3rem + 15vh);
 }
 
 .pro-schedule-date {
   font-weight: 900;
   font-size: var(--text-lg);
   margin-top: var(--spacer-8);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+@include media('<md') {
+  .pro-schedule-date {
+    font-size: var(--text-md);
+  }
 }
 </style>
