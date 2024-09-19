@@ -29,6 +29,7 @@ const { data: artists } = await useAsyncData(
     version,
     language: locale.value,
     excluding_fields: 'cta_url,cta_label,website,description,facebook,twitter,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
+    per_page: 100,
     ...filter
   })
 )
