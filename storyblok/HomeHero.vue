@@ -14,7 +14,7 @@ const scrolled = computed(() => y.value > 100)
 <template>
   <section
     v-editable="blok"
-    :class="['home-hero background-filter', { scrolled }]"
+    :class="['home-hero background-filter', { scrolled: scrolled && blok.animate }]"
     :style="backgroundStyle"
   >
     <div class="container">

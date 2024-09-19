@@ -56,9 +56,9 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'ca',
     locales: [
-      { code: 'ca', iso: 'ca-ES', name: 'Valencià', short: 'VAL', file: 'ca.js' },
-      { code: 'es', iso: 'es-ES', name: 'Castellano', short: 'CAS', file: 'es.js' },
-      { code: 'en', iso: 'en', name: 'English', short: 'ENG', file: 'en.js' },
+      { code: 'ca', language: 'ca-ES', name: 'Valencià', short: 'VAL', file: 'ca.js' },
+      { code: 'es', language: 'es-ES', name: 'Castellano', short: 'CAS', file: 'es.js' },
+      { code: 'en', language: 'en', name: 'English', short: 'ENG', file: 'en.js' },
     ],
     lazy: true,
     langDir: 'lang',
@@ -72,5 +72,14 @@ export default defineNuxtConfig({
     }
   },
 
-  compatibilityDate: '2024-07-31'
+  compatibilityDate: '2024-07-31',
+
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        prefetch: true,
+        prefetchOn: { visibility: false, interaction: true }
+      }
+    }
+  }
 })
