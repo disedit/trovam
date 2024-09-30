@@ -35,9 +35,14 @@ const hasDescription = props.event.description.content[0]?.content
         <LegosStage
           v-if="event.stage"
           :stage="stage.content"
-          stage-only
           class="event-location compensate"
         />
+        <span v-else-if="event.stage_other" class="event-location compensate">
+          <span>{{ event.stage_other }}</span>
+          <span v-if="event.stage_other_subline" class="stage-venue">
+            {{ event.stage_other_subline }}
+          </span>
+        </span>
         <UtilsButton
           v-if="event.cta_url"
           :to="event.cta_url"
@@ -119,12 +124,24 @@ const hasDescription = props.event.description.content[0]?.content
     font-family: var(--font-heavy);
     text-transform: uppercase;
     padding-top: .25em;
-    margin-top: -.25em;
+    margin-top: -.5em;
 
-    &:hover,
-    &:focus {
-      background: var(--color);
+    :deep(.stage-venue) {
+      text-transform: unset;
     }
+
+    .stage-venue {
+      display: block;
+      font-weight: bold;
+      font-size: .85em;
+    }
+  }
+}
+
+a.event-location {
+  &:hover,
+  &:focus {
+    background: var(--color);
   }
 }
 
@@ -164,10 +181,6 @@ const hasDescription = props.event.description.content[0]?.content
       text-align: left;
       margin-top: -.5em;
       padding-top: .75em;
-
-      &:deep(span) {
-        border-bottom: 1px dotted var(--black);
-      }
 
       &:hover {
         background-color: transparent;
