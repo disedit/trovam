@@ -5,6 +5,7 @@ const props = defineProps({
 })
 
 const { time } = useDate()
+const { internalLink } = useLinks()
 const stage = props.stages[props.event.stage]
 
 const hasDescription = props.event.description.content[0]?.content
@@ -29,6 +30,14 @@ const hasDescription = props.event.description.content[0]?.content
         </NuxtLink>
         <span v-else>
           {{ event.title }}
+        </span>
+        <span v-if="event.concert_with">
+          <span v-for="coartist in event.concert_with" :key="coartist.id">
+            +
+            <NuxtLink :to="internalLink(coartist.full_slug)">
+              {{ coartist.content.name }}
+            </NuxtLink>
+          </span>
         </span>
       </h3>
       <div class="event-meta">

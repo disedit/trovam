@@ -36,6 +36,7 @@ const { data: concertData } = await useAsyncData(
     language: locale.value,
     starts_with: props.blok.concerts,
     is_startpage: false,
+    resolve_relations: 'Artist.concert_with',
     filter_query: {
       concert_date: {
         is: 'not_empty'
@@ -52,6 +53,7 @@ const concerts = concertData.value.data.stories.map(artist => ({
   title: artist.content.name,
   stage: artist.content.stage,
   description: artist.content.concert_info,
+  concert_with: artist.content.concert_with,
   cta_url: artist.content.cta_url,
   cta_label: artist.content.cta_label,
   link: artist.full_slug,
