@@ -42,6 +42,7 @@ const { data: concertData } = await useAsyncData(
         is: 'not_empty'
       }
     },
+    per_page: 400,
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
   })
 )
@@ -70,7 +71,8 @@ const { data: scheduleData } = await useAsyncData(
       version,
       language: locale.value,
       by_uuids_ordered: props.blok.schedules.join(','),
-      excluding_fields: 'header,seo_title,seo_description,seo_picture'
+      excluding_fields: 'header,seo_title,seo_description,seo_picture',
+      per_page: 400,
     })
   }
 )
