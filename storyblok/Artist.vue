@@ -67,7 +67,7 @@ const getSecondaryColor = () => {
           <div class="sticky top-navbar-plus">
             <div class="artist-concert-date" v-if="blok.concert_date">
               <span>{{ shortDate(blok.concert_date) }}</span>
-              <span>{{ time(blok.concert_date) }}</span>
+              <span>{{ blok.time_override || time(blok.concert_date) }}</span>
             </div>
 
             <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />

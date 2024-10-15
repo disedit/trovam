@@ -42,7 +42,7 @@ const { data: concertData } = await useAsyncData(
         is: 'not_empty'
       }
     },
-    per_page: 400,
+    per_page: 100,
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
   })
 )
@@ -50,7 +50,7 @@ const { data: concertData } = await useAsyncData(
 const concerts = concertData.value.data.stories.map(artist => ({
   id: artist.id,
   date: artist.content.concert_date,
-  time: null,
+  time: artist.content.time_override,
   title: artist.content.name,
   stage: artist.content.stage,
   description: artist.content.concert_info,
