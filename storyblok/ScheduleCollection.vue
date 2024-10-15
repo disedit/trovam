@@ -28,6 +28,8 @@ const { data: stages } = await useAsyncData(
 )
 const stagesByUuid = Object.fromEntries(stages.value.data.stories.map(stage => [stage.uuid, stage]))
 
+const ticketsFilter = (props.blok.only_tickets) ? { cta_url: { is: 'not_empty' } } : {}
+
 // Concerts
 const { data: concertData } = await useAsyncData(
   'concerts',
@@ -40,7 +42,8 @@ const { data: concertData } = await useAsyncData(
     filter_query: {
       concert_date: {
         is: 'not_empty'
-      }
+      },
+      ...ticketsFilter,
     },
     per_page: 100,
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
@@ -72,7 +75,7 @@ const { data: scheduleData } = await useAsyncData(
       language: locale.value,
       by_uuids_ordered: props.blok.schedules.join(','),
       excluding_fields: 'header,seo_title,seo_description,seo_picture',
-      per_page: 400,
+      per_page: 100,
     })
   }
 )
