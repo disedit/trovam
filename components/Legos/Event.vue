@@ -136,10 +136,8 @@ const hasDescription = props.event.description.content[0]?.content
     margin-top: -.5em;
 
     :deep(.stage-venue) {
-      text-transform: unset;
-    }
-
-    .stage-venue {
+      text-transform: initial;
+      font-family: var(--font-base);
       display: block;
       font-weight: bold;
       font-size: .85em;
