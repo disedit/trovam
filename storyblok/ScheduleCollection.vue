@@ -85,7 +85,7 @@ const scheduleEvents = []
 
 // Filters
 const filters = [
-  { type: 'concert', title: 'Live', color: 'red' }
+  { type: 'concert', title: 'Stage', color: 'red' }
 ]
 
 // Merge pro schedules

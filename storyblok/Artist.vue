@@ -55,7 +55,7 @@ const getSecondaryColor = () => {
             <Icon name="material-symbols:arrow-back" v-if="showArrow" class="arrow" />
             <ShapesShape1 v-else />
           </Transition>
-          Live / {{ $t('artists.title') }}
+          Stage / {{ $t('artists.title') }}
         </NuxtLink>
         <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
         <h1 :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">

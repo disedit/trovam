@@ -175,7 +175,7 @@ onMounted(() => {
     <div class="container padded relative navbar-safe-area z-10 -mt-[100vh]">
       <h1 class="artists-title">
         <ShapesShape1 />
-        <span class="compensate">Live / {{ blok.title }}</span>
+        <span class="compensate">Stage / {{ blok.title }}</span>
       </h1>
       <section :class="['artists-list', { hovering: !!hovering && allowHover }]">
         <template v-for="(artist, i) in artists.data.stories" :key="artist.uuid">
