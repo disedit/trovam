@@ -31,6 +31,7 @@ defineProps({ blok: Object })
   padding: .25em .75em;
   gap: .25em;
   align-items: center;
+  color: var(--black);
 
   &.color-black {
     color: var(--white);
