@@ -2,7 +2,7 @@
 const props = defineProps({ blok: Object })
 
 const filter = props.blok?.path
-  ? { starts_with: props.blok.path, is_startpage: false }
+  ? { starts_with: props.blok.path, is_startpage: false, sort_by: 'content.name:asc', }
   : { by_uuids_ordered: props.blok?.speakers?.join(',') }
 
 const storyblokApi = useStoryblokApi()
@@ -13,30 +13,10 @@ const { data: speakers } = await useAsyncData(
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
     language: locale.value,
+    per_page: 100,
     ...filter
   })
 )
-
-const { $gsap } = useNuxtApp()
-onMounted(() => {
-  const speakerCards = document.querySelectorAll('.speakers .speaker')
-  speakerCards.forEach((card, index) => {
-    $gsap.fromTo(card, {
-        opacity: 0,
-        y: 200,
-      },{
-        opacity: 1,
-        y: 0,
-        duration: .25,
-        delay: index / 20,
-        scrollTrigger: {
-          trigger: card,
-          stagger: 0.1,
-          start: 'top 90%'
-        }
-    })
-  })
-})
 </script>
 
 <template>
@@ -53,12 +33,12 @@ onMounted(() => {
 .speakers {
   gap: var(--site-padding);
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-auto-rows: 400px auto auto;
+  grid-auto-rows: var(--speaker-picture-height, 400px) auto auto auto;
 }
 
 @include media('<md') {
   .speakers {
-    grid-auto-rows: 300px auto auto;
+    --speaker-picture-height: 300px;
   }
 }
 </style>
