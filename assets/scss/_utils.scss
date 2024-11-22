@@ -81,8 +81,6 @@
 }
 
 /* Colors */
-$colors: ('red': $red, 'yellow': $yellow, 'green': $green, 'pink': $pink, 'blue': $blue, 'white': $white, 'black': $black);
-
 @each $name, $color in $colors {
   .color-#{$name} {
     --color: #{$color};
