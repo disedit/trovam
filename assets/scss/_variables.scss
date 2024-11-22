@@ -4,6 +4,7 @@ $yellow: #fad414;
 $green: #099e76;
 $pink: #e3aaca;
 $blue: #3f85c1;
+$purple: #6a69c6;
 $black: #181818;
 $white: #f7eee8;
 $gray: #71717a;
@@ -25,3 +26,15 @@ $breakpoints: (
 /* Sizing */
 $container-max-width: 2000px;
 $navbar-safe-area: 4rem;
+
+/* Util variables */
+$colors: (
+  'red': $red,
+  'yellow': $yellow,
+  'green': $green,
+  'pink': $pink,
+  'blue': $blue,
+  'purple': $purple,
+  'white': $white,
+  'black': $black
+);
