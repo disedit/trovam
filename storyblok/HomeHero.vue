@@ -28,8 +28,8 @@ const scrolled = computed(() => y.value > 100)
 .home-hero {
   position: relative;
   background: var(--black);
-  height: 100vh;
-  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
   background-size: cover;
   background-attachment: fixed;
   display: flex;
