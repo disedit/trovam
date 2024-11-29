@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: 'https://firatrovam.com',
+      baseUrl: 'https://trovam.com',
       environment: 'preview'
     }
   },
@@ -63,7 +63,7 @@ export default defineNuxtConfig({
     ],
     lazy: true,
     langDir: 'lang',
-    baseUrl: 'https://firatrovam.com'
+    baseUrl: 'https://trovam.com'
   },
 
   image: {
