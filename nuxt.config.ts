@@ -7,6 +7,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'theme-color', content: '#181818' },
         { name: 'msapplication-TileColor', content: '#181818' },
+        { name: 'robots', content: 'index, follow' },
       ],
       link: [
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
@@ -23,7 +24,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: 'https://firatrovam.com',
+      baseUrl: 'https://trovam.com',
       environment: 'preview'
     }
   },
@@ -62,7 +63,7 @@ export default defineNuxtConfig({
     ],
     lazy: true,
     langDir: 'lang',
-    baseUrl: 'https://firatrovam.com'
+    baseUrl: 'https://trovam.com'
   },
 
   image: {

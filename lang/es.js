@@ -27,7 +27,7 @@ export default {
     email: 'E-mail',
     placeholder: 'Déjanos tu e-mail',
     button: 'Suscribirse',
-    redirect: 'https://firatrovam.com/newsletter',
+    redirect: 'https://trovam.com/newsletter',
     legal_before: 'Al enviar el formulario aceptas la',
     policy: 'Política de Privacidad',
     legal_after: 'y recibir correos de Valencian Music Association (VAM)',
