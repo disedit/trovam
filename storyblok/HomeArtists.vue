@@ -242,7 +242,7 @@ onMounted(() => {
     text-align: justify;
 
     .artist {
-      font-size: 1.05em;
+      font-size: .85em;
       color: var(--white);
       opacity: 0;
 
