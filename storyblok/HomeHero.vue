@@ -1,5 +1,12 @@
 <script setup>
+import { Vue3Marquee } from 'vue3-marquee'
+
 const props = defineProps({ blok: Object })
+
+const { internalLink } = useLinks()
+const wrapperComponent = computed(() => {
+  return props.blok?.link?.cached_url ? resolveComponent('NuxtLink') : 'section'
+})
 
 const img = useImage()
 const backgroundStyle = computed(() => {
@@ -12,16 +19,24 @@ const scrolled = computed(() => y.value > 800)
 </script>
 
 <template>
-  <section
+  <Component
+    :is="wrapperComponent"
+    :to="internalLink(blok.link.cached_url)"
     v-editable="blok"
-    :class="['home-hero background-filter', { scrolled: scrolled && blok.animate }]"
+    :class="['home-hero', {
+      scrolled: scrolled && blok.animate,
+      'background-filter': blok.background_filter
+    }]"
     :style="backgroundStyle"
   >
     <div class="container">
       <div class="home-hero-text" v-html="blok.text" />
     </div>
     <ShapesArrows v-if="blok.arrows" class="arrows" />
-  </section>
+    <Vue3Marquee v-if="blok.marquee" clone class="home-hero-marquee">
+      <span class="mx-10">{{ blok.marquee }}</span>
+    </Vue3Marquee>
+  </Component>
 </template>
 
 <style lang="scss" scoped>
@@ -41,6 +56,7 @@ const scrolled = computed(() => y.value > 800)
   font-family: var(--font-headline);
   padding: var(--site-padding);
   padding-block-start: var(--navbar-safest-area);
+  color: var(--white);
 
   &-text {
     transition: .5s ease;
@@ -57,6 +73,13 @@ const scrolled = computed(() => y.value > 800)
     color: var(--yellow);
     transition: .5s ease;
     animation: arrow 3s infinite;
+  }
+
+  &-marquee {
+    font-family: var(--font-heavy);
+    font-size: var(--text-md);
+    margin-inline: calc(var(--site-padding) * -1);
+    margin-top: 1rem;
   }
 
   &.scrolled {

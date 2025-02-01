@@ -16,7 +16,7 @@ const backgroundStyle = computed(() => {
   >
     <div v-if="backgroundStyle" class="background z-1">
       <div class="background-holder">
-        <div class="page-background" :style="backgroundStyle" />
+        <div :class="['page-background' , { 'with-overlay': blok.background_overlay }]" :style="backgroundStyle" />
       </div>
     </div>
     <div :class="['relative z-10', { '-mt-[100vh]': !!backgroundStyle, 'container padded': blok.container }]">

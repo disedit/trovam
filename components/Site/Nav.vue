@@ -43,8 +43,9 @@ const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
     position: relative;
     z-index: 10000;
     color: var(--white);
+    flex-shrink: 0;
 
-    svg {
+    svg, img {
       display: block;
       height: 1em;
       width: auto;

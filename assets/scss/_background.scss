@@ -21,7 +21,7 @@
     filter: grayscale(1) contrast(1) brightness(.5);
   }
 
-  &::before {
+  &.with-overlay::before {
     content: '';
     position: absolute;
     inset: 0;

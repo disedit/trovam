@@ -26,7 +26,7 @@ const tag = computed(() => {
         'has-background': !!blok.background?.filename
       }
     ]">
-      <h1 class="headline">
+      <h1 class="hyphens-auto">
         <Component
           :is="tag"
           :class="['headline-inner', { 'pill p-4': blok.pill }]"
@@ -56,7 +56,8 @@ const tag = computed(() => {
   h1 {
     position: relative;
     font-size: var(--text-4xl);
-    top: .4em;
+    font-family: var(--font-heavy);
+    top: .2em;
     z-index: 5;
     margin-block-end: -.2em;
     line-height: 1;
