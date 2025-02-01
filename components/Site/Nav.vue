@@ -4,11 +4,11 @@ const localePath = useLocalePath()
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 100)
 const route = useRoute()
-const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
+const compact = computed(() => !!route.params?.slug && !route.params?.slug[0]?.includes('home'))
 </script>
 
 <template>
-  <nav :class="['nav', { scrolled, compact: scrolled || onArtistsSingle, 'gradient-nav': settings.data.story.content.gradient_nav }]">
+  <nav :class="['nav', { scrolled, compact: scrolled || compact, 'gradient-nav': settings.data.story.content.gradient_nav }]">
     <NuxtLink :to="localePath('/')" class="nav-logo" :aria-label="$t('assist.logo')">
       <SiteLogo />
     </NuxtLink>
@@ -69,7 +69,7 @@ const onArtistsSingle = computed(() => route.params?.slug?.includes('artistes'))
 
   &.scrolled {
     &:not(.gradient-nav) {
-      background: var(--black);
+      background: var(--navbar-color, var(--black));
     }
 
     &.gradient-nav::after {
