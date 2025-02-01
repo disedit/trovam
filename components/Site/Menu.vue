@@ -149,7 +149,7 @@ function unhover() {
   visibility: hidden;
   position: absolute;
   background: var(--color);
-  top: 1.25em;
+  top: 1.75em;
   left: 0;
   padding: .1em;
   list-style: none;
