@@ -39,5 +39,8 @@ export default {
     policy: 'Al carregar el vídeo, acceptes la',
     youtube_policy: 'política de privacitat de Google',
     vimeo_policy: 'política de privacitat de Vimeo'
+  },
+  footer: {
+    app: 'Descarrega\'t l\'app de la Fira Trovam',
   }
 }

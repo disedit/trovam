@@ -2,7 +2,9 @@
   <div class="app-buttons">
     <h2 class="flex gap-4 items-center">
       <ShapesShape5 class="shape" />
-      <span class="compensate">Descarrega't l'app de la Fira Trovam</span>
+      <span class="compensate">
+        {{ $t('footer.app') }}
+      </span>
     </h2>
     <div class="flex gap-4 items-center">
       <a href="https://apps.apple.com/es/app/fira-trovam/id6695746493" target="_blank">

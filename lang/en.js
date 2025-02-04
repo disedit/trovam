@@ -39,5 +39,8 @@ export default {
     policy: 'By loading the vídeo, you accept',
     youtube_policy: 'Google\'s privacy policy',
     vimeo_policy: 'Vimeo\'s privacy policy'
+  },
+  footer: {
+    app: 'Download the Fira Trovam app',
   }
 }
