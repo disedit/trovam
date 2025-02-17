@@ -1,7 +1,7 @@
 <script setup>
 /* Load site settings */
 const settings = useState('settings')
-const global = settings.value.data.story.content
+const global = settings?.value?.data?.story?.content
 
 /* Load page */
 const { locale } = useI18n()
@@ -15,7 +15,7 @@ const story = await useAsyncStoryblok(
     resolve_relations: 'Artist.stage,Stage.venue'
   }
 )
-const page = story.value.content
+const page = story?.value?.content
 
 if (!story.value) {
   throw createError({
