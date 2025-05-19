@@ -58,7 +58,7 @@ const getSecondaryColor = () => {
           Stage / {{ $t('artists.title') }}
         </NuxtLink>
         <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
-        <h1 :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">
+        <h1 v-if="blok.name" :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
