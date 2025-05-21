@@ -15,7 +15,7 @@ export default {
     all: 'More updates'
   },
   artists: {
-    title: 'Artists 2024',
+    title: 'Artists',
     tickets: 'Tickets'
   },
   recap: {

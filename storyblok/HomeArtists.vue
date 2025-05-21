@@ -198,6 +198,7 @@ onMounted(() => {
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  background-color: var(--purple);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -242,8 +243,9 @@ onMounted(() => {
     text-align: justify;
 
     .artist {
-      font-size: .85em;
+      font-size: .75em;
       color: var(--white);
+      font-family: var(--font-heavy);
       opacity: 0;
 
       span {
@@ -277,8 +279,18 @@ onMounted(() => {
 
     span {
       display: block;
-      color: var(--blue);
+      color: var(--yellow);
     }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    filter: contrast(170%) brightness(.14);
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    opacity: .5;
   }
 }
 

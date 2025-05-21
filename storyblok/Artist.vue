@@ -39,23 +39,27 @@ const getSecondaryColor = () => {
   if (randomColor === artistColor.value) return getSecondaryColor()
   return randomColor
 }
+
+// Get year
+const { slug } = useRoute().params
+const year = slug[0]
 </script>
 
 <template>
   <article v-editable="blok" :class="['artist', `color-${artistColor}`]">
-    <div class="background z-1">
+    <div class="background background-purple z-1">
       <div class="background-holder">
-        <div class="page-background grayscale" :style="backgroundStyle" />
+        <div class="page-background with-overlay" :style="backgroundStyle" />
       </div>
     </div>
     <div class="container padded relative navbar-safest-area z-10 -mt-[100vh]">
       <header class="artist-header">
-        <NuxtLink :to="localePath('/2024/artistes')" class="artist-back" @mouseenter="showArrow = true" @mouseleave="showArrow = false">
+        <NuxtLink :to="localePath(`/${year}/artistes`)" class="artist-back" @mouseenter="showArrow = true" @mouseleave="showArrow = false">
           <Transition name="fade-left" mode="out-in">
             <Icon name="material-symbols:arrow-back" v-if="showArrow" class="arrow" />
             <ShapesShape1 v-else />
           </Transition>
-          Stage / {{ $t('artists.title') }}
+          Stage / {{ $t('artists.title') }} {{ year }}
         </NuxtLink>
         <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
         <h1 v-if="blok.name" :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">

@@ -15,7 +15,7 @@ export default {
     all: 'Més notícies'
   },
   artists: {
-    title: 'Artistes 2024',
+    title: 'Artistes',
     tickets: 'Entrades'
   },
   recap: {

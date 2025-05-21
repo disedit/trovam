@@ -157,15 +157,14 @@ onMounted(() => {
 
 <template>
   <div v-editable="blok" class="artists">
-    <div class="background z-1">
+    <div class="background background-purple z-1">
       <div class="background-holder">
-        <div class="page-background" :style="backgroundStyle" />
         <template v-for="artist in artists.data.stories" :key="artist.uuid">
           <Transition name="fade">
             <div 
               :key="`background-${artist.uuid}`"
               v-if="hovering?.uuid === artist.uuid && artist.content?.picture?.filename"
-              class="page-background grayscale"
+              class="page-background with-overlay"
               :style="artistBackground(artist.content.background.filename || artist.content.picture.filename)"
             />
           </Transition>
@@ -182,7 +181,7 @@ onMounted(() => {
           <NuxtLink
             :to="`/${artist.full_slug}`"
             :class="[
-              'artist relative font-heavy',
+              'artist relative font-heavy uppercase',
               { hovering: hovering?.uuid === artist.uuid && allowHover },
             ]"
             :style="{
@@ -206,9 +205,7 @@ onMounted(() => {
             />
             <h2 class="compensate">{{ artist.content.name }}</h2>
           </NuxtLink>
-          <div :class="['shape hidden md:block', `color-${rebus[i]?.color}`]">
-            <ShapesArtists :shape="rebus[i]?.shape" preserveAspectRatio="none" />
-          </div>
+          <div :class="['shape hidden shrink-0 md:block h-[.5em] w-[.5em] bg-[var(--color)] rounded-full', `color-${rebus[i]?.color}`]" />
         </template>
       </section>
     </div>
@@ -319,7 +316,7 @@ onMounted(() => {
   color: var(--color);
   transition: opacity .25s ease;
 
-  svg {
+  div {
     height: .85em;
   }
 }
