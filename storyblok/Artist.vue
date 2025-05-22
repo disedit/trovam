@@ -23,7 +23,7 @@ const img = useImage()
 const backgroundStyle = computed(() => {
   if (!props.blok.picture?.filename) return false
   const imgUrl = img(props.blok.background.filename || props.blok.picture.filename, { width: 1500 })
-  return { backgroundImage: `url('${imgUrl}')` }
+  return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 })
 
 const showArrow = ref(false)
