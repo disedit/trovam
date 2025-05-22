@@ -43,7 +43,7 @@ const backgroundStyle = computed(() => {
 
 function artistBackground(filename) {
   const imgUrl = img(filename, { width: 1500 })
-  return { backgroundImage: `url('${imgUrl}')` }
+  return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 }
 
 /* Prefetch backgrounds */

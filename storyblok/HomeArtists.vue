@@ -106,6 +106,11 @@ onMounted(() => {
     delay: 1
   })
 })
+
+function artistBackground(filename) {
+  const imgUrl = img(filename, { width: 1500 })
+  return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
+}
 </script>
 
 <template>
@@ -115,7 +120,21 @@ onMounted(() => {
     :style="backgroundStyle"
     :aria-labelledby="`title-${blok._uid}`"
   >
-    <div class="container padded relative z-10">
+    <div class="background background-purple z-1">
+      <div class="background-holder">
+        <template v-for="artist in artists?.data?.stories" :key="artist.uuid">
+          <Transition name="fade">
+            <div 
+              :key="`background-${artist.uuid}`"
+              v-if="hovering?.uuid === artist.uuid && artist.content?.picture?.filename"
+              class="page-background with-overlay"
+              :style="artistBackground(artist.content.background.filename || artist.content.picture.filename)"
+            />
+          </Transition>
+        </template>
+      </div>
+    </div>
+    <div class="container padded relative z-10 -mt-[100vh]">
       <NuxtLink :to="`/${blok.path}`" class="dim-on-hover">
         <h2 :id="`title-${blok._uid}`" class="home-artists-title">
           <ShapesShape1 />
@@ -287,7 +306,7 @@ onMounted(() => {
     content: '';
     position: absolute;
     inset: 0;
-    filter: contrast(170%) brightness(.14);
+    filter: contrast(170%) brightness(.8);
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-attachment: fixed;
     opacity: .5;
