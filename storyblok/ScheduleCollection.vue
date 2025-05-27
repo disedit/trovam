@@ -62,7 +62,7 @@ const concerts = concertData.value.data.stories.map(artist => ({
   cta_label: artist.content.cta_label,
   link: artist.full_slug,
   type: 'concert',
-  color: 'pink',
+  color: 'orange',
   hide_in_schedules: artist.content.hide_in_schedules || false,
 }))
 
