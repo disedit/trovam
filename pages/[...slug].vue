@@ -17,13 +17,6 @@ const story = await useAsyncStoryblok(
 )
 const page = story?.value?.content
 
-if (!story.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page Not Found'
-  })
-}
-
 /* SEO Metatags */
 const siteName = global.site_name
 const title = slug && slug.length > 0 ? `${page.title || page.name} - ${siteName}` : siteName
