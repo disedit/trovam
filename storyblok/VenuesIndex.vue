@@ -16,6 +16,10 @@ const { data: venues } = await useAsyncData(
     excluding_fields: 'map',
   })
 )
+
+const rotate = useState(`venues-rotate`, () => {
+  return venues.value.data.stories.map(() => random(-3, 3))
+})
 </script>
 
 <template>
@@ -26,11 +30,11 @@ const { data: venues } = await useAsyncData(
   >
     <div class="container container-sm mx-auto padded grid md:grid-cols-2 gap-padding">
       <article
-        v-for="venue in venues.data.stories"
+        v-for="(venue, v) in venues.data.stories"
         :key="venue.uuid"
         :class="['venue', { 'highlight md:col-span-2': venue.content.highlight }]"
         :style="{
-          '--rotate': `${random(-3,3)}deg`
+          '--rotate': `${rotate[v]}deg`
         }"
       >
         <NuxtLink :to="`/${venue.full_slug}`">

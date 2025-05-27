@@ -7,6 +7,7 @@ const tag = computed(() => props.blok.link?.cached_url
       : 'a'
       : 'article'
 )
+const rotate = useState(`rotate-${props.blok.id}`, () => random(-3, 3))
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const tag = computed(() => props.blok.link?.cached_url
     :to="blok.link.linktype === 'story' ? `/${blok.link.cached_url}` : null"
     :href="blok.link.linktype === 'url' ? blok.link.cached_url : null"
     :style="{
-      '--rotate': `${random(-3,3)}deg`
+      '--rotate': `${rotate}deg`
     }"
   >
     <h2 v-if="blok.title">{{ blok.title }}</h2>

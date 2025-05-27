@@ -4,10 +4,7 @@ const props = defineProps({
 })
 
 const { random } = useUtils()
-const { data: rotate } = await useAsyncData(
-  'rotate' + props.speaker.uuid,
-  () => random(-3,3)
-)
+const rotate = useState(`rotate-${props.speaker.uuid}`, () => random(-3, 3))
 </script>
 
 <template>

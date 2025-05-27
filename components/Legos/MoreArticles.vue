@@ -6,7 +6,7 @@ const props = defineProps({
 const { locale } = useI18n()
 const storyblokApi = useStoryblokApi()
 const { data: posts } = await useAsyncData(
-  'posts_home',
+  'posts_more',
   async () => await storyblokApi.get(`cdn/stories`, {
     version: 'published',
     language: locale.value,

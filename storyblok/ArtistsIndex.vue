@@ -153,6 +153,26 @@ onMounted(() => {
     })
   })
 })
+
+// Random rotations
+const rotateStyles = useState(`artists-rotate`, () => {
+  return artists.value.data.stories.map(() => ({
+    '--from-x': `${random(-30, 30)}%`,
+    '--from-y': `${random(-30, 30)}%`,
+    '--from-rotate': `${random(-15, 15)}deg`,
+    '--to-x': `${random(-10, 10)}%`,
+    '--to-y': `${random(-2, 2)}%`,
+    '--to-rotate': `${random(-7, 7)}deg`,
+  }))
+})
+
+const positionStyles = useState(`artists-positions`, () => {
+  return artists.value.data.stories.map(() => ({
+    '--top': `calc(${random(60,90)}vh - var(--card-height))`,
+    '--left': `calc(${random(40,90)}vw - var(--card-width))`,
+    '--rotate': `${random(-5, 5)}deg`
+  }))
+})
 </script>
 
 <template>
@@ -184,14 +204,7 @@ onMounted(() => {
               'artist relative font-heavy uppercase',
               { hovering: hovering?.uuid === artist.uuid && allowHover },
             ]"
-            :style="{
-              '--from-x': `${random(-30, 30)}%`,
-              '--from-y': `${random(-30, 30)}%`,
-              '--from-rotate': `${random(-15, 15)}deg`,
-              '--to-x': `${random(-10, 10)}%`,
-              '--to-y': `${random(-2, 2)}%`,
-              '--to-rotate': `${random(-7, 7)}deg`,
-            }"
+            :style="rotateStyles[i]"
             @mouseenter="hovering = artist"
             @mouseleave="hovering = null"
             @click="leaveCard"
@@ -210,7 +223,7 @@ onMounted(() => {
       </section>
     </div>
     <div class="hidden md:block">
-      <template v-for="artist in artists.data.stories" :key="`card-${artist.uuid}`">
+      <template v-for="(artist, i) in artists.data.stories" :key="`card-${artist.uuid}`">
         <Transition
           @before-enter="beforeEnter"
           @enter="onEnter"
@@ -219,11 +232,7 @@ onMounted(() => {
           <article
             v-if="hovering?.uuid === artist.uuid && allowHover"
             class="artist-card polaroid"
-            :style="{
-              '--top': `calc(${random(60,90)}vh - var(--card-height))`,
-              '--left': `calc(${random(40,90)}vw - var(--card-width))`,
-              '--rotate': `${random(-5, 5)}deg`
-            }"
+            :style="positionStyles[i]"
           >
             <div class="artist-card-picture">
               <UtilsNoisyPhoto

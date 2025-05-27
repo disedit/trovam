@@ -30,7 +30,7 @@ const title = slug && slug.length > 0 ? `${page.title || page.name} - ${siteName
 const ogTitle = page.seo_title || title
 const description = page.seo_description || page.summary || global.seo_description
 const ogImage = page.seo_picture?.filename || page.picture?.filename || global.seo_picture?.filename
-const keywords = page.seo_keywords
+const keywords = page.seo_keywords || global.seo_keywords || ''
 const twitterSite = global.twitter_account
 useServerSeoMeta({
   title,

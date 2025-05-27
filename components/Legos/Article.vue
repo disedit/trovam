@@ -11,10 +11,7 @@ const router = useRouter()
 const hTag = computed(() => `h${props.level}`)
 const { shortDate } = useDate()
 const { random } = useUtils()
-const { data: rotate } = await useAsyncData(
-  'rotate' + props.article.uuid,
-  () => random(-3,3)
-)
+const rotate = useState(`rotate-${props.article.uuid}`, () => random(-3,3))
 
 function navigate(e, to) {
   e.preventDefault()

@@ -36,20 +36,9 @@ const getSecondaryColor = () => {
   return randomColor
 }
 
-const { data: artistColor } = await useAsyncData(
-  'artistColor' + props.blok.uuid,
-  () => colors[randomInt(0, colors.length)]
-)
-
-const { data: artistShape } = await useAsyncData(
-  'artistShape' + props.blok.uuid,
-  () => `Artists${randomInt(1, 12)}`
-)
-
-const { data: cardColor } = await useAsyncData(
-  'cardColor' + props.blok.uuid,
-  () => getSecondaryColor()
-)
+const artistColor = useState('artistColor', () => colors[randomInt(0, colors.length)])
+const artistShape = useState('artistShape', () => `Artists${randomInt(1, 12)}`)
+const cardColor = useState('cardColor', () => getSecondaryColor())
 
 // Get year
 const { slug } = useRoute().params

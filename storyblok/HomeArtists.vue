@@ -111,6 +111,15 @@ function artistBackground(filename) {
   const imgUrl = img(filename, { width: 1500 })
   return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 }
+
+// Random rotations
+const positionStyles = useState(`artists-positions`, () => {
+  return artists.value.data.stories.map(() => ({
+    '--top': `calc(${random(60,90)}vh - var(--card-height))`,
+    '--left': `calc(${random(40,90)}vw - var(--card-width))`,
+    '--rotate': `${random(-5, 5)}deg`
+  }))
+})
 </script>
 
 <template>
@@ -167,7 +176,7 @@ function artistBackground(filename) {
         </span>
       </NuxtLink>
       <div class="hidden md:block">
-        <template v-for="artist in artists.data.stories" :key="`card-${artist.uuid}`">
+        <template v-for="(artist, i) in artists.data.stories" :key="`card-${artist.uuid}`">
           <Transition
             @before-enter="beforeEnter"
             @enter="onEnter"
@@ -176,11 +185,7 @@ function artistBackground(filename) {
             <article
               v-if="hovering?.uuid === artist.uuid"
               class="artist-card polaroid"
-              :style="{
-                '--top': `calc(${random(60,90)}vh - var(--card-height))`,
-                '--left': `calc(${random(40,90)}vw - var(--card-width))`,
-                '--rotate': `${random(-5, 5)}deg`
-              }"
+              :style="positionStyles[i]"
             >
               <div class="artist-card-picture">
                 <UtilsNoisyPhoto
