@@ -12,21 +12,20 @@
   "dependencies": {
     "@nuxt/image": "^1.4.0",
     "@nuxtjs/tailwindcss": "^6.12.0",
-    "@storyblok/nuxt": "^6.0.6",
+    "@storyblok/nuxt": "^6.2.4",
     "date-fns": "^3.6.0",
     "focus-trap": "^7.5.4",
     "gsap": "^3.12.5",
-    "include-media": "^2.0.0",
     "nuxt-icon": "^0.6.10",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
     "vue3-marquee": "^4.2.2"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^8.2.0",
+    "@nuxtjs/i18n": "^9.5.4",
     "@vueuse/core": "^10.9.0",
     "@vueuse/nuxt": "^10.9.0",
-    "nuxt": "^3.13.2",
-    "sass": "^1.72.0"
+    "nuxt": "^3.17.4",
+    "sass": "^1.87.0"
   }
 }
