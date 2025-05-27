@@ -1,10 +1,7 @@
-@import "variables";
-@import "node_modules/include-media/dist/_include-media.scss";
-@import "mixins";
-@import "fonts";
-@import "root";
-@import "global";
-@import "background";
-@import "accessibility";
-@import "utils";
-@import "transitions";
+@use "fonts";
+@use "root";
+@use "global";
+@use "background";
+@use "accessibility";
+@use "utils";
+@use "transitions";

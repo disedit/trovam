@@ -8,7 +8,7 @@ const compact = computed(() => !!route.params?.slug && !route.params?.slug[0]?.i
 </script>
 
 <template>
-  <nav :class="['nav', { scrolled, compact: scrolled || compact, 'gradient-nav': settings.data.story.content.gradient_nav }]">
+  <nav :class="['nav', { scrolled, compact: scrolled || compact, 'gradient-nav': settings?.data?.story?.content?.gradient_nav }]">
     <NuxtLink :to="localePath('/')" class="nav-logo" :aria-label="$t('assist.logo')">
       <SiteLogo />
     </NuxtLink>
