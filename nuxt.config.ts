@@ -54,6 +54,14 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    prerender: {
+      ignore: [
+        '/.netlify/'
+      ]
+    }
+  },
+
   i18n: {
     defaultLocale: 'ca',
     locales: [
