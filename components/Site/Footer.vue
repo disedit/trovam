@@ -11,6 +11,7 @@ const { internalLink } = useLinks()
     <div class="container padded grid md:grid-cols-2 gap-6">
       <div class="footer-sponsors md:col-span-2 mb-10">
         <StoryblokComponent
+          v-if="settings?.data"
           v-for="blok in settings.data.story.content.footer_logos"
           :blok="blok"
           class="sponsor"
@@ -18,10 +19,11 @@ const { internalLink } = useLinks()
       </div>
       <div class="footer-socials">
         Valencian Music Association (VAM!)
-        <SiteSocials :socials="settings.data.story.content.social_networks" />
+        <SiteSocials v-if="settings?.data" :socials="settings.data.story.content.social_networks" />
       </div>
       <div class="footer-links flex flex-wrap gap-4 md:items-end md:justify-end">
         <NuxtLink
+          v-if="settings?.data"
           v-for="link in settings.data.story.content.footer_links"
           :key="link._uid"
           :to="internalLink(link.link.cached_url)"

@@ -13,11 +13,13 @@ const compact = computed(() => !!route.params?.slug && !route.params?.slug[0]?.i
       <SiteLogo />
     </NuxtLink>
     <SiteMenu
+      v-if="settings?.data"
       class="nav-menu hidden lg:flex"
       :items="settings.data.story.content.nav"
     />
     <SiteLanguage class="nav-langs hidden lg:flex" />
     <SiteMobileMenu
+      v-if="settings?.data"
       class="nav-mobile lg:hidden ms-auto"
       :items="settings.data.story.content.nav"
       :socials="settings.data.story.content.social_networks"
