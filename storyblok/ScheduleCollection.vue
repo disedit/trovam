@@ -62,7 +62,8 @@ const concerts = concertData.value.data.stories.map(artist => ({
   cta_label: artist.content.cta_label,
   link: artist.full_slug,
   type: 'concert',
-  color: 'red'
+  color: 'pink',
+  hide_in_schedules: artist.content.hide_in_schedules || false,
 }))
 
 // Schedules
@@ -104,7 +105,8 @@ schedules.forEach(schedule => {
       stage: event.stage,
       description: event.description,
       type: schedule.uuid,
-      color: schedule.content.color
+      color: schedule.content.color,
+      hide_in_schedules: false
     })
   })
 })
@@ -123,9 +125,9 @@ const firstInstanceOfDate = (date, index) => {
 
 <template>
   <div v-editable="blok" class="pro-schedule">
-    <div v-if="backgroundStyle" class="background z-1">
+    <div v-if="backgroundStyle" class="background background-purple z-1">
       <div class="background-holder">
-        <div class="page-background" :style="backgroundStyle" />
+        <div class="page-background with-overlay" :style="backgroundStyle" />
       </div>
     </div>
     <div class="relative z-10 -mt-[100vh]">
@@ -139,7 +141,12 @@ const firstInstanceOfDate = (date, index) => {
           <h2 v-if="firstInstanceOfDate(event.date, i)" class="pro-schedule-date">
             {{ longDate(event.date) }}
           </h2>
-          <LegosEvent :event="event" :stages="stagesByUuid" :class="`color-${event.color}`" />
+          <LegosEvent
+            v-if="!event.hide_in_schedules"
+            :event="event"
+            :stages="stagesByUuid"
+            :class="`color-${event.color}`"
+          />
         </template>
       </div>
     </div>
