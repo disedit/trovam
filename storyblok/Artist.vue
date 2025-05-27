@@ -30,15 +30,26 @@ const showArrow = ref(false)
 const showTicketsArrow = ref(false)
 const { randomInt } = useUtils()
 const colors = ['yellow', 'green', 'pink', 'blue']
-const artistColor = computed(() => colors[randomInt(0, colors.length)])
-const artistShape = computed(() => `Artists${randomInt(1, 12)}`)
-const cardColor = computed(() => getSecondaryColor())
-
 const getSecondaryColor = () => {
   const randomColor = colors[randomInt(0, colors.length)]
   if (randomColor === artistColor.value) return getSecondaryColor()
   return randomColor
 }
+
+const { data: artistColor } = await useAsyncData(
+  'artistColor' + props.blok.uuid,
+  () => colors[randomInt(0, colors.length)]
+)
+
+const { data: artistShape } = await useAsyncData(
+  'artistShape' + props.blok.uuid,
+  () => `Artists${randomInt(1, 12)}`
+)
+
+const { data: cardColor } = await useAsyncData(
+  'cardColor' + props.blok.uuid,
+  () => getSecondaryColor()
+)
 
 // Get year
 const { slug } = useRoute().params
