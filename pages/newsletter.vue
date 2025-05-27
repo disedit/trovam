@@ -3,8 +3,6 @@ useHead({ title: 'Newletter - Fira Trovam' })
 useServerSeoMeta({
   robots: 'noindex'
 })
-
-const localePath = useLocalePath()
 </script>
 
 <template>

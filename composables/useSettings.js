@@ -1,6 +1,5 @@
 export const useSettings = async () => {
   const siteSettings = useState('settings', () => null)
-  const nuxtApp = useNuxtApp()
   const { locale } = useI18n()
   const version = useEnvironment()
   const storyblokApi = useStoryblokApi()
@@ -13,13 +12,7 @@ export const useSettings = async () => {
         language: locale.value
       })
     },
-    {
-      watch: [locale],
-      dedupe: 'defer',
-      getCachedData (key) {
-        return nuxtApp.isHydrating ? nuxtApp.payload.data[key] : nuxtApp.static.data[key]
-      }
-    }
+    { watch: [locale] }
   )
 
   siteSettings.value = settings.value

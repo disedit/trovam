@@ -7,8 +7,6 @@ const route = useRoute()
 const isHome = computed(() => {
   return ['/', '/en', '/es'].includes(route.path) && !props.home
 })
-
-const localePath = useLocalePath()
 </script>
 
 <template>
