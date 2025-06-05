@@ -8,5 +8,9 @@ defineProps({ blok: Object })
     class="embed"
     v-html="blok.html"
   />
+  <div
+    v-if="blok.styles"
+    v-html="blok.styles"
+  />
 </template>
 
