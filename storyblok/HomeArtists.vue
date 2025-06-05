@@ -255,9 +255,9 @@ const positionStyles = useState(`artists-positions`, () => {
     }
   }
 
-  .container {
-    padding-top: var(--navbar-safest-area);
-  }
+  // .container {
+  //   padding-top: var(--navbar-safest-area);
+  // }
 
   &-list {
     font-size: var(--text-xl);
@@ -376,7 +376,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
     &-list {
       display: block;
-      font-size: 1.25rem;
+      font-size: 1.75rem;
     }
 
     &-info {
