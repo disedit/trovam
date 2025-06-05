@@ -376,7 +376,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
     &-list {
       display: block;
-      font-size: 1.1rem;
+      font-size: 1.25rem;
     }
 
     &-info {
