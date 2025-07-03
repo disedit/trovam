@@ -74,14 +74,9 @@ export default defineNuxtConfig({
     baseUrl: 'https://trovam.com'
   },
 
-  image: process.env.NUXT_PUBLIC_NODE_ENV === 'production' ? {
+  image: {
     provider: 'netlify',
     domains: ['a.storyblok.com']
-  } : {
-    provider: 'storyblok',
-    storyblok: {
-      baseURL: 'https://a.storyblok.com'
-    }
   },
 
   compatibilityDate: '2024-07-31',
