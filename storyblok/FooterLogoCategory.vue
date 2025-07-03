@@ -6,7 +6,7 @@ defineProps({ blok: Object })
   <div v-editable="blok" class="footer-logos">
     <h3>{{ blok.title }}</h3>
     <div class="footer-logos-assets">
-      <img
+      <NuxtImg
         v-for="logo in blok.logos"
         :key="logo.id"
         :src="logo.filename"

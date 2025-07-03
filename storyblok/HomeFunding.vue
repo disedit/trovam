@@ -13,7 +13,7 @@ const props = defineProps({ blok: Object })
           v-for="block in blok.blocks"
           :key="blok._uid"
         >
-          <img
+          <NuxtImg
             :src="block.logos[0].filename"
             :alt="block.logos[0].alt"
           />
