@@ -84,8 +84,7 @@ export default defineNuxtConfig({
   experimental: {
     defaults: {
       nuxtLink: {
-        prefetch: true,
-        prefetchOn: { visibility: false, interaction: true }
+        prefetch: false
       }
     }
   }
