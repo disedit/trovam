@@ -23,7 +23,7 @@ const img = useImage()
 const backgroundStyle = computed(() => {
   if (!props.blok.picture?.filename) return false
   const imgUrl = img(props.blok.background.filename || props.blok.picture.filename, { width: 1500 })
-  return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
+  return { backgroundImage: `url('${imgUrl}/m/1600x0')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 })
 
 const showArrow = ref(false)
@@ -94,7 +94,7 @@ const year = slug[0]
         <div class="md:sticky top-navbar-plus self-start">
           <NuxtImg
             v-if="blok.picture?.filename"
-            :src="blok.picture.filename"
+            :src="blok.picture.filename + '/m/1600x0'"
             :alt="`Foto de ${blok.name}`"
             sizes="100vw md:800px"
           />
