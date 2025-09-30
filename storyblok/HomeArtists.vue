@@ -218,6 +218,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
 <style lang="scss" scoped>
 .home-artists {
+  --illustration-width: 18vw;
   position: relative;
   background-size: cover;
   background-attachment: fixed;
@@ -230,11 +231,38 @@ const positionStyles = useState(`artists-positions`, () => {
   justify-content: center;
   overflow: clip;
 
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--illustration-width);
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    z-index: 2;
+  }
+
+  &::before {
+    left: 0;
+    background-image: url(../assets/images/layer2.png);
+    background-position: bottom left;
+  }
+
+  &::after {
+    right: 0;
+    background-image: url(../assets/images/layer.png);
+    background-position: bottom right;
+  }
+
   &-title {
     display: flex;
     font-weight: bold;
     font-size: var(--text-base);
     align-items: center;
+    justify-content: center;
     gap: .25em;
     margin-bottom: var(--spacer-4);
     opacity: 0;
@@ -255,30 +283,43 @@ const positionStyles = useState(`artists-positions`, () => {
     }
   }
 
-  // .container {
-  //   padding-top: var(--navbar-safest-area);
-  // }
+  .container {
+    padding-top: var(--navbar-safest-area);
+    padding-inline: calc(var(--illustration-width) / 2);
+  }
 
   &-list {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-family: var(--font-headline);
     text-transform: uppercase;
     line-height: 1.25;
-    text-align: justify;
+    text-align: center;
 
     .artist {
       font-size: .75em;
       color: var(--white);
       font-family: var(--font-heavy);
       opacity: 0;
+      color: var(--yellow);
+
+      &:nth-child(odd) {
+        color: var(--pink);
+      }
 
       span {
         transition: .25s ease;
       }
 
       &:not(:last-child)::after {
-        content: ' / ';
+        content: '';
+        display: inline-block;
+        width: .25em;
+        height: .25em;
+        border-radius: 100%;
         transition: .25s ease;
+        margin-inline: .5em;
+        background-color: #72c184;
+        transform: translateY(-100%);
       }
     }
   }
@@ -288,8 +329,10 @@ const positionStyles = useState(`artists-positions`, () => {
     font-family: var(--font-heavy);
     gap: var(--site-padding);
     font-weight: bold;
+    justify-content: center;
     font-size: var(--text-md);
     margin-top: var(--spacer-6);
+    text-align: center;
     line-height: 1;
   }
 
@@ -307,7 +350,7 @@ const positionStyles = useState(`artists-positions`, () => {
     }
   }
 
-  &::before {
+  .grain {
     content: '';
     position: absolute;
     inset: 0;
@@ -373,6 +416,11 @@ const positionStyles = useState(`artists-positions`, () => {
   .home-artists {
     background-position: left;
     background-attachment: scroll;
+
+    &::after,
+    &::before {
+      display: none;
+    }
 
     &-list {
       display: block;
