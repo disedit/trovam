@@ -213,6 +213,8 @@ const positionStyles = useState(`artists-positions`, () => {
         </div>
       </div>
     </div>
+
+    <div v-html="blok.html" />
   </section>
 </template>
 
