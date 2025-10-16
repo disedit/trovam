@@ -8,13 +8,14 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#181818' },
         { name: 'msapplication-TileColor', content: '#181818' },
         { name: 'robots', content: 'index, follow' },
+        { name: 'apple-mobile-web-app-title', content: 'Trovam' }
       ],
       link: [
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
-        { rel: 'mask-icon', color: '#652B80', href: '/safari-pinned-tab.svg' },
-        { rel: 'manifest', color: '#652B80', href: '/site.webmanifest' },
+        { rel: 'icon', type: 'image/png', href: '/favicons/favicon-96x96.png', sizes: '96x96' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicons/favicon.svg' },
+        { rel: 'shortcut icon', href: '/favicons/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicons/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/favicons/site.webmanifest' }
       ],
       script: [
         { src: 'https://cloud.umami.is/script.js', defer: true, 'data-website-id': '182211e5-3bf2-457e-9d2b-a1b7287fa2e4' },
