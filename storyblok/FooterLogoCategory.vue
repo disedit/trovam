@@ -27,14 +27,12 @@ defineProps({ blok: Object })
 
   &-assets {
     display: flex;
-    gap: var(--spacer-2);
+    gap: var(--spacer-4);
     flex-wrap: wrap;
 
     img {
-      height: 100%;
-      max-height: 3rem;
-      max-width: 100%;
-      object-fit: contain;
+      height: 2rem;
+      width: auto;
     }
   }
 }
