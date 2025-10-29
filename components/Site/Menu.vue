@@ -65,12 +65,21 @@ function unhover() {
       <ul v-if="item.items?.length > 0" class="submenu">
         <li v-for="subitem in item.items" :key="subitem._uid" class="submenu-item">
           <NuxtLink
-            :to="internalLink(subitem.link?.story?.full_slug)"
+            v-if="subitem.link?.story"
+            :to="internalLink(subitem.link?.story.full_slug)"
             class="submenu-link"
             @click="unhover"
           >
             {{ subitem.label }}
           </NuxtLink>
+          <a
+            v-else
+            :href="subitem.link?.url"
+            class="submenu-link"
+            @click="unhover"
+          >
+            {{ subitem.label }}
+          </a>
         </li>
       </ul>
     </li>
