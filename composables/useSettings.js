@@ -16,8 +16,11 @@ export const useSettings = async () => {
     {
       watch: [locale],
       dedupe: 'defer',
-      getCachedData (key) {
-        return nuxtApp.isHydrating ? nuxtApp.payload.data[key] : nuxtApp.static.data[key]
+      getCachedData: (key, nuxtApp) => {
+        const cachedSettings = useState('settings_' + locale.value)
+        return cachedSettings.value
+        ? cachedSettings.value
+        : nuxtApp.payload.data[key]
       }
     }
   )

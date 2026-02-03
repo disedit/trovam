@@ -23,7 +23,16 @@ const { data: stages } = await useAsyncData(
     by_uuids: stageUuids.join(','),
     resolve_relations: 'Stage.venue',
     excluding_fields: 'map,address,stages,picture,highlight'
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('stages_' + props.blok._uid + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 const stagesByUuid = Object.fromEntries(stages.value.data.stories.map(stage => [stage.uuid, stage]))
 

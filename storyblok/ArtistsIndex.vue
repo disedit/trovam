@@ -26,7 +26,16 @@ const { data: artists } = await useAsyncData(
     resolve_relations: 'Artist.venue',
     per_page: 100,
     ...filter
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('artists_' + props.blok._uid + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 
 /* Selected artist */

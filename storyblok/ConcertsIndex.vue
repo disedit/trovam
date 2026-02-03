@@ -14,7 +14,16 @@ const { data: artists } = await useAsyncData(
     starts_with: props.path || `${slug[0]}/artistes/`,
     sort_by: 'content.concert_date:asc',
     is_startpage: false
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('artists_' + props.blok._uid + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 
 const concertsByDate = computed(() => {

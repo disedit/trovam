@@ -22,7 +22,16 @@ const { data: stages } = await useAsyncData(
     version,
     language: locale.value,
     by_uuids_ordered: props.blok.stages.join(','),
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('stages_' + props.blok._uid + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 
 /* Background */

@@ -13,10 +13,19 @@ const { data: posts } = await useAsyncData(
     excluding_fields: 'body',
     starts_with: props.blok.path || `noticies/`,
     is_startpage: false,
-    per_page: props.blok.per_page || 10,
+    per_page: props.blok.per_page || 16,
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
     page
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('posts' + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 </script>
 

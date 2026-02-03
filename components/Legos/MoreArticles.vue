@@ -16,7 +16,17 @@ const { data: posts } = await useAsyncData(
     excluding_ids: props.exclude,
     per_page: 8,
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('posts_more_' + locale.value)
+      console.log('cachedContent', cachedContent.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 </script>
 

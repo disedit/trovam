@@ -24,7 +24,16 @@ const { data: stages } = await useAsyncData(
     is_startpage: false,
     resolve_relations: 'Stage.venue',
     excluding_fields: 'map,address,stages,picture,highlight'
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('allStages' + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 const stagesByUuid = Object.fromEntries(stages.value.data.stories.map(stage => [stage.uuid, stage]))
 
@@ -47,7 +56,16 @@ const { data: concertData } = await useAsyncData(
     },
     per_page: 100,
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
-  })
+  }), {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('concerts' + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
+  }
 )
 
 const concerts = concertData.value.data.stories.map(artist => ({
@@ -78,6 +96,15 @@ const { data: scheduleData } = await useAsyncData(
       excluding_fields: 'header,seo_title,seo_description,seo_picture',
       per_page: 100,
     })
+  }, {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('schedules' + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
   }
 )
 

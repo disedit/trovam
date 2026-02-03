@@ -14,6 +14,15 @@ const { data: venues } = await useAsyncData(
     by_uuids_ordered: props.blok.venues.join(','),
     resolve_relations: 'Venue.stages',
     excluding_fields: 'map',
+  }, {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedContent = useState('venues_' + props.blok._uid + locale.value)
+      return cachedContent.value
+      ? cachedContent.value
+      : nuxtApp.payload.data[key]
+    }
   })
 )
 

@@ -41,7 +41,6 @@ const { internalLink } = useLinks()
   background-size: cover;
   background-color: var(--black);
 
-  /*
   &::before {
     content: '';
     display: block;
@@ -54,7 +53,6 @@ const { internalLink } = useLinks()
     background: linear-gradient(to bottom, rgba($black, 0), rgba($black, 1));
     pointer-events: none;
   }
-  */
 
   &-sponsors {
     display: flex;

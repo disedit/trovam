@@ -18,6 +18,15 @@ const { data: menuItems } = await useAsyncData(
       excluding_fields: 'blocks,body,background,seo_title,seo_picture',
       by_uuids_ordered: props.blok.items.join(',')
     })
+  }, {
+    watch: [locale],
+    dedupe: 'defer',
+    getCachedData: (key, nuxtApp) => {
+      const cachedSettings = useState('menu_' + props.blok._uid + locale.value)
+      return cachedSettings.value
+      ? cachedSettings.value
+      : nuxtApp.payload.data[key]
+    }
   }
 )
 
