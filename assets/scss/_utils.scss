@@ -7,17 +7,10 @@
 
 .headline {
   font-family: var(--font-headline);
-  text-transform: uppercase;
 }
 
 .font-heavy {
   font-family: var(--font-heavy);
-}
-
-.compensate {
-  position: relative;
-  top: .1em;
-  margin-block-end: -.1em;
 }
 
 /* Container */

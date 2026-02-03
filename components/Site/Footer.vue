@@ -38,9 +38,8 @@ const { internalLink } = useLinks()
 <style lang="scss" scoped>
 .footer {
   position: relative;
-  background: url(~/assets/images/bg-2.jpg);
   background-size: cover;
-  background-color: #000;
+  background-color: var(--black);
 
   /*
   &::before {

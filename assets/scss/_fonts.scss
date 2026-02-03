@@ -1,27 +1,44 @@
 @font-face {
-  font-family: 'Agrandir-WideLight';
-  src: url('../fonts/Agrandir-WideLight.woff2') format('woff2');
-  font-weight: light;
-  font-style: normal;
+    font-family: 'Delight';
+    src: url('../fonts/Delight-ExtraBold.woff2') format('woff2'),
+        url('../fonts/Delight-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Agrandir-GrandHeavy';
-  src: url('../fonts/Agrandir-GrandHeavy.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
+    font-family: 'Delight';
+    src: url('../fonts/Delight-Black.woff2') format('woff2'),
+        url('../fonts/Delight-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Agrandir';
-  src: url('../fonts/Agrandir-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Delight';
+    src: url('../fonts/Delight-Bold.woff2') format('woff2'),
+        url('../fonts/Delight-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Agrandir';
-  src: url('../fonts/Agrandir-TextBold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
+    font-family: 'Delight';
+    src: url('../fonts/Delight-SemiBold.woff2') format('woff2'),
+        url('../fonts/Delight-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Delight';
+    src: url('../fonts/Delight-Medium.woff2') format('woff2'),
+        url('../fonts/Delight-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }

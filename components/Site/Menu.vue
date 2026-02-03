@@ -137,7 +137,6 @@ function unhover() {
     text-decoration: none;
     color: var(--white);
     font-family: var(--font-headline);
-    text-transform: uppercase;
     font-size: 1.1em;
     padding: .1em;
     transition: outline .25s ease, outline-offset .25s ease;

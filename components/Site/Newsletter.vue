@@ -53,7 +53,7 @@ const localePath = useLocalePath()
 
 <style lang="scss" scoped>
 .newsletter {
-  --input-padding: .25em .5em 0 .5em;
+  --input-padding: .25em .5em;
   overflow-x: clip;
 
   .container {
@@ -82,7 +82,6 @@ const localePath = useLocalePath()
     h2 {
       position: relative;
       font-size: 1.25em;
-      text-transform: uppercase;
       line-height: 1;
       text-wrap: balance;
       z-index: 2;
