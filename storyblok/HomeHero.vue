@@ -15,7 +15,7 @@ const backgroundStyle = computed(() => {
 })
 
 const { y } = useWindowScroll()
-const scrolled = computed(() => y.value > 800)
+const scrolled = computed(() => y.value > 700)
 </script>
 
 <template>
