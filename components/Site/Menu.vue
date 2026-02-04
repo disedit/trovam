@@ -172,7 +172,7 @@ function unhover() {
     display: block;
     color: var(--black);
     text-decoration: none;
-    padding: .35em .25em .15em .25em;
+    padding: .35em .25em;
 
     &:hover,
     &:focus-visible {
@@ -188,6 +188,16 @@ function unhover() {
 
   &-item:not(:last-child) .submenu-link {
     border-bottom: 2px var(--black) solid;
+  }
+}
+
+.color-white {
+  .submenu-link {
+    &:hover,
+    &:focus-visible {
+      background-color: var(--black);
+      color: var(--white);
+    }
   }
 }
 

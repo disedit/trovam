@@ -16,6 +16,10 @@ const backgroundStyle = computed(() => {
 
 const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 800)
+
+const marqueeContent = computed(() => {
+  return props.blok.marquee ? props.blok.marquee.split('_/_') : false
+})
 </script>
 
 <template>
@@ -34,7 +38,7 @@ const scrolled = computed(() => y.value > 800)
     </div>
     <ShapesArrows v-if="blok.arrows" class="arrows" />
     <Vue3Marquee v-if="blok.marquee" clone class="home-hero-marquee">
-      <span class="mx-10">{{ blok.marquee }}</span>
+      <span class="mx-10" v-for="(text, index) in marqueeContent" :key="index">{{ text }}</span>
     </Vue3Marquee>
   </Component>
 </template>
