@@ -38,7 +38,7 @@ export default defineNuxtConfig({
     ['@storyblok/nuxt', { accessToken: process.env.STORYBLOK_TOKEN }],
     '@vueuse/nuxt',
     '@nuxt/image',
-    'nuxt-icon'
+    '@nuxt/icon'
   ],
 
   vite: {
@@ -52,13 +52,17 @@ export default defineNuxtConfig({
           `
         }
       }
-    }
-  },
-
-  nitro: {
-    prerender: {
-      ignore: [
-        '/.netlify/'
+    },
+    optimizeDeps: {
+      include: [
+        '@storyblok/vue',
+        'gsap',
+        'gsap/ScrollTrigger',
+        'gsap/EasePack',
+        'focus-trap',
+        'vue3-marquee',
+        'date-fns',
+        'date-fns/locale',
       ]
     }
   },
@@ -93,5 +97,5 @@ export default defineNuxtConfig({
         prefetch: false
       }
     }
-  }
+  },
 })

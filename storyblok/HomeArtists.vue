@@ -16,7 +16,7 @@ const orderedArtists = {
   by_uuids_ordered: props.blok.ordered_artists.join(',')
 }
 const autopopulate = {
-  starts_with: props.blok.path || `2024/artistes/`,
+  starts_with: props.blok.path || `2026/artistes/`,
   sort_by: 'content.name:asc',
   is_startpage: false
 }
@@ -138,7 +138,7 @@ const positionStyles = useState(`artists-positions`, () => {
     :style="backgroundStyle"
     :aria-labelledby="`title-${blok._uid}`"
   >
-    <div class="background background-purple z-1">
+    <div class="background background-red z-1">
       <div class="background-holder">
         <template v-for="artist in artists?.data?.stories" :key="artist.uuid">
           <Transition name="fade">
@@ -155,7 +155,6 @@ const positionStyles = useState(`artists-positions`, () => {
     <div class="container padded relative z-10 -mt-[100vh]">
       <NuxtLink :to="`/${blok.path}`" class="dim-on-hover">
         <h2 :id="`title-${blok._uid}`" class="home-artists-title">
-          <ShapesShape1 />
           <span class="compensate">{{ blok.title }}</span>
         </h2>
       </NuxtLink>
@@ -196,7 +195,7 @@ const positionStyles = useState(`artists-positions`, () => {
               class="artist-card polaroid"
               :style="positionStyles[i]"
             >
-              <div class="artist-card-picture">
+              <div class="artist-card-picture grayscale">
                 <UtilsNoisyPhoto
                   v-if="artist.content.picture?.filename"
                   :src="artist.content.picture.filename"
@@ -234,39 +233,14 @@ const positionStyles = useState(`artists-positions`, () => {
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  background-color: var(--purple);
+  background-color: var(--red);
+  background-image: url(../assets/images/bg-trovam-2026.jpg);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: clip;
-
-  &::after,
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--illustration-width);
-    height: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    z-index: 2;
-  }
-
-  &::before {
-    left: 0;
-    background-image: url(../assets/images/layer2.png);
-    background-position: bottom left;
-  }
-
-  &::after {
-    right: 0;
-    background-image: url(../assets/images/layer.png);
-    background-position: bottom right;
-  }
 
   &-title {
     display: flex;
@@ -311,10 +285,10 @@ const positionStyles = useState(`artists-positions`, () => {
       color: var(--white);
       font-family: var(--font-heavy);
       opacity: 0;
-      color: var(--yellow);
+      color: var(--black);
 
       &:nth-child(odd) {
-        color: var(--pink);
+        color: var(--white);
       }
 
       span {
@@ -329,8 +303,8 @@ const positionStyles = useState(`artists-positions`, () => {
         border-radius: 100%;
         transition: .25s ease;
         margin-inline: .5em;
-        background-color: #72c184;
-        transform: translateY(-100%);
+        // background-color: #72c184;
+        // transform: translateY(-100%);
       }
     }
   }
@@ -357,7 +331,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
     span {
       display: block;
-      color: var(--yellow);
+      color: var(--black);
     }
   }
 
@@ -391,10 +365,10 @@ const positionStyles = useState(`artists-positions`, () => {
 
   &-picture {
     background: var(--black);
-    filter: saturate(1.15);
 
     :deep(img) {
       aspect-ratio: 1;
+      filter: grayscale(1) brightness(1.25);
     }
   }
 }

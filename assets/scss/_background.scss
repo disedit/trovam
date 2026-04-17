@@ -50,6 +50,15 @@
   }
 }
 
+.background-red {
+  background-color: var(--red);
+
+  .page-background {
+    mix-blend-mode: multiply;
+    filter: grayscale(1) brightness(1.25);
+  }
+}
+
 @include media('<md') {
   .page-background {
     &::before {

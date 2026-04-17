@@ -67,20 +67,6 @@ useHead({
 
 /* Artist list effects */
 const { random } = useUtils()
-const artistsTotal = computed(() => artists.value?.data?.stories?.length)
-const colors = ['yellow', 'red', 'green', 'pink', 'blue']
-const rebus = computed(() => {
-  const shapes = []
-  const totalShapes = 12
-  let shape = 1
-  let color = 0
-  for(let i = 0; i <= artistsTotal.value; i++) {
-    shapes.push({ shape: `Artists${shape}`, color: colors[color] })
-    shape = (shape === totalShapes) ? 1 : shape + 1
-    color = (color === colors.length - 1) ? 0 : color + 1
-  }
-  return shapes
-})
 
 /* Animations */
 const { $gsap } = useNuxtApp()
@@ -186,7 +172,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
 <template>
   <div v-editable="blok" class="artists">
-    <div class="background background-purple z-1">
+    <div class="background background-red z-1">
       <div class="background-holder">
         <template v-for="artist in artists.data.stories" :key="artist.uuid">
           <Transition name="fade">
@@ -202,7 +188,6 @@ const positionStyles = useState(`artists-positions`, () => {
     </div>
     <div class="container padded relative navbar-safe-area z-10 -mt-[100vh]">
       <h1 class="artists-title">
-        <ShapesShape1 />
         <span class="compensate">Stage / {{ blok.title }}</span>
       </h1>
       <section :class="['artists-list', { hovering: !!hovering && allowHover }]">
@@ -227,7 +212,6 @@ const positionStyles = useState(`artists-positions`, () => {
             />
             <h2 class="compensate">{{ artist.content.name }}</h2>
           </NuxtLink>
-          <div :class="['shape hidden shrink-0 md:block h-[.5em] w-[.5em] bg-[var(--color)] rounded-full', `color-${rebus[i]?.color}`]" />
         </template>
       </section>
     </div>
@@ -243,7 +227,7 @@ const positionStyles = useState(`artists-positions`, () => {
             class="artist-card polaroid"
             :style="positionStyles[i]"
           >
-            <div class="artist-card-picture">
+            <div class="artist-card-picture grayscale">
               <UtilsNoisyPhoto
                 v-if="artist.content.picture?.filename"
                 :src="artist.content.picture.filename + '/m/800x0'"
@@ -321,21 +305,13 @@ const positionStyles = useState(`artists-positions`, () => {
 
     &-picture {
       background: var(--black);
-      filter: saturate(1.15);
+      filter: saturate(1.15) grayscale(1) brightness(1.25);
 
       :deep(img) {
         aspect-ratio: 1;
+        filter: saturate(1.15) grayscale(1) brightness(1.25);
       }
     }
-  }
-}
-
-.shape {
-  color: var(--color);
-  transition: opacity .25s ease;
-
-  div {
-    height: .85em;
   }
 }
 
