@@ -7,8 +7,8 @@ defineProps({
 })
 
 const icons = {
-  instagram: 'fa6-brands:facebook',
-  facebook: 'fa6-brands:instagram',
+  instagram: 'fa6-brands:instagram',
+  facebook: 'fa6-brands:facebook',
   youtube: 'fa6-brands:youtube',
   twitter: 'fa6-brands:x-twitter',
   tiktok: 'fa6-brands:tiktok',
