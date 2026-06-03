@@ -6,10 +6,11 @@ const localePath = useLocalePath()
 
 const socials = computed(() => {
   const profiles = []
-  const { website, spotify, instagram, tiktok, twitter, facebook, youtube, soundcloud, bandcamp } = props.blok
+  const { website, spotify, instagram, twitter, tiktok, facebook, youtube, soundcloud, bandcamp } = props.blok
   if (website) profiles.push({ label: t('assist.website'), link: website, icon: 'website' })
   if (spotify) profiles.push({ label: 'Spotify', link: spotify, icon: 'spotify' })
-  if (instagram) profiles.push({ label: 'Instagram', link: twitter, icon: 'instagram' })
+  if (instagram) profiles.push({ label: 'Instagram', link: instagram, icon: 'instagram' })
+  if (twitter) profiles.push({ label: 'X', link: twitter, icon: 'twitter' })
   if (tiktok) profiles.push({ label: 'TikTok', link: tiktok, icon: 'tiktok' })
   if (facebook) profiles.push({ label: 'Facebook', link: facebook, icon: 'facebook' })
   if (youtube) profiles.push({ label: 'Youtube', link: youtube, icon: 'youtube' })
@@ -26,19 +27,7 @@ const backgroundStyle = computed(() => {
   return { backgroundImage: `url('${imgUrl}/m/1600x0')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 })
 
-const showArrow = ref(false)
 const showTicketsArrow = ref(false)
-const { randomInt } = useUtils()
-const colors = ['yellow', 'green', 'pink', 'blue']
-const getSecondaryColor = () => {
-  const randomColor = colors[randomInt(0, colors.length)]
-  if (randomColor === artistColor.value) return getSecondaryColor()
-  return randomColor
-}
-
-const artistColor = useState('artistColor', () => colors[randomInt(0, colors.length)])
-const artistShape = useState('artistShape', () => `Artists${randomInt(1, 12)}`)
-const cardColor = useState('cardColor', () => getSecondaryColor())
 
 // Get year
 const { slug } = useRoute().params
@@ -46,27 +35,23 @@ const year = slug[0]
 </script>
 
 <template>
-  <article v-editable="blok" :class="['artist', `color-${artistColor}`]">
-    <div class="background background-purple z-1">
+  <article v-editable="blok" class="artist">
+    <div class="background background-red z-1">
       <div class="background-holder">
         <div class="page-background with-overlay" :style="backgroundStyle" />
       </div>
     </div>
     <div class="container padded relative navbar-safest-area z-10 -mt-[100vh]">
       <header class="artist-header">
-        <NuxtLink :to="localePath(`/${year}/artistes`)" class="artist-back" @mouseenter="showArrow = true" @mouseleave="showArrow = false">
-          <Transition name="fade-left" mode="out-in">
-            <Icon name="material-symbols:arrow-back" v-if="showArrow" class="arrow" />
-            <ShapesShape1 v-else />
-          </Transition>
+        <NuxtLink :to="localePath(`/${year}/artistes`)" class="artist-back">
           Stage / {{ $t('artists.title') }} {{ year }}
         </NuxtLink>
-        <ShapesArtists :shape="artistShape" class="artist-shape hidden lg:block" />
+        <div class="artist-shape hidden lg:block" />
         <h1 v-if="blok.name" :class="['artist-name font-heavy', { short: blok.name.length < 10, tiny: blok.name.length < 6, medium: blok.name.length < 15 }]">
           <span class="compensate">{{ blok.name }}</span>
         </h1>
       </header>
-      <section :class="['artist-info polaroid focus-black', `color-${cardColor}`]">
+      <section class="artist-info polaroid focus-yellow">
         <div v-if="blok.concert_date" class="artist-concert">
           <div class="sticky top-navbar-plus">
             <div class="artist-concert-date" v-if="blok.concert_date">
@@ -115,7 +100,7 @@ const year = slug[0]
 .artist {
   &-header {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 350px 1fr;
     grid-template-areas:
       "back name"
       "shape name";
@@ -143,15 +128,15 @@ const year = slug[0]
     }
 
     &.medium {
-      font-size: 1.25em;
+      font-size: 1.5em;
     }
 
     &.short {
-      font-size: 1.75em;
+      font-size: 2em;
     }
 
     &.tiny {
-      font-size: 2em;
+      font-size: 2.25em;
     }
   }
 
@@ -161,26 +146,11 @@ const year = slug[0]
     font-size: var(--text-md);
     font-weight: bold;
     color: var(--white);
-    padding-left: 1.5em;
 
     &:hover {
       text-decoration: underline;
       text-underline-offset: .25em;
       text-decoration-thickness: 1px;
-    }
-
-    svg {
-      display: block;
-      position: absolute;
-      top: .1em;
-      left: 0;
-      height: 1em;
-      color: var(--red);
-    }
-
-    .arrow {
-      height: 1.25em;
-      width: 1.25em;
     }
   }
 
@@ -198,7 +168,8 @@ const year = slug[0]
 
   &-info {
     grid-area: info;
-    background-color: var(--color);
+    background-color: var(--black);
+    color: var(--white);
     display: flex;
     flex-direction: column;
     gap: var(--card-padding);
@@ -221,10 +192,16 @@ const year = slug[0]
     :deep(a) {
       padding: .25em;
       border-radius: 100%;
+      height: 1.75em;
+      width: 1.75em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:hover {
         opacity: 1;
-        background: var(--hover-color, var(--color));
+        background: var(--hover-color, var(--white));
+        color: var(--hover-text-color, var(--red));
       }
     }
   }

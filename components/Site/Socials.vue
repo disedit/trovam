@@ -10,7 +10,7 @@ const icons = {
   instagram: 'fa6-brands:facebook',
   facebook: 'fa6-brands:instagram',
   youtube: 'fa6-brands:youtube',
-  twitter: 'fa6-brands:twitter',
+  twitter: 'fa6-brands:x-twitter',
   tiktok: 'fa6-brands:tiktok',
   linkedin: 'fa6-brands:linkedin',
   spotify: 'fa6-brands:spotify',
