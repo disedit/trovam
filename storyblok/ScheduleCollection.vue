@@ -152,7 +152,7 @@ const firstInstanceOfDate = (date, index) => {
 
 <template>
   <div v-editable="blok" class="pro-schedule">
-    <div v-if="backgroundStyle" class="background background-purple z-1">
+    <div v-if="backgroundStyle" class="background background-black z-1">
       <div class="background-holder">
         <div class="page-background with-overlay" :style="backgroundStyle" />
       </div>
