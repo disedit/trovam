@@ -5,7 +5,7 @@ const props = defineProps({ blok: Object })
 
 const { internalLink } = useLinks()
 const wrapperComponent = computed(() => {
-  return props.blok?.link?.cached_url ? resolveComponent('NuxtLink') : 'section'
+  return props.blok?.link?.cached_url ? props.blok?.link.linktype === 'url' ? 'a' : resolveComponent('NuxtLink') : 'section'
 })
 
 const img = useImage()
@@ -25,7 +25,9 @@ const marqueeContent = computed(() => {
 <template>
   <Component
     :is="wrapperComponent"
-    :to="internalLink(blok.link.cached_url)"
+    :to="props.blok?.link?.cached_url && props.blok.link.linktype !== 'url' ? internalLink(props.blok.link.cached_url) : null"
+    :href="props.blok?.link?.cached_url && props.blok.link.linktype === 'url' ? props.blok.link.cached_url : null"
+    :target="props.blok?.link?.cached_url && props.blok.link.linktype === 'url' ? props.blok.link.target : null"
     v-editable="blok"
     :class="['home-hero', {
       scrolled: scrolled && blok.animate,
