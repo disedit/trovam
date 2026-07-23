@@ -42,3 +42,12 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Karben';
+    src: url('../fonts/Karben205Mono-Black.woff2') format('woff2'),
+        url('../fonts/Karben205Mono-Black.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}

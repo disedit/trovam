@@ -134,11 +134,11 @@ const positionStyles = useState(`artists-positions`, () => {
 <template>
   <section
     v-editable="blok"
-    :class="['home-artists', { hovering: !!hovering }]"
+    :class="['home-artists relative', { hovering: !!hovering }]"
     :style="backgroundStyle"
     :aria-labelledby="`title-${blok._uid}`"
   >
-    <div class="background background-red z-1">
+    <div class="background background-black z-1">
       <div class="background-holder">
         <template v-for="artist in artists?.data?.stories" :key="artist.uuid">
           <Transition name="fade">
@@ -223,6 +223,7 @@ const positionStyles = useState(`artists-positions`, () => {
     </div>
 
     <div v-html="blok.html" />
+    <video src="/video/trovam.mp4" autoplay muted loop playsinline class="absolute mix-blend-lighten inset-0 w-full h-full object-contain z-0 opacity-50 pointer-events-none"></video>
   </section>
 </template>
 
@@ -233,8 +234,7 @@ const positionStyles = useState(`artists-positions`, () => {
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  background-color: var(--red);
-  background-image: url(../assets/images/bg-trovam-2026.jpg);
+  background-color: var(--black);
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -283,13 +283,10 @@ const positionStyles = useState(`artists-positions`, () => {
     .artist {
       font-size: .75em;
       color: var(--white);
-      font-family: var(--font-heavy);
+      font-family: var(--font-mono);
       opacity: 0;
-      color: var(--black);
-
-      &:nth-child(odd) {
-        color: var(--white);
-      }
+      color: var(--white);
+      text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1.75517px 0.958851px 0px, rgb(0, 0, 0) 1.0806px 1.68294px 0px, rgb(0, 0, 0) 0.141474px 1.99499px 0px, rgb(0, 0, 0) -0.832294px 1.81859px 0px, rgb(0, 0, 0) -1.60229px 1.19694px 0px, rgb(0, 0, 0) -1.97998px 0.28224px 0px, rgb(0, 0, 0) -1.87291px -0.701566px 0px, rgb(0, 0, 0) -1.30729px -1.5136px 0px, rgb(0, 0, 0) -0.421592px -1.95506px 0px, rgb(0, 0, 0) 0.567324px -1.91785px 0px, rgb(0, 0, 0) 1.41734px -1.41108px 0px, rgb(0, 0, 0) 1.92034px -0.558831px 0px;
 
       span {
         transition: .25s ease;

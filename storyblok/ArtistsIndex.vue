@@ -172,7 +172,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
 <template>
   <div v-editable="blok" class="artists">
-    <div class="background background-red z-1">
+    <div class="background background-black z-1">
       <div class="background-holder">
         <template v-for="artist in artists.data.stories" :key="artist.uuid">
           <Transition name="fade">
@@ -195,7 +195,7 @@ const positionStyles = useState(`artists-positions`, () => {
           <NuxtLink
             :to="`/${artist.full_slug}`"
             :class="[
-              'artist relative font-heavy uppercase',
+              'artist relative font-mono uppercase',
               { hovering: hovering?.uuid === artist.uuid && allowHover },
             ]"
             :style="rotateStyles[i]"
@@ -242,6 +242,7 @@ const positionStyles = useState(`artists-positions`, () => {
         </Transition>
       </template>
     </div>
+    <video src="/video/trovam.mp4" autoplay muted loop playsinline class="fixed mix-blend-lighten inset-0 w-full scale-150 md:scale-100 h-full object-contain z-0 opacity-50 pointer-events-none"></video>
   </div>
 </template>
 
@@ -273,6 +274,8 @@ const positionStyles = useState(`artists-positions`, () => {
     font-size: var(--text-2xl);
     gap: .5em;
     margin: 2rem 0 calc(5rem + 20vh);
+    font-family: var(--font-mono);
+    text-shadow: rgb(0, 0, 0) 2px 0px 0px, rgb(0, 0, 0) 1.75517px 0.958851px 0px, rgb(0, 0, 0) 1.0806px 1.68294px 0px, rgb(0, 0, 0) 0.141474px 1.99499px 0px, rgb(0, 0, 0) -0.832294px 1.81859px 0px, rgb(0, 0, 0) -1.60229px 1.19694px 0px, rgb(0, 0, 0) -1.97998px 0.28224px 0px, rgb(0, 0, 0) -1.87291px -0.701566px 0px, rgb(0, 0, 0) -1.30729px -1.5136px 0px, rgb(0, 0, 0) -0.421592px -1.95506px 0px, rgb(0, 0, 0) 0.567324px -1.91785px 0px, rgb(0, 0, 0) 1.41734px -1.41108px 0px, rgb(0, 0, 0) 1.92034px -0.558831px 0px;
   }
 }
 
