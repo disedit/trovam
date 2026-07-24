@@ -184,7 +184,7 @@ const positionStyles = useState(`artists-positions`, () => {
         :to="`/${blok.path}`"
         class="home-artists-list md:hidden"
       >
-        <span v-for="artist in artists?.data?.stories" :key="artist.slug" class="artist">
+        <span v-for="artist in artists?.data?.stories" :key="artist.slug" class="artist whitespace-nowrap">
           {{ artist.content.name }}
         </span>
       </NuxtLink>
@@ -414,6 +414,12 @@ const positionStyles = useState(`artists-positions`, () => {
       display: block;
       font-size: 1.25rem;
       line-height: 1;
+
+      .artist:not(:last-child)::after {
+        width: .5em;
+        height: .5em;
+        transform: translateY(-25%);
+      }
     }
 
     &-info {
