@@ -226,15 +226,16 @@ const year = slug[0]
 
     &-stage {
       display: block;
-      border: 3px var(--black) solid;
+      border: 3px var(--white) solid;
       padding: .5em .5em .4em .5em;
       border-radius: 10rem;
-      color: var(--black);
+      color: var(--white);
       text-align: center;
       transition: .25s ease;
 
       &:hover {
         background: var(--white);
+        color: var(--black);
       }
     }
 
@@ -316,17 +317,18 @@ const year = slug[0]
 
     &-name {
       text-align: left;
+      font-size: 1.75em;
 
       &.medium {
-        font-size: 1.25em;
+        font-size: 2.25em;
       }
 
       &.short {
-        font-size: 1.4em;
+        font-size: 2.75em;
       }
 
       &.tiny {
-        font-size: 2em;
+        font-size: 3.25em;
       }
     }
   }

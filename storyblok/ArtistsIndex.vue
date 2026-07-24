@@ -372,6 +372,11 @@ const positionStyles = useState(`artists-positions`, () => {
     opacity: 0;
     box-shadow: var(--card-shadow);
     font-size: var(--text-xl);
+    text-shadow: none;
+
+    &::after {
+      display: none !important;
+    }
 
     &-picture {
       :deep(img) {
