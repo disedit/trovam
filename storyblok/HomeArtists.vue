@@ -18,6 +18,11 @@ const orderedArtists = {
 const autopopulate = {
   starts_with: props.blok.path || `2026/artistes/`,
   sort_by: 'content.name:asc',
+  filter_query: {
+    hide_in_artist_lists: {
+      is: 'false'
+    }
+  },
   is_startpage: false
 }
 
@@ -167,7 +172,7 @@ const positionStyles = useState(`artists-positions`, () => {
             @mouseleave="hovering = null"
             @click="leaveCard"
             :class="[
-              'artist relative',
+              'artist relative whitespace-nowrap',
               { hovering: hovering?.uuid === artist.uuid },
             ]"
           >
@@ -297,11 +302,12 @@ const positionStyles = useState(`artists-positions`, () => {
         display: inline-block;
         width: .25em;
         height: .25em;
-        border-radius: 100%;
+        border-radius: .1em;
+        border: 2px solid var(--black);
         transition: .25s ease;
         margin-inline: .5em;
-        // background-color: #72c184;
-        // transform: translateY(-100%);
+        background-color: var(--white);
+        transform: translateY(-100%);
       }
     }
   }
