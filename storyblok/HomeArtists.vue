@@ -286,6 +286,8 @@ const positionStyles = useState(`artists-positions`, () => {
     text-align: center;
 
     .artist {
+      display: inline-flex;
+      align-items: center;
       font-size: .75em;
       color: var(--white);
       font-family: var(--font-mono);
@@ -302,12 +304,13 @@ const positionStyles = useState(`artists-positions`, () => {
         display: inline-block;
         width: .25em;
         height: .25em;
+        min-width: .5rem;
+        min-height: .5rem;
         border-radius: .1em;
         border: 2px solid var(--black);
         transition: .25s ease;
         margin-inline: .5em;
         background-color: var(--white);
-        transform: translateY(-100%);
       }
     }
   }
@@ -414,12 +417,6 @@ const positionStyles = useState(`artists-positions`, () => {
       display: block;
       font-size: 1.25rem;
       line-height: 1;
-
-      .artist:not(:last-child)::after {
-        width: .5em;
-        height: .5em;
-        transform: translateY(-25%);
-      }
     }
 
     &-info {
