@@ -12,7 +12,7 @@ const story = await useAsyncStoryblok(
   {
     version,
     language: locale.value,
-    resolve_relations: 'Artist.stage,Stage.venue'
+    resolve_relations: 'Artist.stage,Stage.venue,Artist.extra_concerts'
   }
 )
 const page = story?.value?.content
