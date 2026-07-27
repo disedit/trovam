@@ -10,7 +10,7 @@ const props = defineProps({
   }
 })
 
-const venue = computed(() => props.stage.venue[0].content)
+const venue = computed(() => props.stage.venue[0]?.content)
 </script>
 
 <template>
@@ -18,7 +18,7 @@ const venue = computed(() => props.stage.venue[0].content)
     <span>
       {{ stage.short_name || stage.name }}
     </span>
-    <span v-if="stage.name !== venue.name && !stageOnly" class="stage-venue">
+    <span v-if="venue && stage.name !== venue.name && !stageOnly" class="stage-venue">
       {{ venue.name }}
     </span>
   </NuxtLink>

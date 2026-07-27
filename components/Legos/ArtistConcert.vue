@@ -13,7 +13,7 @@ const { shortDate, time } = useDate()
       </div>
 
       <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />
-      
+
       <a v-if="blok.cta_url" :href="blok.cta_url" target="_blank" class="artist-concert-tickets" @mouseenter="showTicketsArrow = true" @mouseleave="showTicketsArrow = false">
         <span class="compensate">{{ blok.cta_label || $t('artists.tickets') }}</span>
         
