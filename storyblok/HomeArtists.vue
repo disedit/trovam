@@ -337,7 +337,7 @@ const positionStyles = useState(`artists-positions`, () => {
 
     span {
       display: block;
-      color: var(--black);
+      color: var(--red);
     }
   }
 
