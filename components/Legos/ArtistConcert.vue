@@ -65,21 +65,21 @@ const { shortDate, time } = useDate()
 
     &-tickets {
       display: flex;
-      border: 3px var(--black) solid;
+      border: 3px var(--white) solid;
       padding: .5em 1.25em;
       border-radius: 10rem;
-      color: var(--white);
+      color: var(--black);
       justify-content: space-between;
       align-items: center;
       gap: var(--spacer-2);
-      background-color: var(--black);
+      background-color: var(--white);
       font-weight: bold;
       transition: .25s ease;
 
       &:hover {
-        background: var(--white);
-        color: var(--black);
-        border-color: var(--white);
+        background: var(--red);
+        color: var(--white);
+        border-color: var(--red);
       }
     }
 

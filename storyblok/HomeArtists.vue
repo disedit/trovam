@@ -104,7 +104,7 @@ function leaveCard () {
 onMounted(() => {
   $gsap.set('.home-artists-list .artist', { opacity: 0 })
   $gsap.set('.home-artists-title', { opacity: 0, x: '-1em' })
-  $gsap.set('.home-artists-info div', { opacity: 0, x: '-1me' })
+  $gsap.set('.home-artists-info div, .home-artists-html', { opacity: 0, x: '-1me' })
 
   $gsap.to('.home-artists-list .artist', {
     opacity: 1,
@@ -112,7 +112,7 @@ onMounted(() => {
     stagger: .05,
   })
 
-  $gsap.to('.home-artists-title, .home-artists-info div', {
+  $gsap.to('.home-artists-title, .home-artists-info div, .home-artists-html', {
     opacity: 1,
     duration: .75,
     x: 0,
@@ -227,7 +227,7 @@ const positionStyles = useState(`artists-positions`, () => {
       </div>
     </div>
 
-    <div v-html="blok.html" />
+    <div v-html="blok.html" class="home-artists-html" />
     <video src="/video/trovam.mp4" autoplay muted loop playsinline class="absolute mix-blend-lighten inset-0 w-full h-full object-contain z-0 opacity-50 pointer-events-none"></video>
   </section>
 </template>
