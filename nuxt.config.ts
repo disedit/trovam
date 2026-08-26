@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: process.env.NUXT_PUBLIC_NODE_ENV === 'production' ? true : false,
+  ssr: true,
 
   app: {
     head: {
@@ -79,11 +79,11 @@ export default defineNuxtConfig({
     baseUrl: 'https://trovam.com'
   },
 
-  image: process.env.NUXT_PUBLIC_NODE_ENV === 'production' ? {
-    provider: 'netlify',
-    domains: ['a.storyblok.com']
-  } : {
-    provider: 'storyblok',
+  image: {
+    provider: process.env.NUXT_PUBLIC_IMAGE_PROVIDER || 'storyblok',
+    cloudflare: {
+      baseURL: 'https://trovam.com'
+    },
     storyblok: {
       baseURL: 'https://a.storyblok.com'
     }
