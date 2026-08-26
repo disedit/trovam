@@ -81,6 +81,7 @@ export default defineNuxtConfig({
 
   image: {
     provider: process.env.NUXT_PUBLIC_IMAGE_PROVIDER || 'storyblok',
+    domains: ['a.storyblok.com'],
     cloudflare: {
       baseURL: 'https://trovam.com'
     },
