@@ -91,6 +91,15 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-07-31',
 
+  nitro: {
+    prerender: {
+      concurrency: 4,
+      retry: 3,
+      retryDelay: 1000,
+      failOnError: false
+    }
+  },
+
   experimental: {
     defaults: {
       nuxtLink: {
