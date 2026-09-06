@@ -137,10 +137,16 @@ const allEvents = concerts.concat(scheduleEvents)
 const sortedEvents = allEvents.sort((a, b) => new Date(a.date) - new Date(b.date))
 
 // Hide dates if repeated
+const scheduleDate = (date) => {
+  const groupedDate = new Date(date)
+  groupedDate.setHours(groupedDate.getHours() - 5)
+  return groupedDate
+}
+
 const firstInstanceOfDate = (date, index) => {
   if (index === 0) return true
   const previousDate = sortedEvents[index - 1].date
-  return shortDate(date) !== shortDate(previousDate)
+  return shortDate(scheduleDate(date)) !== shortDate(scheduleDate(previousDate))
 }
 </script>
 
@@ -160,7 +166,7 @@ const firstInstanceOfDate = (date, index) => {
       <div class="container container-sm padded pro-schedule-events">
         <template v-for="(event, i) in sortedEvents" :key="i">
           <h2 v-if="firstInstanceOfDate(event.date, i)" class="pro-schedule-date">
-            {{ longDate(event.date) }}
+            {{ longDate(scheduleDate(event.date)) }}
           </h2>
           <LegosEvent
             v-if="!event.hide_in_schedules"
