@@ -3,6 +3,7 @@ defineProps({ blok: Object, meta: Object })
 
 const localePath = useLocalePath()
 const { longDate } = useDate()
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -16,8 +17,8 @@ const { longDate } = useDate()
         {{ longDate(meta.first_published_at) }}
       </time>
     </div>
-    <h1 class="article-title">{{ blok.title }}</h1>
-    <div class="article-summary">{{ blok.summary }}</div>
+    <h1 class="article-title">{{ tr(blok, 'title') }}</h1>
+    <div class="article-summary">{{ tr(blok, 'summary') }}</div>
     <div class="article-card">
       <div v-if="blok.picture?.filename && !blok.hide_picture_inside" class="article-picture">
         <NuxtPicture
@@ -42,9 +43,12 @@ const { longDate } = useDate()
 <style lang="scss" scoped>
 .article {
   &-meta {
+    display: flex;
     font-size: var(--text-base);
     margin-block-start: calc(10vh + 2rem);
     margin-block-end: var(--spacer-6);
+    gap: .25rem;
+    align-items: center;
   }
 
   &-back {

@@ -3,22 +3,20 @@ const props = defineProps({ blok: Object })
 const { random } = useUtils()
 
 /* Load relations */
-const { locale } = useI18n()
+const { tr } = useTranslated()
 const version = useEnvironment()
 const storyblokApi = useStoryblokApi()
 const { data: venues } = await useAsyncData(
   'venues_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     by_uuids_ordered: props.blok.venues.join(','),
     resolve_relations: 'Venue.stages',
     excluding_fields: 'map',
   }, {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('venues_' + props.blok._uid + locale.value)
+      const cachedContent = useState('venues_' + props.blok._uid)
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -54,7 +52,7 @@ const rotate = useState(`venues-rotate`, () => {
               sizes="100vw md:800px"
             />
           </div>
-          <h2>{{ venue.content.name }}</h2>
+          <h2>{{ tr(venue.content, 'name') }}</h2>
           <LegosStageList class="mt-auto" :stages="venue.content.stages" />
         </NuxtLink>
       </article>

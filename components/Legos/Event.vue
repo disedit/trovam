@@ -4,6 +4,7 @@ const props = defineProps({
   stages: Object
 })
 
+const { tr } = useTranslated()
 const { time } = useDate()
 const { internalLink } = useLinks()
 const stage = props.stages[props.event.stage]
@@ -25,11 +26,11 @@ const hasDescription = props.event.description.content[0]?.content
     </time>
     <div class="event-info">
       <h3 class="event-title compensate">
-        <NuxtLink v-if="event.link" :to="`/${event.link}`">
-          {{ event.title }}
+        <NuxtLink v-if="event.link" :to="internalLink(`/${event.link}`)">
+          {{ tr(event, 'title') }}
         </NuxtLink>
         <span v-else>
-          {{ event.title }}
+          {{ tr(event, 'title') }}
         </span>
         <span v-if="event.concert_with">
           <span v-for="coartist in event.concert_with" :key="coartist.id">
@@ -60,12 +61,12 @@ const hasDescription = props.event.description.content[0]?.content
           rel="noopener"
           class="event-button"
         >
-          {{ event.cta_label || $t('artists.tickets') }}
+          {{ tr(event, 'cta_label') || $t('artists.tickets') }}
         </UtilsButton>
       </div>
       <UtilsRichText
         v-if="hasDescription"
-        :content="event.description"
+        :content="tr(event, 'description')"
         class="event-description"
       />
     </div>

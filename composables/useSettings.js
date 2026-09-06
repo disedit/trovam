@@ -1,35 +1,31 @@
 export const useSettings = async () => {
-  const siteSettings = useState('settings', () => null)
-  const nuxtApp = useNuxtApp()
-  const { locale } = useI18n()
-  const version = useEnvironment()
-  const storyblokApi = useStoryblokApi()
+  const siteSettings = useState("settings", () => null);
+  const version = useEnvironment();
+  const storyblokApi = useStoryblokApi();
   const { data: settings } = await useAsyncData(
-    'settings_' + locale.value,
+    "settings",
     async () => {
-      return await storyblokApi.get('cdn/stories/settings', {
+      return await storyblokApi.get("cdn/stories/settings", {
         version,
-        resolve_links: 'url',
-        language: locale.value
-      })
+        resolve_links: "url",
+      });
     },
     {
-      watch: [locale],
-      dedupe: 'defer',
+      dedupe: "defer",
       getCachedData: (key, nuxtApp) => {
-        const cachedSettings = useState('settings_' + locale.value)
+        const cachedSettings = useState("settings");
         return cachedSettings.value
-        ? cachedSettings.value
-        : nuxtApp.payload.data[key]
-      }
-    }
-  )
+          ? cachedSettings.value
+          : nuxtApp.payload.data[key];
+      },
+    },
+  );
 
-  siteSettings.value = settings.value
+  siteSettings.value = settings.value;
 
   watch(settings, (newSettings) => {
-    siteSettings.value = newSettings
-  })
+    siteSettings.value = newSettings;
+  });
 
-  return siteSettings
-}
+  return siteSettings;
+};

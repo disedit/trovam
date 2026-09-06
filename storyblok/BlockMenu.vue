@@ -5,6 +5,7 @@ const { internalLink } = useLinks()
 
 /* Load relations */
 const { locale } = useI18n()
+const { tr } = useTranslated()
 const version = useEnvironment()
 const storyblokApi = useStoryblokApi()
 const { data: menuItems } = await useAsyncData(
@@ -14,8 +15,7 @@ const { data: menuItems } = await useAsyncData(
 
     return await storyblokApi.get(`cdn/stories`, {
       version,
-      language: locale.value,
-      excluding_fields: 'blocks,body,background,seo_title,seo_picture',
+      excluding_fields: 'blocks,body,background,seo_title,seo_title_es,seo_title_en,seo_picture,seo_picture_es,seo_picture_en,seo_description,seo_description_es,seo_description_en,seo_keywords,seo_keywords_es,seo_keywords_en',
       by_uuids_ordered: props.blok.items.join(',')
     })
   }, {
@@ -34,17 +34,17 @@ const menu = computed(() => {
   if (props.blok.blocks.length > 0) {
     return props.blok.blocks.map((item) => ({
       id: item._uid,
-      label: item.label,
+      label: tr(item, 'label'),
       shape: item.shape,
       color: item.shape_color,
-      flair: item.flair,
+      flair: tr(item, 'flair'),
       link: internalLink(item.link.cached_url)
     }))
   }
 
   return menuItems.value.data.stories.map((item) => ({
     id: item.uuid,
-    label: item.content.title,
+    label: tr(item.content, 'title'),
     shape: props.blok.items_shape,
     color: props.blok.items_color,
     flair: false,
@@ -66,8 +66,8 @@ const menu = computed(() => {
       :class="['block-menu-item headline', `color-${item.color}`]"
     >
       <ShapesGate :shape="item.shape" />
-      <span class="compensate">{{ item.label }}</span>
-      <span class="flair" v-if="item.flair">{{ item.flair }}</span>
+      <span class="compensate">{{ tr(item, 'label') }}</span>
+      <span class="flair" v-if="tr(item, 'flair')">{{ tr(item, 'flair') }}</span>
     </NuxtLink>
   </nav>
 </template>

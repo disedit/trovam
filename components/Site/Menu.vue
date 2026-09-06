@@ -7,6 +7,7 @@ defineProps({
 })
 
 const { internalLink } = useLinks()
+const { tr } = useTranslated()
 
 const hovering = ref(null)
 const gracePeriod = ref(false)
@@ -52,14 +53,14 @@ function unhover() {
         @click.prevent="toggleHover(item._uid)"
       >
         <ShapesGate :shape="item.shape" />
-        <span>{{ item.label }}</span>
+        <span>{{ tr(item, 'label') }}</span>
       </a>
       <NuxtLink
         v-else
         :to="internalLink(item.link?.story?.full_slug)"
         class="menu-link">
         <ShapesGate :shape="item.shape" />
-        <span>{{ item.label }}</span>
+        <span>{{ tr(item, 'label') }}</span>
       </NuxtLink>
 
       <ul v-if="item.items?.length > 0" class="submenu">
@@ -70,7 +71,7 @@ function unhover() {
             class="submenu-link"
             @click="unhover"
           >
-            {{ subitem.label }}
+            {{ tr(subitem, 'label') }}
           </NuxtLink>
           <a
             v-else
@@ -78,7 +79,7 @@ function unhover() {
             class="submenu-link"
             @click="unhover"
           >
-            {{ subitem.label }}
+            {{ tr(subitem, 'label') }}
           </a>
         </li>
       </ul>

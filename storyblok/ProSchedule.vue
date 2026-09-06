@@ -13,21 +13,18 @@ const backgroundStyle = computed(() => {
 const { longDate, shortDate } = useDate()
 const stageUuids = props.blok.schedule.map(event => event.stage)
 const storyblokApi = useStoryblokApi()
-const { locale } = useI18n()
 const version = useEnvironment()
 const { data: stages } = await useAsyncData(
   'stages_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     by_uuids: stageUuids.join(','),
     resolve_relations: 'Stage.venue',
     excluding_fields: 'map,address,stages,picture,highlight'
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('stages_' + props.blok._uid + locale.value)
+      const cachedContent = useState('stages_' + props.blok._uid)
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]

@@ -1,6 +1,7 @@
 <script setup>
 const settings = useState('settings')
 const { internalLink } = useLinks()
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -27,7 +28,7 @@ const { internalLink } = useLinks()
           :key="link._uid"
           :to="internalLink(link.link.cached_url)"
         >
-          {{ link.label }}
+          {{ tr(link, 'label') }}
         </NuxtLink>
       </div>
     </div>

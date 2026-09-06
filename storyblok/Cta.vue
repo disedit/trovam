@@ -1,5 +1,6 @@
 <script setup>
 defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -9,7 +10,7 @@ defineProps({ blok: Object })
     :to="blok.link.linktype === 'story' ? `/${blok.link.cached_url}` : null"
   >
     <ShapesGate v-if="blok.shape" :shape="blok.shape" />
-    <span class="compensate">{{ blok.label }}</span>
+    <span class="compensate">{{ tr(blok, 'label') }}</span>
   </NuxtLink>
   <a
     v-else
@@ -17,7 +18,7 @@ defineProps({ blok: Object })
     :class="['cta', `color-${blok.color}`, `text-${blok.size}`]"
   >
     <ShapesGate v-if="blok.shape" :shape="blok.shape" />
-    <span class="compensate">{{ blok.label }}</span>
+    <span class="compensate">{{ tr(blok, 'label') }}</span>
   </a>
 </template>
 

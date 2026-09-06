@@ -3,13 +3,11 @@ const props = defineProps({
   exclude: { type: [String, Number], default: null },
   noSummary: { type: Boolean, default: true }
 })
-const { locale } = useI18n()
 const storyblokApi = useStoryblokApi()
 const { data: posts } = await useAsyncData(
   'posts_more',
   async () => await storyblokApi.get(`cdn/stories`, {
     version: 'published',
-    language: locale.value,
     excluding_fields: 'body',
     starts_with: `noticies/`,
     is_startpage: false,
@@ -17,10 +15,9 @@ const { data: posts } = await useAsyncData(
     per_page: 8,
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('posts_more_' + locale.value)
+      const cachedContent = useState('posts_more')
       console.log('cachedContent', cachedContent.value)
       return cachedContent.value
       ? cachedContent.value

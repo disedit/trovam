@@ -10,16 +10,18 @@ const props = defineProps({
   }
 })
 
+const { internalLink } = useLinks()
+const { tr } = useTranslated()
 const venue = computed(() => props.stage.venue[0]?.content)
 </script>
 
 <template>
-  <NuxtLink :to="`/${stage.venue[0].full_slug || 'la-fira/espais'}`" class="stage">
+  <NuxtLink :to="internalLink(`/${stage.venue[0].full_slug || '/la-fira/espais'}`)" class="stage">
     <span>
-      {{ stage.short_name || stage.name }}
+      {{ tr(stage, 'short_name') || tr(stage, 'name') }}
     </span>
-    <span v-if="venue && stage.name !== venue.name && !stageOnly" class="stage-venue">
-      {{ venue.name }}
+    <span v-if="venue && tr(stage, 'name') !== tr(venue, 'name') && !stageOnly" class="stage-venue">
+      {{ tr(venue, 'name') }}
     </span>
   </NuxtLink>
 </template>

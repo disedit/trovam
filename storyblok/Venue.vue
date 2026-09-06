@@ -2,7 +2,8 @@
 import PageHeader from './PageHeader'
 
 const props = defineProps({ blok: Object })
-const { locale } = useI18n()
+const { tr } = useTranslated()
+const { internalLink } = useLinks()
 const version = useEnvironment()
 const storyblokApi = useStoryblokApi()
 
@@ -10,8 +11,7 @@ const storyblokApi = useStoryblokApi()
 const parent = await useAsyncStoryblok(
   '/la-fira/espais',
   {
-    version,
-    language: locale.value
+    version
   }
 )
 
@@ -20,13 +20,11 @@ const { data: stages } = await useAsyncData(
   'stages_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     by_uuids_ordered: props.blok.stages.join(','),
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('stages_' + props.blok._uid + locale.value)
+      const cachedContent = useState('stages_' + props.blok._uid)
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -55,8 +53,8 @@ const backgroundStyle = computed(() => {
         small_container: true,
         color: parent.content.body[0].color,
         shape: parent.content.body[0].shape,
-        title: parent.content.body[0].title,
-        link: `/${parent.full_slug}`
+        title: tr(parent.content.body[0], 'title'),
+        link: internalLink(`/${parent.full_slug}`)
       }"
       class="relative z-10 -mt-[100vh]"
     />
@@ -68,7 +66,7 @@ const backgroundStyle = computed(() => {
             :alt="`Foto de ${blok.name}`"
             sizes="100vw md:800px"
           />
-          <h2>{{ blok.name }}</h2>
+          <h2>{{ tr(blok, 'name') }}</h2>
         </div>
         <div class="venue-stages my-4">
           <h3>{{ $t('venue.stages') }}</h3>

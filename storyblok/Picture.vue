@@ -1,5 +1,6 @@
 <script setup>
 defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -14,7 +15,7 @@ defineProps({ blok: Object })
       sizes="100vw sm:50vw md:400px"
     />
     <figcaption v-if="blok.caption || blok.polaroid">
-      {{ blok.caption }}
+      {{ tr(blok, 'caption') }}
     </figcaption>
   </figure>
 </template>

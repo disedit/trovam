@@ -1,5 +1,7 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { tr } = useTranslated()
+const { internalLink } = useLinks()
 const { random } = useUtils()
 const tag = computed(() => props.blok.link?.cached_url
   ? props.blok.link.linktype === 'story'
@@ -15,14 +17,14 @@ const rotate = useState(`rotate-${props.blok.id}`, () => random(-3, 3))
     :is="tag"
     v-editable="blok"
     :class="['info-card p-site', `bg-color-${blok.background_color}`, { 'hover-effect': blok.hover_effect }]"
-    :to="blok.link.linktype === 'story' ? `/${blok.link.cached_url}` : null"
+    :to="blok.link.linktype === 'story' ? internalLink(`/${blok.link.cached_url}`) : null"
     :href="blok.link.linktype === 'url' ? blok.link.cached_url : null"
     :style="{
       '--rotate': `${rotate}deg`
     }"
   >
-    <h2 v-if="blok.title">{{ blok.title }}</h2>
-    <p v-if="blok.text">{{ blok.text }}</p>
+    <h2 v-if="blok.title">{{ tr(blok, 'title') }}</h2>
+    <p v-if="blok.text">{{ tr(blok, 'text') }}</p>
     <StoryblokComponent
       v-for="blok in blok.blocks"
       :key="blok.id"

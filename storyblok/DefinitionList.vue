@@ -1,8 +1,9 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { tr } = useTranslated()
 
 const list = computed(() => {
-  return props.blok.list?.split('\n').map(line => line.split('|'))
+  return tr(props.blok, 'list')?.split('\n').map(line => line.split('|'))
 })
 </script>
 

@@ -9,23 +9,22 @@ const backgroundStyle = computed(() => {
 })
 
 /* Fetch posts */
-const { locale } = useI18n()
+const { tr } = useTranslated()
+const { internalLink } = useLinks()
 const storyblokApi = useStoryblokApi()
 const { data: posts } = await useAsyncData(
   'posts_home',
   async () => await storyblokApi.get(`cdn/stories`, {
     version: 'published',
-    language: locale.value,
     excluding_fields: 'body',
     starts_with: `noticies/`,
     is_startpage: false,
     per_page: 8,
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('posts_home_' + locale.value)
+      const cachedContent = useState('posts_home')
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -66,7 +65,7 @@ onMounted(() => {
   >
     <div class="container padded relative z-10">
       <NuxtLink :to="blok.link.cached_url" class="text-white hover:text-yellow">
-        <h2 :id="`title-${blok._uid}`" class="home-news-title headline" v-html="blok.text" />
+        <h2 :id="`title-${blok._uid}`" class="home-news-title headline" v-html="tr(blok, 'text')" />
       </NuxtLink>
     </div>
     <div class="relative z-10">
@@ -85,7 +84,7 @@ onMounted(() => {
           />
         </div>
         <NuxtLink
-          :to="blok.link.cached_url"
+          :to="internalLink(blok.link.cached_url)"
           class="home-news-more"
           draggable="false"
         >

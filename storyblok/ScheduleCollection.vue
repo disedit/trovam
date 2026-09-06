@@ -11,7 +11,7 @@ const backgroundStyle = computed(() => {
 })
 
 const storyblokApi = useStoryblokApi()
-const { locale } = useI18n()
+const { tr } = useTranslated()
 const version = useEnvironment()
 
 // Stages
@@ -19,16 +19,14 @@ const { data: stages } = await useAsyncData(
   'allStages',
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     starts_with: 'escenaris/',
     is_startpage: false,
     resolve_relations: 'Stage.venue',
     excluding_fields: 'map,address,stages,picture,highlight'
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('allStages' + locale.value)
+      const cachedContent = useState('allStages')
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -41,10 +39,9 @@ const ticketsFilter = (props.blok.only_tickets) ? { cta_url: { is: 'not_empty' }
 
 // Concerts
 const { data: concertData } = await useAsyncData(
-  'concerts',
+  'concerts_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     starts_with: props.blok.concerts,
     is_startpage: false,
     resolve_relations: 'Artist.concert_with',
@@ -57,10 +54,9 @@ const { data: concertData } = await useAsyncData(
     per_page: 100,
     excluding_fields: 'picture,background,website,description,facebook,twitter,tiktok,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('concerts' + locale.value)
+      const cachedContent = useState('concerts_' + props.blok._uid)
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -74,10 +70,10 @@ const concerts = concertData.value.data.stories.map(artist => ({
   time: artist.content.time_override,
   title: artist.content.name,
   stage: artist.content.stage,
-  description: artist.content.concert_info,
+  description: tr(artist.content, 'concert_info'),
   concert_with: artist.content.concert_with,
   cta_url: artist.content.cta_url,
-  cta_label: artist.content.cta_label,
+  cta_label: tr(artist.content, 'cta_label'),
   link: artist.full_slug,
   type: 'concert',
   color: 'orange',
@@ -91,16 +87,14 @@ const { data: scheduleData } = await useAsyncData(
     if (!props.blok.schedules.length) return []
     return await storyblokApi.get(`cdn/stories`, {
       version,
-      language: locale.value,
       by_uuids_ordered: props.blok.schedules.join(','),
       excluding_fields: 'header,seo_title,seo_description,seo_picture',
       per_page: 100,
     })
   }, {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('schedules' + locale.value)
+      const cachedContent = useState('schedules')
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -120,7 +114,7 @@ const filters = [
 schedules.forEach(schedule => {
   filters.push({
     type: schedule.uuid,
-    title: schedule.content.title,
+    title: tr(schedule.content, 'title'),
     color: schedule.content.color
   })
   schedule.content.schedule.forEach(event => {
@@ -128,9 +122,9 @@ schedules.forEach(schedule => {
       id: event._uid,
       date: event.date,
       time: event.time,
-      title: event.title,
+      title: tr(event, 'title'),
       stage: event.stage,
-      description: event.description,
+      description: tr(event, 'description'),
       type: schedule.uuid,
       color: schedule.content.color,
       hide_in_schedules: false

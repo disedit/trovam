@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({ blok: Object })
-const { locale } = useI18n()
+const { tr } = useTranslated()
+const { internalLink } = useLinks()
 const version = useEnvironment()
 const { slug } = useRoute().params
 const storyblokApi = useStoryblokApi()
@@ -26,16 +27,14 @@ const { data: artists } = await useAsyncData(
   'artists_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     excluding_fields: 'cta_url,cta_label,website,description,facebook,twitter,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
     resolve_relations: 'Artist.venue',
     per_page: 100,
     ...filter
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('artists_' + props.blok._uid + locale.value)
+      const cachedContent = useState('artists_' + props.blok._uid)
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -49,11 +48,6 @@ const allowHover = ref(false)
 
 /* Background */
 const img = useImage()
-const backgroundStyle = computed(() => {
-  if (!props.blok.background?.filename) return false
-  const imgUrl = img(props.blok.background.filename, { width: 1500 })
-  return { backgroundImage: `url('${imgUrl}/m/1600x0')` }
-})
 
 function artistBackground(filename) {
   const imgUrl = img(filename, { width: 1500 })
@@ -193,12 +187,12 @@ const positionStyles = useState(`artists-positions`, () => {
     </div>
     <div class="container padded relative navbar-safe-area z-10 -mt-[100vh]">
       <h1 class="artists-title">
-        <span class="compensate">Stage / {{ blok.title }}</span>
+        <span class="compensate">Stage / {{ tr(blok, 'title') }}</span>
       </h1>
       <section :class="['artists-list', { hovering: !!hovering && allowHover }]">
         <template v-for="(artist, i) in artists.data.stories" :key="artist.uuid">
           <NuxtLink
-            :to="`/${artist.full_slug}`"
+            :to="internalLink(`/${artist.full_slug}`)"
             :class="[
               'artist relative font-mono uppercase',
               { hovering: hovering?.uuid === artist.uuid && allowHover },

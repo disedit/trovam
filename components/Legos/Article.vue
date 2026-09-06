@@ -7,6 +7,8 @@ const props = defineProps({
   noPicture: { type: Boolean, default: false },
 })
 
+const { tr } = useTranslated()
+const { internalLink } = useLinks()
 const router = useRouter()
 const hTag = computed(() => `h${props.level}`)
 const { shortDate } = useDate()
@@ -21,23 +23,23 @@ function navigate(e, to) {
 }
 
 const post = {
-  title: props.article.content.title,
+  title: tr(props.article.content, 'title'),
   slug: props.article.full_slug,
   picture: props.article.content.picture,
   date: props.article.published_at,
-  summary: props.article.content.summary
+  summary: tr(props.article.content, 'summary')
 }
 </script>
 
 <template>
   <a
-    :href="`/${post.slug}`"
+    :href="internalLink(`/${post.slug}`)"
     class="article"
     :style="{
       '--rotate': `${rotate}deg`
     }"
     draggable="false"
-    @click="navigate($event, `/${post.slug}`)">
+    @click="navigate($event, internalLink(`/${post.slug}`))">
     <div v-if="post.picture?.filename && !noPicture" class="article-picture">
       <NuxtImg
         :src="post.picture.filename"
@@ -50,11 +52,11 @@ const post = {
       {{ shortDate(post.date) }}
     </time>
     <Component :is="hTag" class="article-title" draggable="false">
-      {{ post.title }}
+      {{ tr(post, 'title') }}
     </Component>
     <div v-if="!noSummary" class="hidden md:block mt-auto">
       <p class="article-summary">
-        {{ post.summary }}
+        {{ tr(post, 'summary') }}
       </p>
     </div>
   </a>

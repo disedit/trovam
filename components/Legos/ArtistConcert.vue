@@ -2,6 +2,7 @@
 const props = defineProps({ blok: Object })
 const showTicketsArrow = ref(false)
 const { shortDate, time } = useDate()
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -15,7 +16,7 @@ const { shortDate, time } = useDate()
       <LegosStage v-if="blok.stage" :stage="blok.stage.content" class="artist-concert-stage" />
 
       <a v-if="blok.cta_url" :href="blok.cta_url" target="_blank" class="artist-concert-tickets" @mouseenter="showTicketsArrow = true" @mouseleave="showTicketsArrow = false">
-        <span class="compensate">{{ blok.cta_label || $t('artists.tickets') }}</span>
+        <span class="compensate">{{ tr(blok, 'cta_label') || $t('artists.tickets') }}</span>
         
         <Transition name="fade-right" mode="out-in">
           <Icon name="material-symbols:arrow-forward" v-if="showTicketsArrow" class="arrow" key="arrow" />
@@ -23,7 +24,7 @@ const { shortDate, time } = useDate()
         </Transition>
       </a>
 
-      <UtilsRichText v-if="blok.concert_info" :content="blok.concert_info" class="artist-concert-info" />
+      <UtilsRichText v-if="tr(blok, 'concert_info')" :content="tr(blok, 'concert_info')" class="artist-concert-info" />
     </div>
   </div>
 </template>

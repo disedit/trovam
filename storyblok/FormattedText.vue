@@ -1,5 +1,6 @@
 <script setup>
 defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
@@ -13,7 +14,7 @@ defineProps({ blok: Object })
       `color-${blok.link_color}`
     ]"
   >
-    <UtilsRichText :content="blok.content" />
+    <UtilsRichText :content="tr(blok, 'content')" />
   </div>
 </template>
 

@@ -2,12 +2,14 @@
 defineProps({
   stages: { type: Array, required: true }
 })
+
+const { tr } = useTranslated()
 </script>
 
 <template>
   <div class="stages">
     <span v-for="stage in stages" :key="stage._uid">
-      {{ stage.content.name }}
+      {{ tr(stage.content, 'name') }}
     </span>
   </div>
 </template>

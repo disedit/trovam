@@ -1,10 +1,11 @@
 <script setup>
 defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
   <div v-editable="blok" class="footer-logos">
-    <h3>{{ blok.title }}</h3>
+    <h3>{{ tr(blok, 'title') }}</h3>
     <div class="footer-logos-assets">
       <NuxtImg
         v-for="logo in blok.logos"

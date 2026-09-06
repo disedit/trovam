@@ -1,6 +1,4 @@
 <script setup>
-const siteSettings = await useSettings()
-
 const head = useLocaleHead({
   addDirAttribute: true,
   identifierAttribute: 'id',

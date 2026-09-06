@@ -8,14 +8,12 @@ const { data: artists } = await useAsyncData(
   'artists_' + props.blok._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     excluding_fields: 'website,description,facebook,twitter,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
     resolve_relations: 'Artist.stage',
     starts_with: props.path || `${slug[0]}/artistes/`,
     sort_by: 'content.concert_date:asc',
     is_startpage: false
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
       const cachedContent = useState('artists_' + props.blok._uid + locale.value)

@@ -9,7 +9,7 @@ const backgroundStyle = computed(() => {
 })
 
 /* Fetch posts */
-const { locale } = useI18n()
+const { tr } = useTranslated()
 const version = useEnvironment()
 const storyblokApi = useStoryblokApi()
 const orderedArtists = {
@@ -32,15 +32,13 @@ const { data: artists } = await useAsyncData(
   'artists_home',
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     excluding_fields: 'cta_url,cta_label,website,description,facebook,twitter,instagram,youtube,youtube_id,vimeo_id,spotify,bandcamp,soundcloud',
     per_page: 100,
     ...filter
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('artists_home' + locale.value)
+      const cachedContent = useState('artists_home')
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
@@ -160,7 +158,7 @@ const positionStyles = useState(`artists-positions`, () => {
     <div class="container padded relative z-10 -mt-[100vh]">
       <NuxtLink :to="`/${blok.path}`" class="dim-on-hover">
         <h2 :id="`title-${blok._uid}`" class="home-artists-title">
-          <span class="compensate">{{ blok.title }}</span>
+          <span class="compensate">{{ tr(blok, 'title') }}</span>
         </h2>
       </NuxtLink>
       <div class="hidden md:block">
@@ -218,16 +216,16 @@ const positionStyles = useState(`artists-positions`, () => {
 
       <div :class="['home-artists-info dim-on-hover', { 'hovering': !!hovering }]">
         <div class="home-artists-dates">
-          {{ blok.dates }}
+          {{ tr(blok, 'dates') }}
         </div>
         <div class="home-artists-location">
-          <span>{{ blok.edition }}</span>
+          <span>{{ tr(blok, 'edition') }}</span>
           {{ blok.city }}
         </div>
       </div>
     </div>
 
-    <div v-html="blok.html" class="home-artists-html" />
+    <div v-html="tr(blok, 'html')" class="home-artists-html" />
     <video src="/video/trovam.mp4" autoplay muted loop playsinline class="absolute mix-blend-lighten inset-0 w-full h-full object-contain z-0 opacity-50 pointer-events-none"></video>
   </section>
 </template>

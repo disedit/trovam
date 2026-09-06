@@ -1,6 +1,6 @@
 <script setup>
 useHead({ title: 'Newletter - Fira Trovam' })
-useServerSeoMeta({
+useSeoMeta({
   robots: 'noindex'
 })
 

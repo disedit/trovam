@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({ blok: Object })
 const { t } = useI18n()
-const { shortDate, time } = useDate()
+const { tr } = useTranslated()
 const localePath = useLocalePath()
 
 const socials = computed(() => {
@@ -66,7 +66,7 @@ const year = slug[0]
           />
         </div>
         <div class="artist-text sticky top-navbar-plus self-start">
-          <UtilsRichText :content="blok.description" />
+          <UtilsRichText :content="tr(blok, 'description')" />
         </div>
       </section>
       <section v-if="blok.youtube_id || blok.vimeo_id" class="artist-video polaroid">

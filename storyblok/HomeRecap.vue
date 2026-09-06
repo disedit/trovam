@@ -1,12 +1,13 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
   <section v-editable="blok" class="home-recap relative py-14 md:py-32" :aria-labelledby="`title-${blok._uid}`">
     <div class="container padded">
       <h2 :id="`title-${blok._uid}`" class="headline mb-4">
-        <span class="compensate">{{ blok.title }}</span>
+        <span class="compensate">{{ tr(blok, 'title') }}</span>
         <ShapesRings class="hidden md:block" />
         <ShapesArtists2 class="md:hidden" />
         <span class="compensate">{{ blok.year }}</span>

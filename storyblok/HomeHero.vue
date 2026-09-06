@@ -2,6 +2,7 @@
 import { Vue3Marquee } from 'vue3-marquee'
 
 const props = defineProps({ blok: Object })
+const { tr } = useTranslated()
 
 const { internalLink } = useLinks()
 const wrapperComponent = computed(() => {
@@ -18,7 +19,7 @@ const { y } = useWindowScroll()
 const scrolled = computed(() => y.value > 800)
 
 const marqueeContent = computed(() => {
-  return props.blok.marquee ? props.blok.marquee.split('_/_') : false
+  return props.blok.marquee ? tr(props.blok, 'marquee').split('_/_') : false
 })
 </script>
 
@@ -36,7 +37,7 @@ const marqueeContent = computed(() => {
     :style="backgroundStyle"
   >
     <div class="container">
-      <div class="home-hero-text" v-html="blok.text" />
+      <div class="home-hero-text" v-html="tr(blok, 'text')" />
     </div>
     <ShapesArrows v-if="blok.arrows" class="arrows" />
     <Vue3Marquee v-if="blok.marquee" clone class="home-hero-marquee">

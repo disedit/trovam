@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({ blok: Object })
-
+const { tr } = useTranslated()
 const img = useImage()
 const backgroundStyle = computed(() => {
   if (!props.blok.background?.filename) return false
@@ -33,7 +33,7 @@ const tag = computed(() => {
           :to="blok.link"
         >
           <ShapesGate v-if="blok.shape" :shape="blok.shape" class="icon" />
-          <span class="headline-text compensate">{{ blok.title }}</span>
+          <span class="headline-text compensate">{{ tr(blok, 'title') }}</span>
         </Component>
       </h1>
     </div>

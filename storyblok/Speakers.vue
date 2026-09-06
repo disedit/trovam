@@ -6,13 +6,11 @@ const filter = props.blok?.path
   : { by_uuids_ordered: props.blok?.speakers?.join(',') }
 
 const storyblokApi = useStoryblokApi()
-const { locale } = useI18n()
 const version = useEnvironment()
 const { data: speakers } = await useAsyncData(
   'speakers_' + props.blok?._uid,
   async () => await storyblokApi.get(`cdn/stories`, {
     version,
-    language: locale.value,
     per_page: 100,
     ...filter
   })

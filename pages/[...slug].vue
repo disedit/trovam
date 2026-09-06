@@ -1,31 +1,31 @@
 <script setup>
 /* Load site settings */
-const settings = useState('settings')
+const settings = await useSettings()
 const global = settings?.value?.data?.story?.content
 
 /* Load page */
 const { locale } = useI18n()
+const { tr } = useTranslated() 
 const { slug } = useRoute().params
 const version = useEnvironment()
 const story = await useAsyncStoryblok(
   slug && slug.length > 0 ? slug.join('/') : 'home',
   {
     version,
-    language: locale.value,
     resolve_relations: 'Artist.stage,Stage.venue,Artist.extra_concerts'
   }
 )
 const page = story?.value?.content
 
 /* SEO Metatags */
-const siteName = global.site_name
-const title = slug && slug.length > 0 ? `${page.title || page.name} - ${siteName}` : siteName
-const ogTitle = page.seo_title || title
-const description = page.seo_description || page.summary || global.seo_description
-const ogImage = page.seo_picture?.filename || page.picture?.filename || global.seo_picture?.filename
-const keywords = page.seo_keywords || global.seo_keywords || ''
-const twitterSite = global.twitter_account
-useServerSeoMeta({
+const siteName = global?.site_name
+const title = slug && slug.length > 0 ? `${tr(page, 'title') || page.name} - ${siteName}` : siteName
+const ogTitle = tr(page, 'seo_title') || title
+const description = tr(page, 'seo_description') || tr(page, 'summary') || tr(global, 'seo_description')
+const ogImage = page.seo_picture?.filename || page.picture?.filename || global?.seo_picture?.filename
+const keywords = tr(page, 'seo_keywords') || tr(global, 'seo_keywords') || ''
+const twitterSite = global?.twitter_account
+useSeoMeta({
   title,
   ogTitle,
   description,

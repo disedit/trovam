@@ -1,12 +1,13 @@
 <script setup>
 const props = defineProps({ blok: Object })
+const { tr } = useTranslated()
 </script>
 
 <template>
   <section v-editable="blok" class="home-funding p-site" :aria-labelledby="`title-${blok._uid}`">
     <div class="container padded">
       <h2 :id="`title-${blok._uid}`" class="visually-hidden">
-        {{ blok.title }}
+        {{ tr(blok, 'title') }}
       </h2>
       <div class="grid gap-8">
         <div
@@ -17,7 +18,7 @@ const props = defineProps({ blok: Object })
             :src="block.logos[0].filename"
             :alt="block.logos[0].alt"
           />
-          <p class="text-sm">{{ block.title }}</p>
+          <p class="text-sm">{{ tr(block, 'title') }}</p>
         </div>
       </div>
     </div>

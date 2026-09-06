@@ -2,14 +2,12 @@
 const props = defineProps({ blok: Object })
 
 const { page } = useRoute().query
-const { locale } = useI18n()
 const storyblokApi = useStoryblokApi()
 
 const { data: posts } = await useAsyncData(
   'posts',
   async () => await storyblokApi.get(`cdn/stories`, {
     version: 'published',
-    language: locale.value,
     excluding_fields: 'body',
     starts_with: props.blok.path || `noticies/`,
     is_startpage: false,
@@ -17,10 +15,9 @@ const { data: posts } = await useAsyncData(
     sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
     page
   }), {
-    watch: [locale],
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {
-      const cachedContent = useState('posts' + locale.value)
+      const cachedContent = useState('posts')
       return cachedContent.value
       ? cachedContent.value
       : nuxtApp.payload.data[key]
