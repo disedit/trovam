@@ -20,7 +20,7 @@ const { data: posts } = await useAsyncData(
     starts_with: `noticies/`,
     is_startpage: false,
     per_page: 8,
-    sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
+    sort_by: 'created_at:desc',
   }), {
     dedupe: 'defer',
     getCachedData: (key, nuxtApp) => {

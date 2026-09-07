@@ -26,7 +26,7 @@ const post = {
   title: tr(props.article.content, 'title'),
   slug: props.article.full_slug,
   picture: props.article.content.picture,
-  date: props.article.published_at,
+  date: props.article.created_at,
   summary: tr(props.article.content, 'summary')
 }
 </script>

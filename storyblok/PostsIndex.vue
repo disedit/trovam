@@ -12,7 +12,7 @@ const { data: posts } = await useAsyncData(
     starts_with: props.blok.path || `noticies/`,
     is_startpage: false,
     per_page: props.blok.per_page || 16,
-    sort_by: 'sort_by_date:desc,first_published_at:desc,created_at:desc',
+    sort_by: 'created_at:desc',
     page
   }), {
     dedupe: 'defer',

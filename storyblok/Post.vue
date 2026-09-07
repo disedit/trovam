@@ -13,8 +13,8 @@ const { tr } = useTranslated()
         <ShapesShape3 />
         <span class="compensate">{{ $t('news.title') }}</span>
       </NuxtLink>
-      <time class="article-date" :datetime="meta.first_published_at">
-        {{ longDate(meta.first_published_at) }}
+      <time class="article-date" :datetime="meta.created_at">
+        {{ longDate(meta.created_at) }}
       </time>
     </div>
     <h1 class="article-title">{{ tr(blok, 'title') }}</h1>
