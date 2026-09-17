@@ -6,6 +6,9 @@ export default {
     close_menu: "Close menu",
     website: "Website",
   },
+  nav: {
+    area_pro: "Pro Area",
+  },
   venue: {
     stages: "Stages",
     address: "Address",

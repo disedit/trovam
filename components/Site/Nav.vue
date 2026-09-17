@@ -17,6 +17,12 @@ const compact = computed(() => !!route.params?.slug && !route.params?.slug[0]?.i
       class="nav-menu hidden lg:flex"
       :items="settings.data.story.content.nav"
     />
+    <div class="ms-auto hidden lg:flex items-center">
+      <a href="https://pro.trovam.com" class="text-md bg-purple text-black rounded-full px-3 py-1 flex items-center gap-2 hover:bg-white">
+        <Icon name="ri:user-line" />
+        {{ $t('nav.area_pro') }}
+      </a>
+    </div>
     <SiteLanguage class="nav-langs hidden lg:flex" />
     <SiteMobileMenu
       v-if="settings?.data"
@@ -56,7 +62,6 @@ const compact = computed(() => !!route.params?.slug && !route.params?.slug[0]?.i
 
   &-langs {
     align-self: flex-start;
-    margin-inline-start: auto;
     font-size: var(--text-base);
     z-index: 9000;
   }

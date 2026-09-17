@@ -6,6 +6,9 @@ export default {
     close_menu: "Tancar menú",
     website: "Pàgina web",
   },
+  nav: {
+    area_pro: "Àrea Pro",
+  },
   venue: {
     stages: "Escenaris",
     address: "Adreça",

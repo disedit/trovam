@@ -1,26 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    'storyblok/**/**.vue'
-  ],
+  content: ["storyblok/**/**.vue"],
   theme: {
     colors: {
-      'red': '#e0602e',
-      'blue': '#3f85c1',
-      'yellow': '#fad414',
-      'green': '#099e76',
-      'orange': '#e17625',
-      'pink': '#e3aaca',
-      'black': '#000',
-      'white': '#dfe2df',
-      'gray': '#71717a',
+      red: "#e0602e",
+      blue: "#3f85c1",
+      yellow: "#fad414",
+      green: "#099e76",
+      orange: "#e17625",
+      pink: "#e3aaca",
+      black: "#000",
+      white: "#dfe2df",
+      gray: "#71717a",
+      purple: "#6c6cac",
     },
     fontFamily: {
-      sans: ['Delight', 'sans-serif'],
-      headline: ['Delight', 'sans-serif'],
-      mono: ['Karben', 'monospace'],
+      sans: ["Delight", "sans-serif"],
+      headline: ["Delight", "sans-serif"],
+      mono: ["Karben", "monospace"],
     },
   },
   plugins: [],
-}
-
+};

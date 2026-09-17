@@ -10,6 +10,9 @@ export default {
     stages: "Escenarios",
     address: "Dirección",
   },
+  nav: {
+    area_pro: "Área Pro",
+  },
   news: {
     title: "Noticias",
     all: "Más noticias",
