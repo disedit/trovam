@@ -15,14 +15,10 @@ const hasDescription = props.event.description.content[0]?.content
 <template>
   <article class="event focus-black">
     <time :datetime="event.date" class="event-time">
-      <template v-if="event.time">
-        <span v-for="row in event.time.split('-')">
-          {{ row }}
-        </span>
-      </template>
-      <template v-else>
-        {{ time(event.date) }}
-      </template>
+      {{ time(event.date) }}
+      <span v-if="event.time_end" class="text-base opacity-50">
+        {{ event.time_end }}
+      </span>
     </time>
     <div class="event-info">
       <h3 class="event-title compensate">
