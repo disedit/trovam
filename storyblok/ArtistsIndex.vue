@@ -51,7 +51,7 @@ const img = useImage()
 
 function artistBackground(filename) {
   const imgUrl = img(filename, { width: 1500 })
-  return { backgroundImage: `url('${imgUrl}/m/1600x0')`, backgroundPosition: 'center', backgroundSize: 'cover' }
+  return { backgroundImage: `url('${imgUrl}')`, backgroundPosition: 'center', backgroundSize: 'cover' }
 }
 
 /* Prefetch backgrounds */
@@ -60,7 +60,7 @@ useHead({
     const background = artist.content?.background?.filename || artist.content?.picture?.filename
     if (!background) return
     const imgUrl = img(background, { width: 1500 })
-    return { rel: 'prefetch', as: 'image', href: imgUrl + '/m/1600x0' }
+    return { rel: 'prefetch', as: 'image', href: imgUrl }
   })
 })
 
@@ -204,7 +204,7 @@ const positionStyles = useState(`artists-positions`, () => {
           >
             <UtilsNoisyPhoto
               v-if="artist.content.picture?.filename"
-              :src="artist.content.picture.filename + '/m/800x0'"
+              :src="artist.content.picture.filename"
               :alt="artist.content.picture.alt || `Foto de ${artist.content.name}`"
               class="artist-picture md:!hidden"
               sizes="100vw md:800px"
@@ -229,7 +229,7 @@ const positionStyles = useState(`artists-positions`, () => {
             <div class="artist-card-picture grayscale">
               <UtilsNoisyPhoto
                 v-if="artist.content.picture?.filename"
-                :src="artist.content.picture.filename + '/m/800x0'"
+                :src="artist.content.picture.filename"
                 :alt="`Foto de ${artist.content.name}`"
                 sizes="100vw md:800px"
               />
